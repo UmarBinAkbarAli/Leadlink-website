@@ -12,13 +12,6 @@ const TESTS = [
   {
     person: 'assets/testimonial-person.png',
     logo:   'assets/testimonial-logo.png',
-    quote:  'x-aixs clarified our product and brand. Their strategic approach was fast and precise, exceeding expectations.',
-    name:   'Neatian Meyal',
-    role:   'Head of Product, Growthwards',
-  },
-  {
-    person: 'assets/testimonial-person.png',
-    logo:   'assets/testimonial-logo.png',
     quote:  'LeadLink built our entire growth engine in 90 days. Pipeline doubled, brand clarified, and the team finally had direction.',
     name:   'James Caldwell',
     role:   'Founder, Clearpath Ventures',
@@ -36,6 +29,41 @@ const TESTS = [
     quote:  'From brand identity to lead generation, LeadLink handled everything under one roof. No back-and-forth, no gaps — just results.',
     name:   'Tariq Al-Mansouri',
     role:   'CEO, Pinnacle Retail Group',
+  },
+  {
+    person: 'assets/testimonial-person.png',
+    logo:   'assets/testimonial-logo.png',
+    quote:  'We had three agencies before LeadLink. None of them talked to each other. LeadLink replaced all three and our cost per lead dropped by 40%.',
+    name:   'Sophie Laurent',
+    role:   'Marketing Director, Elara Skincare',
+  },
+  {
+    person: 'assets/testimonial-person.png',
+    logo:   'assets/testimonial-logo.png',
+    quote:  'Our TikTok Shop went from zero to six figures in eight weeks. The commerce team knew exactly what levers to pull.',
+    name:   'Daniel Osei',
+    role:   'Co-Founder, NovaNest',
+  },
+  {
+    person: 'assets/testimonial-person.png',
+    logo:   'assets/testimonial-logo.png',
+    quote:  'The website they built is the best investment we have made. Conversion rate tripled within the first month of going live.',
+    name:   'Aisha Karimi',
+    role:   'CEO, Luminary Consulting',
+  },
+  {
+    person: 'assets/testimonial-person.png',
+    logo:   'assets/testimonial-logo.png',
+    quote:  'LeadLink Press got us featured in three major publications in 60 days. The credibility that came with it is priceless.',
+    name:   'Marcus Webb',
+    role:   'Founder, Apex Capital Partners',
+  },
+  {
+    person: 'assets/testimonial-person.png',
+    logo:   'assets/testimonial-logo.png',
+    quote:  'I was sceptical about handing everything to one team. Six months later I cannot imagine running our marketing any other way.',
+    name:   'Rania Haddad',
+    role:   'Head of Growth, Stackora',
   },
 ];
 
@@ -138,6 +166,7 @@ export function initTeamSlider() {
 export function initTestimonialSlider() {
   const N = TESTS.length;
   let idx = 0;
+  let busy = false;
   let timer: ReturnType<typeof setInterval>;
 
   const row      = document.getElementById('testimonialRow');
@@ -151,43 +180,42 @@ export function initTestimonialSlider() {
 
   if (!row || !personEl || !logoEl || !quoteEl || !nameEl || !roleEl) return;
 
-  const pEl  = personEl as HTMLImageElement;
-  const lEl  = logoEl as HTMLImageElement;
-  const tqEl = quoteEl as HTMLElement;
-  const tnEl = nameEl as HTMLElement;
-  const trEl = roleEl as HTMLElement;
-
   function fill(i: number) {
     const t = TESTS[i];
-    pEl.src = t.person; pEl.alt = t.name;
-    lEl.src = t.logo;
-    tqEl.textContent = t.quote;
-    tnEl.textContent = t.name;
-    trEl.textContent = t.role;
+    (personEl as HTMLImageElement).src = t.person;
+    (personEl as HTMLImageElement).alt = t.name;
+    (logoEl as HTMLImageElement).src = t.logo;
+    quoteEl!.textContent = t.quote;
+    nameEl!.textContent  = t.name;
+    roleEl!.textContent  = t.role;
   }
 
-  function show(i: number, animate: boolean) {
-    idx = (i + N) % N;
-    if (!animate) { fill(idx); return; }
-    gsap.to(row, {
-      opacity: 0, y: 14, duration: 0.25, ease: 'power2.in',
-      onComplete() {
-        fill(idx);
-        gsap.to(row, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-      },
-    });
+  function slide(newIdx: number, dir: number) {
+    if (busy) return;
+    busy = true;
+    idx = (newIdx + N) % N;
+
+    gsap.timeline({ onComplete() { busy = false; } })
+      .to(row, { x: `${dir * -100}%`, duration: 0.45, ease: 'power2.inOut' })
+      .add(() => fill(idx))
+      .fromTo(
+        row,
+        { x: `${dir * 100}%` },
+        { x: '0%', duration: 0.45, ease: 'power2.inOut' },
+      );
   }
 
   function startTimer() {
     clearInterval(timer);
-    timer = setInterval(() => show(idx + 1, true), 5000);
+    timer = setInterval(() => slide(idx + 1, 1), 5000);
   }
 
   fill(0);
+  gsap.set(row, { x: '0%' });
   startTimer();
 
-  prevBtn?.addEventListener('click', () => { show(idx - 1, true); startTimer(); });
-  nextBtn?.addEventListener('click', () => { show(idx + 1, true); startTimer(); });
+  prevBtn?.addEventListener('click', () => { slide(idx - 1, -1); startTimer(); });
+  nextBtn?.addEventListener('click', () => { slide(idx + 1,  1); startTimer(); });
   row.addEventListener('mouseenter', () => clearInterval(timer));
   row.addEventListener('mouseleave', startTimer);
 }

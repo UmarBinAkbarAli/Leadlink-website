@@ -124,6 +124,47 @@ function initNavDropdowns() {
   });
 }
 
+function initHamburger() {
+  const btn = document.querySelector<HTMLButtonElement>('#hamBtn');
+  const menu = document.querySelector<HTMLElement>('#mobileMenu');
+  if (!btn || !menu) return;
+
+  const open = () => {
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    menu.classList.add('open');
+    menu.removeAttribute('aria-hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  btn.addEventListener('click', () => {
+    btn.classList.contains('open') ? close() : open();
+  });
+
+  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+
+  menu.querySelectorAll<HTMLButtonElement>('.mobile-nav-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const subnav = trigger.nextElementSibling as HTMLElement | null;
+      if (!subnav) return;
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) subnav.setAttribute('hidden', '');
+      else subnav.removeAttribute('hidden');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
 function initWayCards() {
   const cards = gsap.utils.toArray<HTMLElement>('.division');
   if (cards.length === 0) return;
@@ -233,6 +274,7 @@ export function initHomepageMotion() {
 
   const run = () => {
     initNavDropdowns();
+    initHamburger();
     initFragmentationScroll();
     initWayCards();
 
