@@ -52,11 +52,12 @@
   .nav-links a:hover{color:#fff}
   .nav-links a.active{color:#fff}
   .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
-  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:14px 10px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
 
   /* ====== HERO — ANIMATED MESH + LIVE COMMERCE ====== */
   .hero{position:relative;padding:150px 0 80px;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+  .hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none;z-index:3}
   /* animated gradient mesh blobs */
   .mesh{position:absolute;inset:0;overflow:hidden;filter:blur(60px) saturate(1.2);opacity:.55}
   .blob{position:absolute;border-radius:50%;will-change:transform}
@@ -318,7 +319,7 @@
   .modal-success .tick{width:54px;height:54px;border-radius:50%;background:rgba(var(--rgb),.15);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.4rem}
   .gs-rev{opacity:0}
   @media(prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
-  @media(max-width:880px){.nav-links{display:none}.burger{display:flex}}
+  @media(max-width:880px){.nav-links{display:none}.burger{display:flex}.nav-inner>.btn-primary{display:none}footer{padding-bottom:90px}}
   @media(max-width:520px){.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
 </style>
 </head>
@@ -456,7 +457,7 @@
 
 <!-- ============ HORIZONTAL MACHINE (pinned) ============ -->
 <section class="hmach" id="hmach">
-  <div class="hmach-head gs-rev">
+  <div class="hmach-head">
     <span class="eyebrow" style="justify-content:center">Aisle 02 · The Machine</span>
     <h2>From product to <span class="hl-serif">payout</span> — scroll through the machine</h2>
     <p>Six stations. One operation. This is what "full-stack" actually means — keep scrolling and walk the line.</p>
@@ -637,17 +638,17 @@
       <h2>Why full-stack beats five vendors on TikTok Shop.</h2>
     </div>
     <div class="why-grid" id="why-grid">
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
         <h3>Full-stack, zero handoffs</h3>
         <p>Content, creators, affiliates, ads, and ops sit on one team. No brief-to-agency delay, no channel running blind to the others.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
         <h3>Products chosen on data, not vibes</h3>
         <p>Trend velocity, sell-through, and margin modeling decide what we launch. We find winners before the market saturates them.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 11 0 0-2 2-5 2s-5-2-5-2c0-5 2-9 5-11z"/><circle cx="12" cy="9" r="1.6"/><path d="M9 16l-3 4M15 16l3 4"/></svg></div>
         <h3>We pay for results, then scale them</h3>
         <p>Affiliates earn on performance, not reach. Once the unit economics prove out, we scale across every channel at once.</p>
@@ -852,7 +853,7 @@
         if(Math.abs(skew)>Math.abs(proxySkew.skew)){
           proxySkew.skew=skew;
           gsap.to(proxySkew,{skew:0,duration:.7,ease:'power3',overwrite:true,
-            onUpdate:()=>vt.style.transform=`translateX(${gsap.getProperty(vt,'x')}px) skewX(${proxySkew.skew}deg)`});
+            onUpdate:()=>gsap.set(vt,{skewX:proxySkew.skew})});
         }
       }});
 
@@ -884,10 +885,6 @@
           }});
       },
       '(max-width: 880px)':function(){
-        gsap.utils.toArray('.hpanel').forEach(p=>{
-          gsap.from(p,{opacity:0,y:34,duration:.7,ease:'power3.out',
-            scrollTrigger:{trigger:p,start:'top 86%'}});
-        });
         const mg=document.getElementById('machine-gmv');const o={v:0};
         ScrollTrigger.create({trigger:'.hpanel.gmv',start:'top 80%',once:true,
           onEnter:()=>gsap.to(o,{v:180000,duration:1.6,ease:'power2.out',
@@ -935,9 +932,9 @@
     /* listing buy button pulse */
     gsap.to('.vl-buy',{scale:1.04,duration:.7,yoyo:true,repeat:-1,ease:'sine.inOut'});
 
-    /* why cards */
-    gsap.from('#why-grid .why-card',{opacity:0,y:34,duration:.7,stagger:.12,ease:'power3.out',
-      scrollTrigger:{trigger:'#why-grid',start:'top 84%'}});
+
+    /* recalculate all trigger positions after fonts + layout settle */
+    addEventListener('load',()=>ScrollTrigger.refresh());
 
     /* ---- magnetic buttons (desktop) ---- */
     if(matchMedia('(hover:hover)').matches){

@@ -136,19 +136,6 @@
     .studio{height:330px;transform:scale(.72)}
   }
 
-  /* ====== SWATCHES ====== */
-  .swatches{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-3)}
-  .swatch-row{display:grid;grid-template-columns:repeat(6,1fr)}
-  .swatch{position:relative;padding:1.9rem 1.4rem 1.5rem;cursor:pointer;border-right:1px solid var(--border-2);transition:.3s;overflow:hidden}
-  .swatch:last-child{border-right:none}
-  .swatch::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
-  .swatch:hover{background:var(--bg-2)}
-  .swatch .chip{width:30px;height:30px;border-radius:3px;background:var(--c);margin-bottom:.9rem;box-shadow:0 4px 14px -4px var(--c);display:block}
-  .swatch .sname{font-family:var(--grot);font-weight:700;font-size:.85rem;letter-spacing:-.01em;display:block}
-  .swatch .shex{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--muted-2);margin-top:.15rem;display:block}
-  .swatch .copied{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,15,.92);font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c);opacity:0;transition:.25s;pointer-events:none}
-  .swatch.flash .copied{opacity:1}
-  .swatch-kick{text-align:center;padding:1rem 0 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
 
   .section{padding:clamp(80px,11vw,150px) 0}
 
@@ -408,7 +395,6 @@
   .gs-rev{opacity:0}
   @media (prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
 
-  @media(max-width:1000px){.swatch-row{grid-template-columns:repeat(3,1fr)}.swatch:nth-child(3n){border-right:none}}
   @media(max-width:880px){
     .nav-links{display:none}.burger{display:flex}
     .intro-grid{grid-template-columns:1fr;gap:2.2rem}
@@ -423,7 +409,6 @@
     .incl{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr}
-    .swatch-row{grid-template-columns:repeat(2,1fr)}
     .float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}
     .hero-ctas .btn{width:100%;justify-content:center}
   }
@@ -514,18 +499,6 @@
   </div>
 </header>
 
-<!-- ============ SWATCHES ============ -->
-<section class="swatches">
-  <p class="swatch-kick">The group palette · Click any swatch to copy its hex</p>
-  <div class="swatch-row" id="swatch-row">
-    <div class="swatch" style="--c:#3B82F6" data-hex="#3B82F6"><span class="chip"></span><span class="sname">Content Blue</span><span class="shex">#3B82F6</span><span class="copied">Copied ✓</span></div>
-    <div class="swatch" style="--c:#06B6D4" data-hex="#06B6D4"><span class="chip"></span><span class="sname">Tech Cyan</span><span class="shex">#06B6D4</span><span class="copied">Copied ✓</span></div>
-    <div class="swatch" style="--c:#22C55E" data-hex="#22C55E"><span class="chip"></span><span class="sname">Growth Green</span><span class="shex">#22C55E</span><span class="copied">Copied ✓</span></div>
-    <div class="swatch" style="--c:#EC4899" data-hex="#EC4899"><span class="chip"></span><span class="sname">Design Pink</span><span class="shex">#EC4899</span><span class="copied">Copied ✓</span></div>
-    <div class="swatch" style="--c:#F59E0B" data-hex="#F59E0B"><span class="chip"></span><span class="sname">Commerce Gold</span><span class="shex">#F59E0B</span><span class="copied">Copied ✓</span></div>
-    <div class="swatch" style="--c:#E5274A" data-hex="#E5274A"><span class="chip"></span><span class="sname">Press Crimson</span><span class="shex">#E5274A</span><span class="copied">Copied ✓</span></div>
-  </div>
-</section>
 
 <!-- ============ CRITIQUE ============ -->
 <section class="section" id="critique">
@@ -765,12 +738,12 @@
       <h2>Six artboards from brief to brand</h2>
     </div>
     <div class="steps" id="steps">
-      <div class="step"><span class="ab">Artboard 01</span><h3>The Interrogation</h3><p>We question everything before designing anything — your market, your buyers, your competitors, and the perception gap between what you are and how you look.</p></div>
-      <div class="step"><span class="ab">Artboard 02</span><h3>The Position</h3><p>One sentence that defines who you're for and why you win. Every visual decision that follows must defend itself against this sentence.</p></div>
-      <div class="step"><span class="ab">Artboard 03</span><h3>The Concepts</h3><p>Divergent directions, not three shades of the same idea. Each concept is a different strategic bet, presented with its reasoning attached.</p></div>
-      <div class="step"><span class="ab">Artboard 04</span><h3>The System</h3><p>The chosen direction becomes a system — logo suite, palette, type, iconography, photography rules — engineered to survive contact with reality.</p></div>
-      <div class="step"><span class="ab">Artboard 05</span><h3>The Stress Test</h3><p>We break it on purpose: smallest favicon, worst print job, busiest feed. If the identity fails anywhere it will live, it goes back to the bench.</p></div>
-      <div class="step"><span class="ab">Artboard 06</span><h3>The Handover</h3><p>Guidelines, templates, and source files your team can actually use — then we wire the brand into your ads, content, and site through the LeadLink group.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 01</span><h3>The Interrogation</h3><p>We question everything before designing anything — your market, your buyers, your competitors, and the perception gap between what you are and how you look.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 02</span><h3>The Position</h3><p>One sentence that defines who you're for and why you win. Every visual decision that follows must defend itself against this sentence.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 03</span><h3>The Concepts</h3><p>Divergent directions, not three shades of the same idea. Each concept is a different strategic bet, presented with its reasoning attached.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 04</span><h3>The System</h3><p>The chosen direction becomes a system — logo suite, palette, type, iconography, photography rules — engineered to survive contact with reality.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 05</span><h3>The Stress Test</h3><p>We break it on purpose: smallest favicon, worst print job, busiest feed. If the identity fails anywhere it will live, it goes back to the bench.</p></div>
+      <div class="step gs-rev"><span class="ab">Artboard 06</span><h3>The Handover</h3><p>Guidelines, templates, and source files your team can actually use — then we wire the brand into your ads, content, and site through the LeadLink group.</p></div>
     </div>
   </div>
 </section>
@@ -783,17 +756,17 @@
       <h2>Why strategy-led design wins deals that pretty design loses.</h2>
     </div>
     <div class="why-grid" id="why-grid">
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-4 10.5c.5.5 1 1.2 1 2h6c0-.8.5-1.5 1-2A6 6 0 0012 3z"/></svg></div>
         <h3>Strategy before a single pixel</h3>
         <p>We define positioning, personality, and message first. The visuals are an expression of a decision, not a decoration looking for one.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
         <h3>One system, every touchpoint</h3>
         <p>Logo, palette, type, and voice flow into your site, ads, and content through the wider LeadLink group. Consistency you don't have to police.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-5 3 3 5-7"/></svg></div>
         <h3>Design tied to the metric</h3>
         <p>Interfaces are built to convert, creative to stop the scroll. We measure whether the design did its job, then refine until it does.</p>
@@ -916,13 +889,6 @@
   const cx=document.getElementById('cx'),cy=document.getElementById('cy');
   addEventListener('mousemove',e=>{cx.textContent=e.clientX;cy.textContent=e.clientY;},{passive:true});
 
-  // swatch copy
-  document.querySelectorAll('.swatch').forEach(s=>{
-    s.addEventListener('click',()=>{
-      (navigator.clipboard?navigator.clipboard.writeText(s.dataset.hex):Promise.reject()).catch(()=>{});
-      s.classList.add('flash');setTimeout(()=>s.classList.remove('flash'),900);
-    });
-  });
 
   // before/after drag
   const stage=document.getElementById('ba-stage');
@@ -991,10 +957,6 @@
     });
     gsap.set('.gs-rev',{y:30});
 
-    /* swatches stagger */
-    gsap.from('#swatch-row .swatch',{y:26,opacity:0,duration:.7,stagger:.07,ease:'power2.out',
-      scrollTrigger:{trigger:'.swatches',start:'top 88%'}});
-
     /* ledger rows draw in */
     gsap.from('.ledger-row',{opacity:0,y:14,duration:.5,stagger:.08,ease:'power2.out',
       scrollTrigger:{trigger:'.ledger',start:'top 80%'}});
@@ -1010,18 +972,6 @@
         gsap.to(el,{y:'+='+(i%2?8:-8),duration:3+i*.5,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1+i*.3});
       });
     });
-
-    /* specimen rows */
-    gsap.from('.spec-row',{opacity:0,x:-24,duration:.6,stagger:.1,ease:'power2.out',
-      scrollTrigger:{trigger:'.spec-rows',start:'top 82%'}});
-
-    /* process artboards */
-    gsap.from('#steps .step',{opacity:0,y:34,duration:.7,stagger:.1,ease:'power3.out',
-      scrollTrigger:{trigger:'#steps',start:'top 84%'}});
-
-    /* why cards */
-    gsap.from('#why-grid .why-card',{opacity:0,y:34,duration:.7,stagger:.12,ease:'power3.out',
-      scrollTrigger:{trigger:'#why-grid',start:'top 84%'}});
 
     /* stats counters */
     gsap.utils.toArray('.stat-num').forEach(el=>{
