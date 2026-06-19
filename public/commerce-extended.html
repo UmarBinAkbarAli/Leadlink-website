@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadLink Commerce — Scaling Online Is a Different Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#F59E0B;--accent-bright:#FBBF24;--accent-deep:#B45309;
+    --rgb:245,158,11;
+    --btn-dark:#1A1206;
+    --ok:#34D399;--live:#F43F5E;
+    --bg:#0A0A0F;--bg-2:#111118;--bg-3:#0d0d13;
+    --text:#fff;--muted:rgba(255,255,255,.58);--muted-2:rgba(255,255,255,.38);
+    --border:rgba(255,255,255,.10);--border-2:rgba(255,255,255,.06);
+    --grot:"Schibsted Grotesk",system-ui,sans-serif;
+    --serif:"Playfair Display",Georgia,serif;
+    --mono:"JetBrains Mono",monospace;
+    --body:"Plus Jakarta Sans",system-ui,sans-serif;
+    --maxw:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  .eyebrow{font-family:var(--grot);font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2);display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:500}
+  .hl{color:var(--accent)}
+  .hl-serif{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+  a{color:inherit;text-decoration:none}
+  .btn{font-family:var(--grot);font-weight:600;font-size:.95rem;padding:.95em 1.6em;border-radius:2px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:.6em;transition:.35s cubic-bezier(.2,.7,.3,1);background:none;color:var(--text);position:relative}
+  .btn-primary{background:var(--accent);color:var(--btn-dark)}
+  .btn-primary:hover{background:var(--accent-bright);box-shadow:0 14px 40px -10px rgba(var(--rgb),.6)}
+  .btn-ghost{border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);background:rgba(var(--rgb),.07)}
+
+  /* ====== NAV ====== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
+  nav.scrolled{background:rgba(10,10,15,.92);border-bottom-color:var(--border)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--grot);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5em}
+  .logo .dot{width:7px;height:7px;background:var(--accent);border-radius:1px;box-shadow:0 0 12px var(--accent)}
+  .logo .div{font-weight:500;color:var(--muted);font-size:.95rem}
+  .nav-links{display:flex;align-items:center;gap:2.2rem;font-family:var(--grot);font-size:.92rem;font-weight:500}
+  .nav-links a{color:var(--muted);transition:.25s;position:relative}
+  .nav-links a:hover{color:#fff}
+  .nav-links a.active{color:#fff}
+  .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+
+  /* ====== HERO — ANIMATED MESH + LIVE COMMERCE ====== */
+  .hero{position:relative;padding:150px 0 80px;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+  /* animated gradient mesh blobs */
+  .mesh{position:absolute;inset:0;overflow:hidden;filter:blur(60px) saturate(1.2);opacity:.55}
+  .blob{position:absolute;border-radius:50%;will-change:transform}
+  .b1{width:560px;height:560px;background:radial-gradient(circle,rgba(245,158,11,.55),transparent 65%);top:-12%;left:-8%}
+  .b2{width:480px;height:480px;background:radial-gradient(circle,rgba(180,83,9,.5),transparent 65%);bottom:-14%;right:-6%}
+  .b3{width:380px;height:380px;background:radial-gradient(circle,rgba(251,191,36,.34),transparent 65%);top:30%;left:46%}
+  .hero-cols{position:absolute;inset:0;opacity:.4;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent)}
+  /* giant outlined word behind */
+  .ghost-word{position:absolute;top:46%;left:0;transform:translateY(-50%);white-space:nowrap;font-family:var(--grot);font-weight:900;font-size:clamp(7rem,22vw,19rem);letter-spacing:-.03em;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(245,158,11,.13);pointer-events:none;user-select:none;z-index:0}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .hero h1{font-family:var(--grot);font-weight:900;line-height:1;letter-spacing:-.032em;font-size:clamp(2.7rem,6.6vw,5.6rem);margin-top:1.4rem}
+  .hero h1 .serif{font-weight:600}
+  .h-mask{overflow:hidden;display:block;padding-top:.18em;margin-top:-.18em}
+  .h-line{display:block}
+  .sub{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--muted);max-width:540px;margin-top:1.8rem}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+  /* GMV odometer pill */
+  .gmv-pill{display:inline-flex;align-items:center;gap:1rem;margin-top:2.4rem;background:rgba(17,17,24,.8);border:1px solid rgba(var(--rgb),.4);border-radius:50px;padding:.7rem 1.4rem;box-shadow:0 14px 40px -12px rgba(var(--rgb),.4)}
+  .gmv-pill .gp-dot{width:9px;height:9px;border-radius:50%;background:var(--ok)}
+  .gmv-pill .gp-l{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+  .gmv-pill .gp-v{font-family:var(--grot);font-weight:900;font-size:1.3rem;letter-spacing:-.01em;color:var(--accent-bright);font-variant-numeric:tabular-nums}
+
+  /* ---- live shopping phone ---- */
+  .live-stage{position:relative;height:560px;display:flex;align-items:center;justify-content:center}
+  .lp{position:relative;width:250px;height:500px;border-radius:34px;background:#0b0b11;border:1px solid rgba(255,255,255,.14);box-shadow:0 50px 110px -28px rgba(0,0,0,.95),0 0 0 1px rgba(var(--rgb),.1),inset 0 0 0 7px #07070b;padding:20px 15px;z-index:2;overflow:hidden}
+  .lp-notch{width:70px;height:6px;border-radius:3px;background:rgba(255,255,255,.16);margin:0 auto 12px}
+  .lp-stream{position:relative;height:330px;border-radius:16px;background:linear-gradient(160deg,rgba(245,158,11,.4),rgba(180,83,9,.18) 60%,rgba(10,10,15,.6));border:1px solid rgba(var(--rgb),.3);overflow:hidden}
+  .lp-stream::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 35% 25%,rgba(255,255,255,.18),transparent 50%)}
+  .lp-live{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:.4rem;background:var(--live);border-radius:4px;padding:.25em .7em;font-family:var(--grot);font-weight:800;font-size:.6rem;letter-spacing:.1em;z-index:3}
+  .lp-live i{width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block}
+  .lp-views{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);border-radius:4px;padding:.25em .6em;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:#fff;z-index:3;font-variant-numeric:tabular-nums}
+  /* comments */
+  .lp-comments{position:absolute;left:10px;bottom:64px;right:60px;display:flex;flex-direction:column;gap:.4rem;z-index:3}
+  .lp-c{background:rgba(0,0,0,.5);border-radius:12px;padding:.35rem .7rem;font-size:.6rem;line-height:1.4;color:rgba(255,255,255,.92);max-width:100%;opacity:0;transform:translateY(10px)}
+  .lp-c b{color:var(--accent-bright);font-weight:600}
+  /* product card in stream */
+  .lp-product{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(10,10,15,.92);border:1px solid rgba(var(--rgb),.45);border-radius:11px;padding:.6rem .7rem;display:flex;align-items:center;gap:.6rem;z-index:4}
+  .lp-thumb{width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .lp-pi .n{font-family:var(--grot);font-weight:700;font-size:.66rem}
+  .lp-pi .p{font-family:var(--mono);font-size:.6rem;color:var(--accent-bright)}
+  .lp-pi .p s{color:var(--muted-2);margin-left:.4em}
+  .lp-buy{margin-left:auto;background:var(--accent);color:var(--btn-dark);font-family:var(--grot);font-weight:800;font-size:.6rem;border-radius:7px;padding:.55em .9em;white-space:nowrap}
+  /* hearts container */
+  .lp-hearts{position:absolute;right:8px;bottom:70px;width:40px;height:220px;z-index:3;pointer-events:none}
+  .heart{position:absolute;bottom:0;left:50%;font-size:1rem;opacity:0}
+  /* under-stream rows */
+  .lp-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--muted-2)}
+  .lp-row b{color:var(--accent-bright);font-variant-numeric:tabular-nums}
+  .lp-bar{height:7px;border-radius:4px;background:rgba(255,255,255,.08);margin-top:9px;overflow:hidden}
+  .lp-bar i{display:block;height:100%;width:30%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));border-radius:4px}
+  .lp-stock{margin-top:7px;font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--live)}
+  /* floating sale cards around phone */
+  .fl{position:absolute;will-change:transform;z-index:3}
+  .sale-card{background:#0c0c12;border:1px solid var(--border);border-radius:9px;padding:.7rem .9rem;box-shadow:0 20px 50px -14px rgba(0,0,0,.85);display:flex;align-items:center;gap:.6rem}
+  .sale-card .ic{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+  .sale-card .t{font-family:var(--grot);font-weight:700;font-size:.7rem;line-height:1.25}
+  .sale-card .s{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+  .sc1{top:40px;left:-30px}.sc1 .ic{background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.4)}
+  .sc2{top:150px;right:-44px}.sc2 .ic{background:rgba(var(--rgb),.15);border:1px solid rgba(var(--rgb),.45)}
+  .sc3{bottom:90px;left:-46px}.sc3 .ic{background:rgba(244,63,94,.15);border:1px solid rgba(244,63,94,.4)}
+  .sc4{bottom:20px;right:-30px}.sc4 .ic{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4)}
+  @media(max-width:1000px){.live-stage{transform:scale(.85)}}
+  @media(max-width:880px){
+    .hero{min-height:0;padding-top:140px}
+    .hero-grid{grid-template-columns:1fr}
+    .live-stage{height:540px;transform:scale(.92);margin-top:1rem}
+    .sc1{left:0}.sc3{left:0}.sc2{right:0}.sc4{right:0}
+  }
+  @media(max-width:560px){.live-stage{transform:scale(.78);height:470px}}
+
+  /* ====== VELOCITY MARQUEE ====== */
+  .vmarq{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-3);overflow:hidden;padding:1.1rem 0}
+  .vmarq-track{display:flex;width:max-content;will-change:transform}
+  .vmarq-item{font-family:var(--grot);font-weight:900;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-.02em;white-space:nowrap;padding:0 1.6rem;color:#fff}
+  .vmarq-item.o{color:transparent;-webkit-text-stroke:1px rgba(245,158,11,.6)}
+  .vmarq-item .d{color:var(--accent);margin-left:3.2rem}
+
+  .section{padding:clamp(80px,11vw,150px) 0}
+
+  /* ====== LEDGER ====== */
+  .divide-head{margin-bottom:3.4rem;max-width:760px}
+  .divide-head h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.6vw,3.4rem);margin-top:1.4rem}
+  .divide-head p{color:var(--muted);margin-top:1.4rem;max-width:560px}
+  .ledger{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+  .ledger-head{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-2)}
+  .ledger-head>div{padding:1.5rem 2rem;font-family:var(--grot);font-weight:800;font-size:clamp(1.05rem,2vw,1.4rem);letter-spacing:-.01em;display:flex;align-items:center;gap:.7em}
+  .ledger-head .l-col{color:var(--muted);border-right:1px solid var(--border)}
+  .ledger-head .r-col{color:var(--accent)}
+  .ledger-head .tag{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;border:1px solid currentColor;border-radius:2px;padding:.25em .7em;opacity:.7}
+  .ledger-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border-2)}
+  .ledger-row>div{padding:1.25rem 2rem;font-size:.98rem}
+  .ledger-row .l{color:var(--muted);border-right:1px solid var(--border-2)}
+  .ledger-row .r{color:rgba(255,255,255,.86);position:relative}
+  .ledger-row .r::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transition:.4s;transform-origin:top}
+  .ledger-row:hover .r::before{transform:scaleY(1)}
+  .ledger-row:hover{background:rgba(var(--rgb),.025)}
+  .ledger-foot{border-top:1px solid var(--border);padding:1.4rem 2rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.8vw,1.3rem);color:rgba(255,255,255,.85);background:var(--bg-2)}
+  .ledger-foot .hl{font-weight:600}
+  @media(max-width:880px){.ledger-head,.ledger-row{grid-template-columns:1fr}.ledger-head .l-col,.ledger-row .l{border-right:none;border-bottom:1px solid var(--border-2)}}
+
+  /* ====== HORIZONTAL MACHINE (pinned scrub) ====== */
+  .hmach{position:relative;background:var(--bg-2);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);overflow:hidden}
+  .hmach-head{padding:clamp(70px,9vw,110px) 0 2rem;text-align:center}
+  .hmach-head h2{font-family:var(--grot);font-weight:900;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.025em;line-height:1.05;margin-top:1.4rem}
+  .hmach-head p{color:var(--muted);margin-top:1.2rem;max-width:560px;margin-left:auto;margin-right:auto;padding:0 24px}
+  .htrack-wrap{overflow:hidden}
+  .htrack{display:flex;gap:1.4rem;padding:2.5rem clamp(20px,5vw,48px) clamp(80px,9vw,110px);width:max-content}
+  .hpanel{width:min(380px,82vw);flex-shrink:0;border:1px solid var(--border);border-radius:8px;background:var(--bg-3);padding:2.2rem 2rem;position:relative;overflow:hidden}
+  .hpanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-bright))}
+  .hpanel .hp-n{font-family:var(--grot);font-weight:900;font-size:3.4rem;letter-spacing:-.04em;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(245,158,11,.5)}
+  .hpanel h3{font-family:var(--grot);font-weight:800;font-size:1.45rem;letter-spacing:-.01em;margin:1.1rem 0 .7rem}
+  .hpanel p{color:var(--muted);font-size:.95rem}
+  .hpanel .hp-m{margin-top:1.4rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .hpanel.gmv{background:linear-gradient(150deg,rgba(245,158,11,.16),rgba(180,83,9,.06));border-color:rgba(var(--rgb),.5)}
+  .hpanel.gmv .big{font-family:var(--grot);font-weight:900;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.03em;color:var(--accent-bright);line-height:1;font-variant-numeric:tabular-nums}
+  .hprogress{position:absolute;bottom:38px;left:clamp(20px,5vw,48px);right:clamp(20px,5vw,48px);height:2px;background:var(--border-2)}
+  .hprogress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-bright))}
+  @media(max-width:880px){
+    .htrack{flex-direction:column;width:auto;padding-bottom:70px}
+    .hpanel{width:100%}
+    .hprogress{display:none}
+  }
+
+  /* ====== INTRO ====== */
+  .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px);align-items:start}
+  .intro h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.4vw,3.4rem);margin-top:1.4rem}
+  .dropcap{color:var(--muted);font-size:1.05rem;border-top:1px solid var(--border);padding-top:1.8rem}
+  .dropcap::first-letter{font-family:var(--serif);font-style:italic;font-weight:600;font-size:4.2em;float:left;line-height:.78;padding:.06em .14em 0 0;color:var(--accent)}
+  .byline{margin-top:1.8rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+  .byline b{color:rgba(255,255,255,.7);font-weight:500}
+  @media(max-width:880px){.intro-grid{grid-template-columns:1fr;gap:2.2rem}}
+
+  /* ====== SERVICES ====== */
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+  .services-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em}
+  .services-head p{color:var(--muted);max-width:340px}
+  .scard{border-top:1px solid var(--border);padding:clamp(40px,6vw,76px) 0}
+  .scard:last-of-type{border-bottom:1px solid var(--border)}
+  .scard-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+  .scard.flip .scard-grid>.sc-visual{order:-1}
+  .scard-num{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+  .scard-name{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.7rem,3.2vw,2.7rem);margin:.5rem 0 1.6rem}
+  .pullquote{position:relative;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.2rem,2.1vw,1.7rem);line-height:1.35;color:rgba(255,255,255,.92)}
+  .pullquote .mark{position:absolute;left:-.45em;top:-.5em;font-size:3.2em;line-height:1;color:var(--accent);opacity:.28;font-family:var(--serif)}
+  .scard-desc{color:var(--muted);margin-top:1.4rem;font-size:1rem;max-width:48ch}
+  .incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;margin-top:1.6rem}
+  .incl li{display:flex;gap:.6em;font-size:.9rem;color:rgba(255,255,255,.78);line-height:1.4}
+  .incl li svg{flex-shrink:0;margin-top:.3em;color:var(--accent)}
+  .scard .btn{margin-top:2rem}
+  .sc-visual{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:5px;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(var(--rgb),.05),transparent 70%);overflow:hidden;padding:2rem}
+  .sc-visual .vtag{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
+  @media(max-width:880px){.scard-grid{grid-template-columns:1fr;gap:2.2rem}.scard.flip .scard-grid>.sc-visual{order:0}.sc-visual{min-height:320px}}
+
+  /* V1: GMV dashboard */
+  .v-gmv{width:100%;max-width:400px}
+  .vg-frame{border:1px solid var(--border);border-radius:11px;background:#0c0c12;box-shadow:0 30px 64px -18px rgba(0,0,0,.85);padding:1.2rem}
+  .vg-top{display:flex;justify-content:space-between;align-items:baseline}
+  .vg-l{font-family:var(--mono);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
+  .vg-v{font-family:var(--grot);font-weight:900;font-size:2rem;letter-spacing:-.02em;color:var(--accent-bright);font-variant-numeric:tabular-nums}
+  .vg-delta{font-family:var(--mono);font-size:.6rem;color:var(--ok)}
+  .vg-chart{display:flex;align-items:flex-end;gap:5px;height:110px;margin-top:1rem;border-bottom:1px solid var(--border-2);padding-bottom:2px}
+  .vg-chart i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,rgba(var(--rgb),.9),rgba(var(--rgb),.2));height:10%}
+  .vg-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted-2);margin-top:.8rem}
+  .vg-row b{color:var(--accent-bright)}
+  /* V2: product radar */
+  .v-radar{position:relative;width:100%;max-width:380px;height:300px;display:flex;align-items:center;justify-content:center}
+  .radar{position:relative;width:240px;height:240px}
+  .radar svg{display:block}
+  .radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(245,158,11,.35),transparent 70deg);will-change:transform}
+  .radar-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 12px rgba(var(--rgb),.9)}
+  .rd1{top:26%;left:60%}.rd2{top:54%;left:30%}.rd3{top:68%;left:64%}
+  .radar-tag{position:absolute;background:#0c0c12;border:1px solid rgba(var(--rgb),.5);border-radius:5px;padding:.35rem .6rem;font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;white-space:nowrap;z-index:3}
+  .rt1{top:14%;right:-12%}.rt1 b{color:var(--accent-bright)}
+  .rt2{bottom:8%;left:-14%}.rt2 b{color:var(--ok)}
+  /* V3: affiliate network */
+  .v-aff{position:relative;width:100%;max-width:380px;height:300px}
+  .v-aff svg.lines{position:absolute;inset:0;width:100%;height:100%;color:rgba(var(--rgb),.5)}
+  .aff-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:linear-gradient(140deg,var(--accent),var(--accent-deep));color:var(--btn-dark);font-family:var(--grot);font-weight:900;font-size:.72rem;border-radius:10px;padding:.8rem 1rem;text-align:center;z-index:2;box-shadow:0 18px 44px -10px rgba(var(--rgb),.7)}
+  .aff-ava{position:absolute;width:44px;height:44px;border-radius:50%;border:2px solid rgba(var(--rgb),.6);display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:#15151d;box-shadow:0 14px 34px -10px rgba(0,0,0,.8);z-index:2}
+  .av1{left:4%;top:4%}.av2{right:4%;top:10%}.av3{left:0;bottom:18%}.av4{right:8%;bottom:4%}.av5{left:34%;bottom:0}
+  .aff-comm{position:absolute;background:#0c0c12;border:1px solid rgba(52,211,153,.5);color:var(--ok);border-radius:5px;padding:.3rem .6rem;font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;z-index:3}
+  .cm1{top:24%;left:24%}.cm2{bottom:30%;right:22%}
+  /* V4: marketplace listing */
+  .v-list{width:100%;max-width:330px}
+  .vl-card{border:1px solid var(--border);border-radius:11px;background:#0c0c12;box-shadow:0 30px 64px -18px rgba(0,0,0,.85);overflow:hidden}
+  .vl-img{height:130px;background:linear-gradient(135deg,rgba(var(--rgb),.45),rgba(180,83,9,.2));position:relative}
+  .vl-img::before{content:"📦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+  .vl-badge{position:absolute;top:10px;left:10px;background:var(--accent);color:var(--btn-dark);font-family:var(--grot);font-weight:800;font-size:.56rem;border-radius:4px;padding:.3em .7em;letter-spacing:.08em}
+  .vl-body{padding:1rem 1.1rem}
+  .vl-t{font-family:var(--grot);font-weight:700;font-size:.92rem}
+  .vl-stars{color:var(--accent);font-size:.7rem;letter-spacing:.12em;margin-top:.25rem}
+  .vl-stars span{color:var(--muted-2);font-family:var(--mono);font-size:.56rem;margin-left:.4em}
+  .vl-price{display:flex;align-items:baseline;gap:.6rem;margin-top:.5rem}
+  .vl-price .now{font-family:var(--grot);font-weight:900;font-size:1.3rem;color:var(--accent-bright)}
+  .vl-price .was{font-family:var(--mono);font-size:.66rem;color:var(--muted-2);text-decoration:line-through}
+  .vl-buy{margin-top:.8rem;background:var(--accent);color:var(--btn-dark);border-radius:7px;text-align:center;font-family:var(--grot);font-weight:800;font-size:.78rem;padding:.7em}
+  .vl-meta{display:flex;justify-content:space-between;margin-top:.7rem;font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+  .vl-meta b{color:var(--ok)}
+
+  /* ====== WHY / FAQ / FINAL / FOOTER ====== */
+  .why{background:var(--bg-2)}
+  .why-head{margin-bottom:3.4rem}
+  .why-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem;max-width:20ch;line-height:1.1}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .why-card{border:1px solid var(--border);border-radius:3px;padding:2.4rem 2rem;background:var(--bg-3);transition:.4s;position:relative;overflow:hidden}
+  .why-card:hover{border-color:rgba(var(--rgb),.4);transform:translateY(-4px)}
+  .why-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:.4s}
+  .why-card:hover::before{transform:scaleX(1)}
+  .why-icon{width:46px;height:46px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1.6rem}
+  .why-card h3{font-family:var(--grot);font-weight:700;font-size:1.28rem;margin-bottom:.9rem;line-height:1.2;letter-spacing:-.01em}
+  .why-card p{color:var(--muted);font-size:.98rem}
+  @media(max-width:880px){.why-grid{grid-template-columns:1fr}}
+  .faq{max-width:880px;margin:0 auto}
+  .faq-head{margin-bottom:2.6rem}
+  .faq-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem}
+  .qa{border-top:1px solid var(--border-2)}
+  .qa:last-child{border-bottom:1px solid var(--border-2)}
+  .qa button{width:100%;background:none;border:none;color:#fff;text-align:left;cursor:pointer;font-family:var(--grot);font-weight:700;font-size:clamp(1.02rem,1.8vw,1.2rem);letter-spacing:-.01em;padding:1.5rem 3rem 1.5rem 0;position:relative}
+  .qa button::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--accent);transition:.35s}
+  .qa.open button::after{transform:translateY(-50%) rotate(45deg)}
+  .qa .ans{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,.84,.3,1)}
+  .qa .ans p{color:var(--muted);padding:0 0 1.6rem;max-width:62ch;font-size:.99rem}
+  .final{position:relative;text-align:center;overflow:hidden;padding-bottom:clamp(110px,14vw,180px)}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% 120%,rgba(var(--rgb),.3),transparent 70%)}
+  .final .wrap{position:relative;z-index:2}
+  .final .kick{font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1.6rem}
+  .final h2{font-family:var(--grot);font-weight:900;letter-spacing:-.028em;line-height:1.06;font-size:clamp(2.2rem,5.4vw,4.4rem);max-width:16ch;margin:0 auto 2.4rem}
+  .final h2 .serif{color:var(--accent);font-weight:500}
+  .micro{font-family:var(--grot);font-size:.85rem;color:var(--muted-2);letter-spacing:.04em;margin-top:1.6rem}
+  footer{border-top:1px solid var(--border);padding:72px 0 40px;background:var(--bg-3)}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:3.5rem}
+  .foot-grid h4{font-family:var(--grot);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1.3rem}
+  .foot-grid p,.foot-grid a{color:var(--muted);font-size:.94rem;display:block;margin-bottom:.6rem;transition:.25s}
+  .foot-grid a:hover{color:#fff}
+  .foot-brands a.cur{color:var(--accent)}
+  .foot-tag{color:var(--muted);font-size:.95rem;max-width:30ch;margin-top:1rem}
+  .foot-bottom{border-top:1px solid var(--border-2);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;color:var(--muted-2);font-size:.85rem;font-family:var(--grot)}
+  @media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+  @media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+  .float-cta{position:fixed;bottom:24px;right:24px;z-index:90;box-shadow:0 16px 40px -12px rgba(var(--rgb),.6)}
+  .overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,5,8,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:.3s}
+  .overlay.open{display:flex;opacity:1}
+  .modal{background:var(--bg-2);border:1px solid var(--border);border-radius:5px;max-width:460px;width:100%;padding:clamp(32px,5vw,48px);position:relative;transform:translateY(16px) scale(.98);transition:.35s cubic-bezier(.16,.84,.3,1);overflow:hidden}
+  .overlay.open .modal{transform:none}
+  .modal::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.35),transparent 70%)}
+  .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1;z-index:2}
+  .modal-close:hover{color:#fff}
+  .modal .eyebrow{margin-bottom:1.1rem}
+  .modal h3{font-family:var(--grot);font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:.9rem;position:relative}
+  .modal p{color:var(--muted);font-size:.97rem;margin-bottom:1.6rem;position:relative}
+  .modal input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.95em 1.1em;color:#fff;font-family:var(--body);font-size:1rem;margin-bottom:1rem;transition:.25s}
+  .modal input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--rgb),.15)}
+  .modal .btn-primary{width:100%;justify-content:center}
+  .modal .fine{font-size:.78rem;color:var(--muted-2);margin-top:1.2rem;line-height:1.5}
+  .modal-success{display:none;text-align:center;position:relative}
+  .modal-success.show{display:block}
+  .modal-success .tick{width:54px;height:54px;border-radius:50%;background:rgba(var(--rgb),.15);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.4rem}
+  .gs-rev{opacity:0}
+  @media(prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
+  @media(max-width:880px){.nav-links{display:none}.burger{display:flex}}
+  @media(max-width:520px){.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">LeadLink<span class="dot"></span><span class="div">Commerce</span></a>
+    <div class="nav-links">
+      <a href="tech-extended.html">Tech</a>
+      <a href="growth-extended.html">Growth</a>
+      <a href="design-extended.html">Design</a>
+      <a href="commerce-extended.html" class="active">Commerce</a>
+      <a href="press-extended.html">Press &amp; Media</a>
+    </div>
+    <button class="btn btn-primary mag" onclick="openModal()">☕ Let's Talk Coffee</button>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="mesh" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
+  <div class="hero-cols"></div>
+  <div class="ghost-word" id="ghost-word" aria-hidden="true">GMV&nbsp;·&nbsp;SOLD&nbsp;OUT&nbsp;·&nbsp;ADD&nbsp;TO&nbsp;CART&nbsp;·&nbsp;GMV&nbsp;·&nbsp;SOLD&nbsp;OUT&nbsp;·&nbsp;ADD&nbsp;TO&nbsp;CART&nbsp;·&nbsp;</div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow gs-h">LeadLink Commerce · TikTok Shop · Marketplaces</span>
+        <h1>
+          <span class="h-mask"><span class="h-line">Selling online is easy.</span></span>
+          <span class="h-mask"><span class="h-line">Scaling online is</span></span>
+          <span class="h-mask"><span class="h-line"><span class="hl-serif">a different game.</span></span></span>
+        </h1>
+        <p class="sub gs-h">Full-stack TikTok Shop management, marketplace scaling, and affiliate programmes — content, creators, ads, and ops under one roof, all optimized toward one number: GMV.</p>
+        <div class="hero-ctas gs-h">
+          <button class="btn btn-primary mag" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+          <button class="btn btn-ghost mag" onclick="openModal()">Download Our Commerce Portfolio</button>
+        </div>
+        <div class="gmv-pill gs-h">
+          <span class="gp-dot"></span>
+          <span class="gp-l">GMV generated · live</span>
+          <span class="gp-v" id="gmv-odo">$0</span>
+        </div>
+      </div>
+
+      <!-- live shopping phone -->
+      <div class="live-stage" id="live-stage" aria-hidden="true">
+        <div class="lp">
+          <div class="lp-notch"></div>
+          <div class="lp-stream">
+            <span class="lp-live"><i></i>LIVE</span>
+            <span class="lp-views" id="lp-views">👁 12,408</span>
+            <div class="lp-comments" id="lp-comments">
+              <div class="lp-c"><b>@aisha.k</b> obsessed with this 😍</div>
+              <div class="lp-c"><b>@dxb.finds</b> just ordered 2!</div>
+              <div class="lp-c"><b>@omar_r</b> is the gold one back??</div>
+              <div class="lp-c"><b>@shopq8</b> code still working? 🙏</div>
+              <div class="lp-c"><b>@layla.s</b> arrived in 2 days, so good</div>
+            </div>
+            <div class="lp-hearts" id="lp-hearts"></div>
+            <div class="lp-product">
+              <span class="lp-thumb">✨</span>
+              <span class="lp-pi"><span class="n">Glow Serum · 30ml</span><br><span class="p">AED 89 <s>AED 149</s></span></span>
+              <span class="lp-buy" id="lp-buy">Buy now</span>
+            </div>
+          </div>
+          <div class="lp-row"><span>Sold this stream</span><b id="lp-sold">347</b></div>
+          <div class="lp-bar"><i id="lp-bar"></i></div>
+          <div class="lp-stock">⚡ Only 53 left — selling fast</div>
+        </div>
+        <!-- floating sale cards -->
+        <div class="fl sale-card sc1"><span class="ic">💸</span><span><span class="t">Order #8242 · AED 178</span><br><span class="s">2 items · Dubai</span></span></div>
+        <div class="fl sale-card sc2"><span class="ic">🛒</span><span><span class="t">+1 Added to cart</span><br><span class="s">Conversion · 8.4%</span></span></div>
+        <div class="fl sale-card sc3"><span class="ic">🔥</span><span><span class="t">Trending #3 · Beauty</span><br><span class="s">TikTok Shop · GCC</span></span></div>
+        <div class="fl sale-card sc4"><span class="ic">🤝</span><span><span class="t">Creator posted · 240K views</span><br><span class="s">Affiliate · commission only</span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ VELOCITY MARQUEE ============ -->
+<div class="vmarq" aria-hidden="true">
+  <div class="vmarq-track" id="vmarq-track">
+    <span class="vmarq-item">SELL<span class="d">·</span></span>
+    <span class="vmarq-item o">SCALE<span class="d">·</span></span>
+    <span class="vmarq-item">REPEAT<span class="d">·</span></span>
+    <span class="vmarq-item o">$180K GMV · MONTH 2<span class="d">·</span></span>
+    <span class="vmarq-item">SOLD OUT<span class="d">·</span></span>
+    <span class="vmarq-item o">500+ CREATORS<span class="d">·</span></span>
+  </div>
+</div>
+
+<!-- ============ LEDGER ============ -->
+<section class="section" id="divide">
+  <div class="wrap">
+    <div class="divide-head gs-rev">
+      <span class="eyebrow">Aisle 01 · The Divide</span>
+      <h2>Anyone can list a product. <span class="serif hl">Few can move it.</span></h2>
+      <p>The marketplaces are open to everyone — that's exactly why being on them means nothing. Here's the honest ledger.</p>
+    </div>
+    <div class="ledger gs-rev">
+      <div class="ledger-head">
+        <div class="l-col">Selling <span class="tag">A listing</span></div>
+        <div class="r-col">Scaling <span class="tag">An operation</span></div>
+      </div>
+      <div class="ledger-row"><div class="l">Lists a product and waits for the algorithm to be kind.</div><div class="r">Feeds the algorithm 20–40 native videos a month until it has no choice.</div></div>
+      <div class="ledger-row"><div class="l">Pays influencers up front and prays.</div><div class="r">Runs 500+ affiliates who only earn when the product sells.</div></div>
+      <div class="ledger-row"><div class="l">Picks products on instinct and trends already peaking.</div><div class="r">Picks products on trend velocity, sell-through, and margin math.</div></div>
+      <div class="ledger-row"><div class="l">Treats ads, content, and ops as three different vendors.</div><div class="r">Runs them as one machine where every part feeds the others.</div></div>
+      <div class="ledger-row"><div class="l">Celebrates a viral day.</div><div class="r">Engineers a repeatable month — then multiplies it across marketplaces.</div></div>
+      <div class="ledger-foot">Virality is luck. <span class="hl">GMV is a system.</span> We build the system.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow gs-rev">LeadLink Commerce</span>
+        <h2 class="gs-rev intro-h" style="font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.4vw,3.4rem);margin-top:1.4rem">Your brand has a seat at the table — <span class="hl-serif">or it's watching someone else eat.</span></h2>
+      </div>
+      <div class="gs-rev">
+        <p class="dropcap">TikTok Shop did $20 billion in US sales in its first full year, and the marketplaces behind it move faster than any retail channel in history. LeadLink Commerce is a full-stack commerce operation — content, creators, affiliates, ads, and ops — built to take your brand from launch to multi-six-figure monthly GMV on the channels where products actually sell now. One team. One number. GMV.</p>
+        <p class="byline">Aisle · <b>commerce/division.cart</b> · Operated by · <b>The LeadLink Commerce Desk</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HORIZONTAL MACHINE (pinned) ============ -->
+<section class="hmach" id="hmach">
+  <div class="hmach-head gs-rev">
+    <span class="eyebrow" style="justify-content:center">Aisle 02 · The Machine</span>
+    <h2>From product to <span class="hl-serif">payout</span> — scroll through the machine</h2>
+    <p>Six stations. One operation. This is what "full-stack" actually means — keep scrolling and walk the line.</p>
+  </div>
+  <div class="htrack-wrap">
+    <div class="htrack" id="htrack">
+      <div class="hpanel"><div class="hp-n">01</div><h3>The Product</h3><p>Trend velocity analysis, sell-through data, and margin modeling find the winner before the market saturates it. The product decides 80% of the outcome — so it gets 80% of the rigor.</p><div class="hp-m">Output · validated hero product + AOV portfolio</div></div>
+      <div class="hpanel"><div class="hp-n">02</div><h3>The Content</h3><p>20–40 native videos per month, per product line — hooks, demos, UGC-style cuts — produced by LeadLink Studios and engineered to the retention curve.</p><div class="hp-m">Output · the feed can't escape you</div></div>
+      <div class="hpanel"><div class="hp-n">03</div><h3>The Creators</h3><p>500+ vetted affiliates from micro to 1M+, briefed and managed end-to-end, paid on commission. They only earn when you sell — incentives perfectly aligned.</p><div class="hp-m">Output · distribution that costs nothing up front</div></div>
+      <div class="hpanel"><div class="hp-n">04</div><h3>The Ads</h3><p>TikTok Shop Partner ads amplify what's already converting organically. We pour fuel only on fires that are burning — never on hope.</p><div class="hp-m">Output · paid scale on proven winners</div></div>
+      <div class="hpanel"><div class="hp-n">05</div><h3>The Ops</h3><p>Inventory, fulfilment coordination, buy-box strategy, reviews. The unglamorous machinery that decides whether a viral day becomes a stockout or a record month.</p><div class="hp-m">Output · the back-end never breaks the front-end</div></div>
+      <div class="hpanel gmv"><div class="hp-n" style="-webkit-text-stroke-color:rgba(245,158,11,.8)">06</div><h3>The Number</h3><p>Everything above is optimized toward one metric.</p><div class="big" id="machine-gmv">$0</div><div class="hp-m">Peak monthly GMV · month 2 of a recent launch</div></div>
+    </div>
+  </div>
+  <div class="hprogress"><i id="hprog"></i></div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="services-head gs-rev">
+      <h2>The four pillars</h2>
+      <p>The channel, the product, the creators, and the marketplaces — managed as one operation.</p>
+    </div>
+
+    <!-- 01 TIKTOK SHOP -->
+    <article class="scard">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scard-num">Aisle 03 · The Channel</div>
+          <h3 class="scard-name">TikTok Shop Full Management</h3>
+          <p class="pullquote"><span class="mark">"</span>TikTok Shop did $20 billion in US sales in its first full year. Your brand has a seat — or it's watching someone else eat.</p>
+          <p class="scard-desc">A full-stack TikTok Shop operation — content, creators, affiliates, ads, and ops — driven toward one number: GMV.</p>
+          <ul class="incl">
+            <li>{T}Store setup &amp; listing optimization</li>
+            <li>{T}20–40 native videos/month per line</li>
+            <li>{T}Affiliate recruitment &amp; management</li>
+            <li>{T}TikTok Shop paid ads (TSP)</li>
+            <li>{T}Creator relationships (micro to 1M+)</li>
+            <li>{T}Operations &amp; fulfilment coordination</li>
+          </ul>
+          <button class="btn btn-ghost mag" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · GMV dashboard</span>
+          <div class="v-gmv">
+            <div class="vg-frame vz">
+              <div class="vg-top">
+                <div><div class="vg-l">Monthly GMV</div><div class="vg-v" data-kpi data-prefix="$" data-target="180" data-suffix="K">$0K</div></div>
+                <div class="vg-delta">▲ +212% vs month 1</div>
+              </div>
+              <div class="vg-chart" id="vg-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="vg-row"><span>Orders <b data-kpi data-target="4280">0</b></span><span>AOV <b data-kpi data-prefix="AED " data-target="96">0</b></span><span>Affiliate share <b data-kpi data-target="62" data-suffix="%">0%</b></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 PRODUCT HUNTING (flipped) -->
+    <article class="scard flip">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scard-num">Aisle 04 · The Product</div>
+          <h3 class="scard-name">Product Hunting &amp; Research</h3>
+          <p class="pullquote"><span class="mark">"</span>The product you launch determines 80% of your outcome. We find the winners before the market does.</p>
+          <p class="scard-desc">Product selection as data science — trend velocity, sell-through, and margin modeling to find what sells before it peaks.</p>
+          <ul class="incl">
+            <li>{T}TikTok trend velocity analysis</li>
+            <li>{T}Competitor sell-through analysis</li>
+            <li>{T}Full margin modeling</li>
+            <li>{T}Supplier identification &amp; vetting</li>
+            <li>{T}Seasonal &amp; trend timing</li>
+            <li>{T}Hero + AOV portfolio strategy</li>
+          </ul>
+          <button class="btn btn-ghost mag" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · trend radar</span>
+          <div class="v-radar">
+            <div class="radar vz">
+              <svg width="240" height="240" viewBox="0 0 240 240" fill="none">
+                <circle cx="120" cy="120" r="118" stroke="rgba(245,158,11,.18)" stroke-width="1"/>
+                <circle cx="120" cy="120" r="80" stroke="rgba(245,158,11,.14)" stroke-width="1"/>
+                <circle cx="120" cy="120" r="42" stroke="rgba(245,158,11,.12)" stroke-width="1"/>
+                <path d="M120 2v236M2 120h236" stroke="rgba(245,158,11,.08)"/>
+              </svg>
+              <div class="radar-sweep" id="radar-sweep"></div>
+              <span class="radar-dot rd1"></span><span class="radar-dot rd2"></span><span class="radar-dot rd3"></span>
+            </div>
+            <div class="radar-tag rt1 vz">Glow serum · velocity <b>+340%</b></div>
+            <div class="radar-tag rt2 vz">Margin check <b>✓ 68%</b></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 AFFILIATES -->
+    <article class="scard">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scard-num">Aisle 05 · The Creators</div>
+          <h3 class="scard-name">Affiliate Programme Management</h3>
+          <p class="pullquote"><span class="mark">"</span>Stop paying for reach. Start paying for results — creators who only earn when you sell.</p>
+          <p class="scard-desc">We recruit, brief, and manage the creator network that turns your product into a movement, on a commission model.</p>
+          <ul class="incl">
+            <li>{T}Creator recruitment &amp; vetting</li>
+            <li>{T}Briefing &amp; content guidelines</li>
+            <li>{T}Commission structure setup</li>
+            <li>{T}End-to-end relationship management</li>
+            <li>{T}Deliverable &amp; payment tracking</li>
+            <li>{T}Performance reporting</li>
+          </ul>
+          <button class="btn btn-ghost mag" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · creator network</span>
+          <div class="v-aff">
+            <svg class="lines" viewBox="0 0 380 300" preserveAspectRatio="none">
+              <path class="aff-line" d="M40 30 L 190 150" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+              <path class="aff-line" d="M340 48 L 190 150" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+              <path class="aff-line" d="M22 226 L 190 150" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+              <path class="aff-line" d="M330 274 L 190 150" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+              <path class="aff-line" d="M150 290 L 190 150" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+            </svg>
+            <span class="aff-ava av1 vz">👩</span><span class="aff-ava av2 vz">🧔</span><span class="aff-ava av3 vz">👩‍🦱</span><span class="aff-ava av4 vz">👨</span><span class="aff-ava av5 vz">👧</span>
+            <div class="aff-core vz">Your<br>Product</div>
+            <div class="aff-comm cm1 vz">+AED 24 commission</div>
+            <div class="aff-comm cm2 vz">+AED 31 commission</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 MARKETPLACES (flipped) -->
+    <article class="scard flip">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scard-num">Aisle 06 · The Marketplaces</div>
+          <h3 class="scard-name">Amazon &amp; Noon Marketplace</h3>
+          <p class="pullquote"><span class="mark">"</span>Being on the marketplace isn't the win. Being found on it is.</p>
+          <p class="scard-desc">Setup, optimization, and growth across Amazon and Noon — built so your listings get found, ranked, and bought.</p>
+          <ul class="incl">
+            <li>{T}Account setup (Amazon &amp; Noon)</li>
+            <li>{T}Listing optimization &amp; SEO</li>
+            <li>{T}A+ content &amp; storefront</li>
+            <li>{T}Pricing &amp; buy-box strategy</li>
+            <li>{T}PPC advertising</li>
+            <li>{T}Inventory, reviews &amp; reporting</li>
+          </ul>
+          <button class="btn btn-ghost mag" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · winning listing</span>
+          <div class="v-list">
+            <div class="vl-card vz">
+              <div class="vl-img"><span class="vl-badge">BEST SELLER</span></div>
+              <div class="vl-body">
+                <div class="vl-t">Glow Serum · Vitamin C · 30ml</div>
+                <div class="vl-stars">★★★★★<span>4.8 · 2,341 ratings</span></div>
+                <div class="vl-price"><span class="now">AED 89</span><span class="was">AED 149</span></div>
+                <div class="vl-buy">Add to Cart</div>
+                <div class="vl-meta"><span>Buy box <b>won ✓</b></span><span>Rank <b>#3 in Beauty</b></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section why">
+  <div class="wrap">
+    <div class="why-head gs-rev">
+      <span class="eyebrow">Why Us</span>
+      <h2>Why full-stack beats five vendors on TikTok Shop.</h2>
+    </div>
+    <div class="why-grid" id="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+        <h3>Full-stack, zero handoffs</h3>
+        <p>Content, creators, affiliates, ads, and ops sit on one team. No brief-to-agency delay, no channel running blind to the others.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Products chosen on data, not vibes</h3>
+        <p>Trend velocity, sell-through, and margin modeling decide what we launch. We find winners before the market saturates them.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 11 0 0-2 2-5 2s-5-2-5-2c0-5 2-9 5-11z"/><circle cx="12" cy="9" r="1.6"/><path d="M9 16l-3 4M15 16l3 4"/></svg></div>
+        <h3>We pay for results, then scale them</h3>
+        <p>Affiliates earn on performance, not reach. Once the unit economics prove out, we scale across every channel at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="faq">
+      <div class="faq-head gs-rev">
+        <span class="eyebrow">Aisle 07 · The Record</span>
+        <h2>Questions operators ask before launch</h2>
+      </div>
+      <div class="qa gs-rev"><button>We don't have a product yet. Can you still help?</button><div class="ans"><p>That's actually the best starting point. Product hunting is our first pillar — trend velocity analysis, margin modeling, and supplier vetting before a dirham is spent on inventory. Launching the right product matters more than launching fast, and we'd rather tell you "not this one" than manage a loser.</p></div></div>
+      <div class="qa gs-rev"><button>How fast can we expect GMV?</button><div class="ans"><p>Honest answer: the first 30 days are setup and seeding — store, listings, content pipeline, first wave of affiliates. Traction typically shows in weeks 4–8 as creator content compounds, and scale decisions (ads, more SKUs, more marketplaces) happen once unit economics are proven. Anyone promising viral month-one numbers is selling you luck.</p></div></div>
+      <div class="qa gs-rev"><button>Do we pay the creators, or do you?</button><div class="ans"><p>Creators in our affiliate programmes earn commission on sales through the platform — meaning they're paid out of revenue they generate, not from an upfront budget. We handle recruitment, briefing, tracking, and the relationship. You approve the commission structure; the platform handles payouts.</p></div></div>
+      <div class="qa gs-rev"><button>Can you run our existing Amazon account, or only new ones?</button><div class="ans"><p>Both. For existing accounts we start with an audit — listings, pricing, buy-box performance, PPC waste, review health — and fix what's leaking before scaling what works. For new accounts we build correctly from day one, which is cheaper than repairing later.</p></div></div>
+      <div class="qa gs-rev"><button>Who handles inventory and shipping?</button><div class="ans"><p>You own the inventory and the fulfilment relationship; we coordinate it. That means demand forecasting from our sales data, stockout alerts before they happen, and FBA/fulfilment-partner coordination so a viral spike becomes revenue instead of refunds.</p></div></div>
+      <div class="qa gs-rev"><button>What does "full management" actually include?</button><div class="ans"><p>Everything between "here's our product" and "here's your GMV report": store setup, listing optimization, 20–40 native videos a month, affiliate recruitment and management, paid amplification, ops coordination, and weekly reporting. One team, one retainer, one number we're accountable to.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="section final">
+  <div class="wrap">
+    <span class="kick gs-rev">Checkout · Final aisle · Your move</span>
+    <h2 class="gs-rev">Ready to take your seat at the <span class="serif">table?</span></h2>
+    <button class="btn btn-primary mag gs-rev" id="final-cta" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+    <p class="micro gs-rev">Takes 2 minutes · 3 quick questions · Then you pick a time</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">LeadLink<span class="dot"></span><span class="div">Solutions</span></div>
+        <p class="foot-tag">The full-stack digital growth group. UAE · USA · UK · Global.</p>
+      </div>
+      <div class="foot-brands">
+        <h4>Our Brands</h4>
+        <a href="studios.html">LeadLink Studios</a>
+        <a href="tech.html">LeadLink Tech</a>
+        <a href="growth.html">LeadLink Growth</a>
+        <a href="design.html">LeadLink Design</a>
+        <a href="commerce.html" class="cur">LeadLink Commerce</a>
+        <a href="press.html">LeadLink Press</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#services">Pillars</a><a href="#hmach">The Machine</a><a href="#divide">The Divide</a><a href="#">Insights</a><a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Let's Talk</h4>
+        <a href="#" onclick="openModal();return false;">☕ Virtual Coffee</a>
+        <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+        <a href="#">+971 58 519 9409</a><a href="#">WhatsApp →</a>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LeadLink Solutions. All Rights Reserved.</span><span>Cart never abandoned. Obviously.</span></div>
+  </div>
+</footer>
+
+<button class="btn btn-primary float-cta mag" onclick="openModal()">☕ Grab a Coffee</button>
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+    <div id="modal-form">
+      <span class="eyebrow">LeadLink Commerce · Portfolio</span>
+      <h3 id="m-title">Want to see what we actually scale?</h3>
+      <p>Enter your email and we'll send our Commerce portfolio straight to your inbox in 60 seconds. Real launches. Real GMV.</p>
+      <input type="email" id="email" placeholder="Your work email" autocomplete="email">
+      <button class="btn btn-primary" onclick="submitEmail()">Send Me the Portfolio →</button>
+      <p class="fine">We'll also send you one email per month with insights worth reading. Unsubscribe any time.</p>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Check your inbox 📨</h3>
+      <p style="margin-bottom:0">Your Commerce portfolio is on its way. Give it 60 seconds — and check spam just in case.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  /* ---------- base ---------- */
+  const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
+  document.querySelectorAll('.qa button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const qa=b.parentElement,ans=qa.querySelector('.ans'),open=qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(o=>{o.classList.remove('open');o.querySelector('.ans').style.maxHeight=null;});
+      if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+    });
+  });
+  const overlay=document.getElementById('overlay');
+  function openModal(){overlay.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('email').focus(),300);}
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';
+    setTimeout(()=>{document.getElementById('modal-form').style.display='block';
+      document.getElementById('modal-success').classList.remove('show');
+      document.getElementById('email').value='';},300);}
+  function submitEmail(){const em=document.getElementById('email');
+    if(!em.value||!em.value.includes('@')){em.style.borderColor='var(--accent)';em.focus();return;}
+    document.getElementById('modal-form').style.display='none';
+    document.getElementById('modal-success').classList.add('show');}
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();});
+
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGSAP=typeof gsap!=='undefined';
+  const fmt=n=>'$'+Math.floor(n).toLocaleString('en-US');
+
+  if(hasGSAP&&!reduced){
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ---- mesh blobs drift ---- */
+    gsap.to('.b1',{x:120,y:90,duration:11,yoyo:true,repeat:-1,ease:'sine.inOut'});
+    gsap.to('.b2',{x:-100,y:-70,duration:13,yoyo:true,repeat:-1,ease:'sine.inOut'});
+    gsap.to('.b3',{x:-70,y:110,duration:9,yoyo:true,repeat:-1,ease:'sine.inOut'});
+
+    /* ---- ghost word drifts + parallax ---- */
+    gsap.to('#ghost-word',{xPercent:-22,duration:48,repeat:-1,ease:'none'});
+
+    /* ---- HERO entrance ---- */
+    const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+    tl.from('.h-line',{yPercent:110,duration:1,stagger:.13},.1)
+      .from('.gs-h',{y:24,opacity:0,duration:.8,stagger:.12},'-=.55')
+      .from('.lp',{y:90,opacity:0,scale:.9,duration:1.1,ease:'back.out(1.3)'},'-=.7')
+      .from('.sale-card',{y:50,opacity:0,scale:.85,duration:.9,stagger:.12,ease:'back.out(1.6)'},'-=.6');
+
+    /* sale cards idle float */
+    gsap.utils.toArray('.sale-card').forEach((el,i)=>{
+      gsap.to(el,{y:'+='+(i%2?13:-12),rotate:(i%2?2:-2),duration:3.2+i*.5,yoyo:true,repeat:-1,ease:'sine.inOut',delay:i*.3});
+    });
+
+    /* ---- GMV odometer: counts forever ---- */
+    const odo=document.getElementById('gmv-odo');
+    let gmv=2412000;
+    odo.textContent=fmt(gmv);
+    gsap.timeline({repeat:-1,repeatDelay:1.1})
+      .to({},{duration:1.2,onComplete:()=>{
+        const inc=80+Math.random()*340;
+        const o={v:gmv};gmv+=inc;
+        gsap.to(o,{v:gmv,duration:.7,ease:'power2.out',onUpdate:()=>odo.textContent=fmt(o.v)});
+      }});
+
+    /* ---- live stream sim ---- */
+    /* viewers tick */
+    const vEl=document.getElementById('lp-views');let viewers=12408;
+    setInterval(()=>{viewers+=Math.floor(Math.random()*23)-4;vEl.textContent='👁 '+viewers.toLocaleString();},1400);
+    /* comments cycle */
+    const comments=gsap.utils.toArray('#lp-comments .lp-c');
+    const ctl=gsap.timeline({repeat:-1});
+    comments.forEach((c)=>{
+      ctl.to(c,{opacity:1,y:0,duration:.45,ease:'power2.out'})
+         .to(c,{opacity:0,y:-12,duration:.4,ease:'power2.in'},'+=1.6');
+    });
+    /* hearts */
+    const heartsBox=document.getElementById('lp-hearts');
+    const emojis=['❤️','🧡','💛','✨','🔥'];
+    setInterval(()=>{
+      const h=document.createElement('span');h.className='heart';
+      h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      heartsBox.appendChild(h);
+      gsap.fromTo(h,{y:0,x:0,opacity:1,scale:.7},
+        {y:-180-Math.random()*30,x:(Math.random()-.5)*36,opacity:0,scale:1.25,duration:2+Math.random(),ease:'power1.out',
+         onComplete:()=>h.remove()});
+    },650);
+    /* buy button pulse + sold counter + bar */
+    gsap.to('#lp-buy',{scale:1.08,duration:.55,yoyo:true,repeat:-1,ease:'sine.inOut'});
+    const soldEl=document.getElementById('lp-sold');let sold=347;
+    const barEl=document.getElementById('lp-bar');
+    setInterval(()=>{sold+=Math.random()<.6?1:2;soldEl.textContent=sold;
+      barEl.style.width=Math.min(30+(sold-347)*.6,94)+'%';},2100);
+    /* LIVE dot blink */
+    gsap.to('.lp-live i',{opacity:.25,duration:.7,yoyo:true,repeat:-1,ease:'sine.inOut'});
+
+    /* ---- hero parallax ---- */
+    gsap.to('#live-stage',{yPercent:-8,ease:'none',
+      scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('#ghost-word',{yPercent:40,ease:'none',
+      scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+
+    /* ---- velocity marquee: skews with scroll speed ---- */
+    const vt=document.getElementById('vmarq-track');
+    vt.innerHTML+=vt.innerHTML;
+    gsap.to(vt,{x:()=>-vt.scrollWidth/2,duration:26,ease:'none',repeat:-1});
+    let proxySkew={skew:0};
+    const clamp=gsap.utils.clamp(-14,14);
+    ScrollTrigger.create({
+      onUpdate:self=>{
+        const skew=clamp(self.getVelocity()/-280);
+        if(Math.abs(skew)>Math.abs(proxySkew.skew)){
+          proxySkew.skew=skew;
+          gsap.to(proxySkew,{skew:0,duration:.7,ease:'power3',overwrite:true,
+            onUpdate:()=>vt.style.transform=`translateX(${gsap.getProperty(vt,'x')}px) skewX(${proxySkew.skew}deg)`});
+        }
+      }});
+
+    /* ---- generic reveals ---- */
+    gsap.set('.gs-rev',{y:30});
+    ScrollTrigger.batch('.gs-rev',{start:'top 86%',
+      onEnter:b=>gsap.to(b,{opacity:1,y:0,duration:.85,stagger:.12,ease:'power3.out',overwrite:true})});
+    gsap.from('.ledger-row',{opacity:0,y:14,duration:.5,stagger:.08,ease:'power2.out',
+      scrollTrigger:{trigger:'.ledger',start:'top 80%'}});
+
+    /* ---- HORIZONTAL MACHINE: pinned scrub ---- */
+    ScrollTrigger.matchMedia({
+      '(min-width: 881px)':function(){
+        const track=document.getElementById('htrack');
+        const getScroll=()=>track.scrollWidth-innerWidth;
+        const hTween=gsap.to(track,{x:()=>-getScroll(),ease:'none',
+          scrollTrigger:{
+            trigger:'#hmach',start:'top top',end:()=>'+='+getScroll(),
+            pin:true,scrub:1,invalidateOnRefresh:true,
+            onUpdate:self=>{document.getElementById('hprog').style.width=(self.progress*100)+'%';}
+          }});
+        /* machine GMV counts when its panel approaches */
+        const mg=document.getElementById('machine-gmv');const o={v:0};let done=false;
+        ScrollTrigger.create({trigger:'#hmach',start:'top top',end:()=>'+='+getScroll(),scrub:true,
+          onUpdate:self=>{
+            if(self.progress>.7&&!done){done=true;
+              gsap.to(o,{v:180000,duration:1.6,ease:'power2.out',
+                onUpdate:()=>mg.textContent=fmt(o.v)});}
+          }});
+      },
+      '(max-width: 880px)':function(){
+        gsap.utils.toArray('.hpanel').forEach(p=>{
+          gsap.from(p,{opacity:0,y:34,duration:.7,ease:'power3.out',
+            scrollTrigger:{trigger:p,start:'top 86%'}});
+        });
+        const mg=document.getElementById('machine-gmv');const o={v:0};
+        ScrollTrigger.create({trigger:'.hpanel.gmv',start:'top 80%',once:true,
+          onEnter:()=>gsap.to(o,{v:180000,duration:1.6,ease:'power2.out',
+            onUpdate:()=>mg.textContent=fmt(o.v)})});
+      }
+    });
+
+    /* ---- service mockups ---- */
+    gsap.utils.toArray('[data-viz]').forEach(stage=>{
+      gsap.from(stage.querySelectorAll('.vz'),{
+        y:46,opacity:0,scale:.9,rotate:i=>(i%2?5:-5),duration:.9,stagger:.13,ease:'back.out(1.5)',
+        scrollTrigger:{trigger:stage,start:'top 80%'}});
+      stage.querySelectorAll('.vz').forEach((el,i)=>{
+        gsap.to(el,{y:'+='+(i%2?7:-7),duration:3+i*.5,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1+i*.3});
+      });
+    });
+
+    /* GMV chart bars + KPIs */
+    const barH=[14,22,18,30,34,46,42,58,66,78,88,100];
+    gsap.utils.toArray('#vg-chart i').forEach((b,i)=>{
+      gsap.to(b,{height:barH[i]+'%',duration:.9,ease:'power3.out',delay:i*.06,
+        scrollTrigger:{trigger:'.v-gmv',start:'top 80%'}});
+    });
+    gsap.utils.toArray('[data-kpi]').forEach(el=>{
+      const t=+el.dataset.target,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';const o={v:0};
+      ScrollTrigger.create({trigger:el,start:'top 85%',once:true,
+        onEnter:()=>gsap.to(o,{v:t,duration:1.3,ease:'power2.out',
+          onUpdate:()=>el.textContent=pre+Math.round(o.v).toLocaleString()+suf})});
+    });
+
+    /* radar sweep + dots ping */
+    gsap.to('#radar-sweep',{rotate:360,duration:4,repeat:-1,ease:'none'});
+    gsap.utils.toArray('.radar-dot').forEach((d,i)=>{
+      gsap.to(d,{scale:1.8,opacity:.3,duration:1.1,repeat:-1,yoyo:true,ease:'sine.inOut',delay:i*.4});
+    });
+
+    /* affiliate lines draw */
+    gsap.utils.toArray('.aff-line').forEach(p=>{
+      const len=p.getTotalLength();
+      gsap.set(p,{strokeDasharray:len,strokeDashoffset:len});
+      gsap.to(p,{strokeDashoffset:0,duration:1.1,ease:'power2.out',
+        scrollTrigger:{trigger:'.v-aff',start:'top 80%'}});
+    });
+
+    /* listing buy button pulse */
+    gsap.to('.vl-buy',{scale:1.04,duration:.7,yoyo:true,repeat:-1,ease:'sine.inOut'});
+
+    /* why cards */
+    gsap.from('#why-grid .why-card',{opacity:0,y:34,duration:.7,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#why-grid',start:'top 84%'}});
+
+    /* ---- magnetic buttons (desktop) ---- */
+    if(matchMedia('(hover:hover)').matches){
+      document.querySelectorAll('.mag').forEach(btn=>{
+        btn.addEventListener('mousemove',e=>{
+          const r=btn.getBoundingClientRect();
+          gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.35,ease:'power2.out'});
+        });
+        btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.5,ease:'elastic.out(1,.45)'}));
+      });
+    }
+  }else{
+    /* fallback */
+    document.querySelectorAll('.gs-rev').forEach(el=>el.style.opacity=1);
+    document.getElementById('gmv-odo').textContent='$2,412,000';
+    document.getElementById('machine-gmv').textContent='$180,000';
+    document.querySelectorAll('[data-kpi]').forEach(el=>{
+      el.textContent=(el.dataset.prefix||'')+(+el.dataset.target).toLocaleString()+(el.dataset.suffix||'');
+    });
+    document.querySelectorAll('#lp-comments .lp-c').forEach(c=>{c.style.opacity=1;c.style.transform='none';});
+    const vt=document.getElementById('vmarq-track');vt.innerHTML+=vt.innerHTML;
+    let x=0;(function loop(){x-=.6;if(Math.abs(x)>=vt.scrollWidth/2)x=0;vt.style.transform='translateX('+x+'px)';requestAnimationFrame(loop);})();
+  }
+</script>
+</body>
+</html>

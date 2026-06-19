@@ -1,0 +1,27 @@
+{
+  "name": "leadlink-website",
+  "version": "1.0.0",
+  "description": "LeadLink marketing website built with Astro and GSAP.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "keywords": [
+    "astro",
+    "gsap",
+    "marketing-site"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "astro": "^6.4.7",
+    "gsap": "^3.15.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
+  }
+}

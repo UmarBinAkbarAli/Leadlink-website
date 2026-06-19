@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/homepage.css';
+import source from '../content/homepage-source.html?raw';
+
+const title = source.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() ?? 'LeadLink Solutions';
+const headInner = source.match(/<head[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? '';
+const bodyInner = source.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
+
+const headHtml = headInner
+  .replace(/<title>[\s\S]*?<\/title>/i, '')
+  .replace(/<meta\s+charset=["'][^"']*["']\s*\/?>/i, '')
+  .replace(/<meta\s+name=["']viewport["'][^>]*>\s*/i, '')
+  .trim();
+---
+
+<BaseLayout title={title} headHtml={headHtml}>
+  <Fragment set:html={bodyInner} />
+
+  <script>
+    import { initHomepageMotion } from '../scripts/homepage';
+    import { initProcessTimeline } from '../scripts/process-timeline';
+    import { initTeamSlider, initTestimonialSlider } from '../scripts/sliders';
+
+    initHomepageMotion();
+    initProcessTimeline();
+    initTeamSlider();
+    initTestimonialSlider();
+  </script>
+</BaseLayout>

@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadLink Studios — If It Doesn't Stop the Scroll, It Doesn't Exist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#7C3AED;--accent-bright:#8B5CF6;--accent-mid:#A78BFA;
+    --accent-deep:#4C1D95;--accent-glow:#6D28D9;
+    --rgb:124,58,237;
+    --bg:#0A0A0F;--bg-2:#111118;--bg-3:#0d0d13;
+    --text:#fff;--muted:rgba(255,255,255,.58);--muted-2:rgba(255,255,255,.38);
+    --border:rgba(255,255,255,.10);--border-2:rgba(255,255,255,.06);
+    --gold:#F59E0B;
+    --grot:"Schibsted Grotesk",system-ui,sans-serif;
+    --serif:"Playfair Display",Georgia,serif;
+    --mono:"JetBrains Mono",monospace;
+    --body:"Plus Jakarta Sans",system-ui,sans-serif;
+    --maxw:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.028;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  .eyebrow{font-family:var(--grot);font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2);display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:500}
+  .hl{color:var(--accent)}
+  .hl-serif{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+  a{color:inherit;text-decoration:none}
+  .btn{font-family:var(--grot);font-weight:600;font-size:.95rem;padding:.95em 1.6em;border-radius:2px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:.6em;transition:.35s cubic-bezier(.2,.7,.3,1);background:none;color:var(--text)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-bright);box-shadow:0 14px 40px -10px rgba(var(--rgb),.6);transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);background:rgba(var(--rgb),.07)}
+
+  /* ====== FILM-STRIP TOP BORDER ====== */
+  .filmstrip-top{height:28px;background:#111;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:200}
+  .filmstrip-top::before,.filmstrip-top::after{content:"";flex:none;height:16px;background:repeating-linear-gradient(90deg,var(--bg) 0 10px,#111 10px 18px);width:60px}
+  .fs-ticker{flex:1;overflow:hidden}
+  .fs-inner{display:flex;white-space:nowrap;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+  .fs-inner span{padding:0 2rem}
+  .fs-inner b{color:var(--accent-mid)}
+
+  /* ====== NAV ====== */
+  nav{position:fixed;top:28px;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
+  nav.scrolled{background:rgba(10,10,15,.92);border-bottom-color:var(--border)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--grot);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5em}
+  .logo .dot{width:7px;height:7px;background:var(--accent);border-radius:1px;box-shadow:0 0 12px var(--accent)}
+  .logo .div{font-weight:500;color:var(--muted);font-size:.95rem}
+  .nav-links{display:flex;align-items:center;gap:2.2rem;font-family:var(--grot);font-size:.92rem;font-weight:500}
+  .nav-links a{color:var(--muted);transition:.25s;position:relative}
+  .nav-links a:hover{color:#fff}
+  .nav-links a.active{color:#fff}
+  .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+
+  /* ====== HERO ====== */
+  .hero{position:relative;padding:210px 0 100px;overflow:hidden;min-height:94vh;display:flex;align-items:center}
+  .hero-glow{position:absolute;top:-10%;left:-8%;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.35),rgba(76,29,149,.08) 42%,transparent 68%);filter:blur(24px)}
+  .hero-glow-r{position:absolute;bottom:-10%;right:-8%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.28),transparent 68%);filter:blur(24px)}
+  .hero-cols{position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent)}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:center}
+  /* scene counter — like a clapperboard header */
+  .scene-count{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2);display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
+  .scene-count::before{content:"";width:18px;height:18px;border:1.5px solid var(--accent);transform:rotate(45deg);display:inline-block;flex-shrink:0}
+  .scene-count b{color:var(--accent-mid);font-weight:500}
+  .hero h1{font-family:var(--grot);font-weight:900;line-height:1;letter-spacing:-.032em;font-size:clamp(2.8rem,6.8vw,5.8rem)}
+  .hero h1 .serif{font-weight:600}
+  .h-mask{overflow:hidden;display:block;padding-top:.18em;margin-top:-.18em}
+  .h-line{display:block}
+  .sub{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--muted);max-width:540px;margin-top:1.8rem}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+  .hero-spec{margin-top:2.2rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--muted-2)}
+  .hero-spec b{color:var(--accent-mid);font-weight:500}
+
+  /* ---- HERO VISUAL: studio set ---- */
+  .studio{position:relative;height:540px}
+  .fl{position:absolute;will-change:transform}
+  /* clapperboard */
+  .clap{width:260px;left:2%;top:20px;z-index:3}
+  .clap-top{background:#e8e4d4;border-radius:6px 6px 0 0;padding:.7rem .8rem;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+  .clap-stripes{display:flex;gap:0;height:12px;overflow:hidden}
+  .clap-stripes i{flex:1;background:#1a1a1a}
+  .clap-stripes i:nth-child(even){background:#e8e4d4}
+  .clap-hinge{position:absolute;top:0;left:50%;transform:translateX(-50%);width:4px;height:100%;background:rgba(0,0,0,.18)}
+  .clap-body{background:linear-gradient(170deg,#18181e,#0f0f14);border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;padding:.7rem .9rem;box-shadow:0 30px 64px -18px rgba(0,0,0,.9)}
+  .clap-row{display:flex;gap:.5rem;align-items:baseline;font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;border-bottom:1px solid var(--border-2);padding:.3rem 0}
+  .clap-row:last-child{border-bottom:none}
+  .clap-row .k{color:var(--muted-2);width:54px}
+  .clap-row .v{color:#fff;font-weight:500}
+  .clap-row .v.hl{color:var(--accent-mid)}
+  /* film roll */
+  .roll{right:2%;top:8px;z-index:2}
+  .roll svg{display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.7))}
+  /* phone — reels UI */
+  .phone{right:14%;top:80px;width:155px;height:298px;border-radius:24px;background:#0b0b11;border:1px solid rgba(255,255,255,.14);box-shadow:0 36px 80px -22px rgba(0,0,0,.9),inset 0 0 0 5px #07070b;padding:14px 11px;z-index:4}
+  .ph-notch{width:52px;height:5px;border-radius:3px;background:rgba(255,255,255,.16);margin:0 auto 11px}
+  .ph-reel{height:110px;border-radius:11px;background:linear-gradient(145deg,rgba(var(--rgb),.55),rgba(76,29,149,.28));border:1px solid rgba(var(--rgb),.35);position:relative;overflow:hidden}
+  .ph-reel::before{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:rgba(255,255,255,.9)}
+  .ph-reel::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.4),transparent 40%)}
+  .ph-views{position:absolute;bottom:7px;right:9px;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;color:rgba(255,255,255,.9);background:rgba(0,0,0,.55);border-radius:3px;padding:.25em .5em}
+  .ph-l{height:7px;border-radius:4px;background:rgba(255,255,255,.12);margin-top:9px}
+  .ph-l.s{width:58%}
+  .ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+  .ph-grid span{height:40px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border-2)}
+  .ph-grid span:nth-child(2){background:rgba(var(--rgb),.2);border-color:rgba(var(--rgb),.4)}
+  .ph-cta{height:28px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-bright));margin-top:10px;box-shadow:0 10px 24px -8px rgba(var(--rgb),.7)}
+  /* view counter badge */
+  .views-badge{left:4%;bottom:64px;background:#0c0c12;border:1px solid rgba(var(--rgb),.55);border-radius:7px;padding:.75rem 1rem;box-shadow:0 18px 44px -12px rgba(var(--rgb),.5);z-index:5}
+  .views-badge .vb-num{font-family:var(--grot);font-weight:900;font-size:1.6rem;letter-spacing:-.02em;line-height:1;color:#fff}
+  .views-badge .vb-num span{color:var(--accent-mid);font-size:.65em}
+  .views-badge .vb-t{font-family:var(--mono);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2);margin-top:.25rem}
+  /* retention badge */
+  .ret-badge{right:0;bottom:42px;background:#0c0c12;border:1px solid var(--border);border-radius:7px;padding:.7rem .9rem;box-shadow:0 16px 40px -12px rgba(0,0,0,.8);z-index:5}
+  .ret-badge .rb-t{font-family:var(--mono);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+  .ret-badge .rb-bar{display:flex;gap:2px;margin-top:.45rem;height:22px;align-items:flex-end}
+  .ret-badge .rb-bar i{width:10px;border-radius:2px 2px 0 0;background:var(--accent);opacity:.8}
+  .ret-badge .rb-v{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;color:var(--accent-mid);margin-top:.35rem}
+  @media(max-width:1000px){.studio{height:440px;transform:scale(.82);transform-origin:top right}}
+  @media(max-width:880px){
+    .hero{min-height:0;padding-top:180px}
+    .hero-grid{grid-template-columns:1fr}
+    .studio{height:420px;transform:scale(.85);transform-origin:top center;margin-top:1.5rem}
+    .clap{left:0}.roll{right:0;top:0}.phone{right:18%;top:60px}
+  }
+  @media(max-width:560px){.studio{height:350px;transform:scale(.66)}}
+
+  /* ====== FILM STRIP PLATFORM STRIP ====== */
+  .platforms{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#0a0a0f;overflow:hidden;position:relative}
+  .platforms::before,.platforms::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+  .platforms::before{left:0;background:linear-gradient(90deg,#0a0a0f,transparent)}
+  .platforms::after{right:0;background:linear-gradient(270deg,#0a0a0f,transparent)}
+  /* sprocket holes */
+  .sprockets{height:9px;background:repeating-linear-gradient(90deg,transparent 0 20px,rgba(255,255,255,.09) 20px 30px);border-bottom:1px solid var(--border-2)}
+  .plat-row{display:flex;width:max-content;padding:.9rem 0}
+  .plat-item{display:inline-flex;align-items:center;gap:.7rem;padding:0 2rem;white-space:nowrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:rgba(255,255,255,.55)}
+  .plat-item .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-mid)}
+  .sprockets2{height:9px;background:repeating-linear-gradient(90deg,transparent 0 20px,rgba(255,255,255,.09) 20px 30px);border-top:1px solid var(--border-2)}
+
+  .section{padding:clamp(80px,11vw,150px) 0}
+
+  /* ====== THE LEDGER ====== */
+  .divide-head{margin-bottom:3.4rem;max-width:760px}
+  .divide-head h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.6vw,3.4rem);margin-top:1.4rem}
+  .divide-head p{color:var(--muted);margin-top:1.4rem;max-width:560px}
+  .ledger{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+  .ledger-head{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-2)}
+  .ledger-head>div{padding:1.5rem 2rem;font-family:var(--grot);font-weight:800;font-size:clamp(1.05rem,2vw,1.4rem);letter-spacing:-.01em;display:flex;align-items:center;gap:.7em}
+  .ledger-head .l-col{color:var(--muted);border-right:1px solid var(--border)}
+  .ledger-head .r-col{color:var(--accent-mid)}
+  .ledger-head .tag{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;border:1px solid currentColor;border-radius:2px;padding:.25em .7em;opacity:.7}
+  .ledger-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border-2)}
+  .ledger-row>div{padding:1.25rem 2rem;font-size:.98rem}
+  .ledger-row .l{color:var(--muted);border-right:1px solid var(--border-2)}
+  .ledger-row .r{color:rgba(255,255,255,.86);position:relative}
+  .ledger-row .r::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transition:.4s;transform-origin:top}
+  .ledger-row:hover .r::before{transform:scaleY(1)}
+  .ledger-row:hover{background:rgba(var(--rgb),.025)}
+  .ledger-foot{border-top:1px solid var(--border);padding:1.4rem 2rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.8vw,1.3rem);color:rgba(255,255,255,.85);background:var(--bg-2)}
+  .ledger-foot .hl{font-weight:600}
+  @media(max-width:880px){.ledger-head,.ledger-row{grid-template-columns:1fr}.ledger-head .l-col,.ledger-row .l{border-right:none;border-bottom:1px solid var(--border-2)}}
+
+  /* ====== INTRO ====== */
+  .intro{background:var(--bg-2);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2)}
+  .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px);align-items:start}
+  .intro h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.4vw,3.4rem);margin-top:1.4rem}
+  .dropcap{color:var(--muted);font-size:1.05rem;border-top:1px solid var(--border);padding-top:1.8rem}
+  .dropcap::first-letter{font-family:var(--serif);font-style:italic;font-weight:600;font-size:4.2em;float:left;line-height:.78;padding:.06em .14em 0 0;color:var(--accent)}
+  .byline{margin-top:1.8rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+  .byline b{color:rgba(255,255,255,.7);font-weight:500}
+  @media(max-width:880px){.intro-grid{grid-template-columns:1fr;gap:2.2rem}}
+
+  /* ====== RETENTION COUNTER STRIP ====== */
+  .machine{background:var(--bg-3);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);padding:3rem 0}
+  .machine-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-2);border:1px solid var(--border-2)}
+  .mc{background:var(--bg);padding:clamp(28px,4vw,44px) clamp(18px,3vw,34px);position:relative;overflow:hidden}
+  .mc::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:.6s cubic-bezier(.16,.84,.3,1)}
+  .mc.lit::before{transform:scaleX(1)}
+  .mc .mnum{font-family:var(--grot);font-weight:900;font-size:clamp(2.2rem,4.5vw,3.8rem);letter-spacing:-.03em;line-height:1}
+  .mc .mnum .u{color:var(--accent-mid)}
+  .mc .mcap{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.8rem}
+  .mc .msub{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted-2);margin-top:.2rem}
+  @media(max-width:880px){.machine-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.machine-grid{grid-template-columns:1fr}}
+
+  /* ====== SERVICES — FILM SPREAD CARDS ====== */
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+  .services-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em}
+  .services-head p{color:var(--muted);max-width:340px}
+  .scard{border-top:1px solid var(--border);padding:clamp(40px,6vw,76px) 0}
+  .scard:last-of-type{border-bottom:1px solid var(--border)}
+  .scard-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+  .scard.flip .scard-grid>.sc-visual{order:-1}
+  /* scene label — top-left on each card */
+  .scene-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-mid);display:flex;align-items:center;gap:.7em;margin-bottom:1rem}
+  .scene-label::before{content:"";width:14px;height:14px;border:1.5px solid var(--accent);transform:rotate(45deg);flex-shrink:0}
+  .scard-name{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.7rem,3.2vw,2.7rem);margin:.2rem 0 1.6rem}
+  .pullquote{position:relative;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.2rem,2.1vw,1.75rem);line-height:1.35;color:rgba(255,255,255,.92)}
+  .pullquote .mark{position:absolute;left:-.45em;top:-.5em;font-size:3.2em;line-height:1;color:var(--accent);opacity:.28;font-family:var(--serif)}
+  .scard-desc{color:var(--muted);margin-top:1.4rem;font-size:1rem;max-width:48ch}
+  .incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;margin-top:1.6rem}
+  .incl li{display:flex;gap:.6em;font-size:.9rem;color:rgba(255,255,255,.78);line-height:1.4}
+  .incl li svg{flex-shrink:0;margin-top:.3em;color:var(--accent-mid)}
+  .scard .btn{margin-top:2rem}
+  .sc-visual{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:5px;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(var(--rgb),.05),transparent 70%);overflow:hidden;padding:2rem}
+  .sc-visual .vtag{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
+  @media(max-width:880px){.scard-grid{grid-template-columns:1fr;gap:2.2rem}.scard.flip .scard-grid>.sc-visual{order:0}.sc-visual{min-height:320px}}
+
+  /* V1: AI Avatar spread */
+  .v-avatar{position:relative;width:100%;max-width:380px;height:300px}
+  .av-langs{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:7px;z-index:2}
+  .av-lang{border-radius:5px;padding:.4rem .7rem;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;display:flex;align-items:center;gap:.5rem;box-shadow:0 12px 28px -8px rgba(0,0,0,.7)}
+  .av-lang .flag{font-size:.8rem}
+  .al1{background:#1a1a22;border:1px solid var(--border)}.al2{background:rgba(var(--rgb),.18);border:1px solid rgba(var(--rgb),.4);color:#d8cfff}.al3{background:#1a1a22;border:1px solid var(--border)}.al4{background:#1a1a22;border:1px solid var(--border)}
+  .av-screen{position:absolute;right:0;top:20px;width:220px;height:260px;border-radius:12px;background:linear-gradient(160deg,rgba(var(--rgb),.22),rgba(76,29,149,.12));border:1px solid rgba(var(--rgb),.4);box-shadow:0 30px 64px -18px rgba(0,0,0,.85);overflow:hidden}
+  .av-screen::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.2rem;color:rgba(255,255,255,.9);text-shadow:0 0 40px rgba(var(--rgb),.8)}
+  .av-screen::after{content:"";position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(10,10,15,.9),transparent)}
+  .av-stats{position:absolute;bottom:14px;left:0;right:0;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 .9rem;z-index:2}
+  .av-stat{background:rgba(10,10,15,.85);border:1px solid var(--border);border-radius:5px;padding:.4rem .6rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em}
+  .av-stat .v{color:var(--accent-mid);font-weight:600;font-size:.7rem;display:block;margin-top:.1rem}
+  .av-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;border-radius:3px;padding:.4em .9em;box-shadow:0 10px 28px -8px rgba(var(--rgb),.8);z-index:3;white-space:nowrap}
+  /* V2: short form editor */
+  .v-edit{width:100%;max-width:400px}
+  .ve-win{border:1px solid var(--border);border-radius:10px;background:#0b0e12;box-shadow:0 30px 64px -18px rgba(0,0,0,.85);overflow:hidden}
+  .ve-bar{display:flex;align-items:center;gap:6px;padding:.55rem .8rem;border-bottom:1px solid var(--border-2);background:rgba(255,255,255,.02)}
+  .ve-bar span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+  .ve-bar span:first-child{background:rgba(var(--rgb),.85)}
+  .ve-bar .tt{margin-left:auto;font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+  /* timeline track */
+  .ve-body{padding:.9rem}
+  .ve-preview{height:100px;border-radius:8px;background:linear-gradient(135deg,rgba(var(--rgb),.42),rgba(76,29,149,.22));position:relative;overflow:hidden;margin-bottom:.9rem}
+  .ve-preview::before{content:"";position:absolute;top:0;left:32%;width:2px;height:100%;background:rgba(255,255,255,.9);box-shadow:0 0 8px rgba(255,255,255,.5)}
+  .ve-track{display:flex;flex-direction:column;gap:5px}
+  .ve-row{display:flex;align-items:center;gap:.5rem}
+  .ve-rowl{font-family:var(--mono);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);width:38px;flex-shrink:0}
+  .ve-seg{height:14px;border-radius:3px;position:relative;overflow:hidden;flex:1}
+  .ve-seg i{position:absolute;top:0;bottom:0;border-radius:3px;background:currentColor;opacity:.7}
+  .tr-v{color:var(--accent-mid)}.tr-a{color:#10B981}.tr-c{color:#F59E0B}.tr-s{color:var(--accent)}
+  .ve-head-label{position:absolute;left:32%;top:0;font-family:var(--mono);font-size:.46rem;letter-spacing:.14em;background:rgba(255,255,255,.9);color:#0a0a0f;padding:.2em .5em;border-radius:0 0 3px 3px}
+  .ve-progress{margin-top:.9rem;display:flex;justify-content:space-between;font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--muted-2)}
+  .ve-progress b{color:var(--accent-mid)}
+  /* retention curve overlay */
+  .ret-overlay{margin-top:.9rem;border:1px solid var(--border-2);border-radius:7px;padding:.7rem .8rem;background:rgba(255,255,255,.02)}
+  .ret-label{font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin-bottom:.5rem}
+  .ret-curve svg{display:block;width:100%;height:44px;overflow:visible}
+  /* V3: documentary frames */
+  .v-doc{position:relative;width:100%;max-width:380px;height:300px}
+  .doc-frame{position:absolute;border-radius:7px;overflow:hidden;box-shadow:0 26px 60px -16px rgba(0,0,0,.85);border:1px solid var(--border)}
+  .df1{left:0;top:20px;width:210px;height:148px;background:linear-gradient(145deg,rgba(var(--rgb),.4),rgba(76,29,149,.2));z-index:2}
+  .df2{right:0;top:0;width:170px;height:120px;background:linear-gradient(145deg,rgba(var(--rgb),.28),rgba(109,40,217,.15));z-index:1;transform:rotate(4deg)}
+  .df3{left:30px;bottom:14px;width:200px;height:120px;background:linear-gradient(145deg,rgba(76,29,149,.5),rgba(124,58,237,.18));z-index:3;transform:rotate(-3deg)}
+  .doc-frame::before{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:rgba(255,255,255,.8)}
+  .doc-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 40%)}
+  .doc-label{position:absolute;bottom:6px;left:8px;right:8px;z-index:4;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .doc-award{position:absolute;top:12px;right:-8px;z-index:5;background:linear-gradient(135deg,var(--gold),#D97706);color:#1c1600;font-family:var(--grot);font-weight:800;font-size:.58rem;border-radius:5px;padding:.4em .8em;box-shadow:0 10px 28px -8px rgba(245,158,11,.7)}
+  /* V4: script page */
+  .v-script{position:relative;width:100%;max-width:340px}
+  .vs-page{background:#f5f2e8;color:#1a1a22;border-radius:5px;box-shadow:0 30px 64px -18px rgba(0,0,0,.85);padding:1.2rem 1.3rem}
+  .vs-page::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-bright))}
+  .vs-slug{font-family:var(--mono);font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#7c6f5a;text-align:center;margin-bottom:.6rem}
+  .vs-action{font-family:Georgia,serif;font-size:.68rem;line-height:1.5;color:#3a3430;font-style:italic}
+  .vs-char{font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#1a1a22;text-align:center;margin:.6rem 0 .25rem}
+  .vs-dialogue{font-family:Georgia,serif;font-size:.7rem;line-height:1.6;color:#1a1a22;padding:0 1.2rem;text-align:center}
+  .vs-highlight{background:rgba(124,58,237,.18)}
+  .vs-tag{display:inline-block;background:var(--accent);color:#fff;font-family:var(--mono);font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;border-radius:2px;padding:.25em .7em;margin-top:.7rem}
+  .vs-notes{margin-top:.9rem;border-top:1px dashed rgba(26,26,34,.25);padding-top:.7rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:#9c8f7a;display:flex;justify-content:space-between}
+
+  /* ====== PROCESS: SCREENPLAY STYLE ====== */
+  .proc-wrap{background:var(--bg-2);border:1px solid var(--border);border-radius:5px;padding:clamp(28px,5vw,56px);font-family:Georgia,'Times New Roman',serif;max-width:780px;margin:0 auto}
+  .proc-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);text-align:center;margin-bottom:2rem}
+  .proc-int{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-mid);border-bottom:1px solid var(--border-2);padding-bottom:.6rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem}
+  .proc-int::after{content:"";flex:1;height:1px;background:var(--border-2)}
+  .proc-action{font-size:.78rem;line-height:1.7;color:var(--muted);margin-bottom:1.2rem}
+  .proc-char{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:#fff;text-align:center;margin:.6rem 0 .25rem}
+  .proc-dialogue{font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.9);text-align:center;padding:0 2.2rem;font-style:italic;margin-bottom:1.4rem}
+  .proc-stage{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-mid);margin:.4rem 0 1.4rem}
+  .proc-stage::before,.proc-stage::after{content:"";flex:1;height:1px;background:rgba(var(--rgb),.3)}
+
+  /* ====== WHY ====== */
+  .why{background:var(--bg-2)}
+  .why-head{margin-bottom:3.4rem}
+  .why-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem;max-width:20ch;line-height:1.1}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .why-card{border:1px solid var(--border);border-radius:3px;padding:2.4rem 2rem;background:var(--bg-3);transition:.4s;position:relative;overflow:hidden}
+  .why-card:hover{border-color:rgba(var(--rgb),.4);transform:translateY(-4px)}
+  .why-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:.4s}
+  .why-card:hover::before{transform:scaleX(1)}
+  .why-icon{width:46px;height:46px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent-mid);margin-bottom:1.6rem}
+  .why-card h3{font-family:var(--grot);font-weight:700;font-size:1.28rem;margin-bottom:.9rem;line-height:1.2;letter-spacing:-.01em}
+  .why-card p{color:var(--muted);font-size:.98rem}
+  @media(max-width:880px){.why-grid{grid-template-columns:1fr}}
+
+  /* ====== FAQ / FINAL / FOOTER ====== */
+  .faq{max-width:880px;margin:0 auto}
+  .faq-head{margin-bottom:2.6rem}
+  .faq-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem}
+  .qa{border-top:1px solid var(--border-2)}
+  .qa:last-child{border-bottom:1px solid var(--border-2)}
+  .qa button{width:100%;background:none;border:none;color:#fff;text-align:left;cursor:pointer;font-family:var(--grot);font-weight:700;font-size:clamp(1.02rem,1.8vw,1.2rem);letter-spacing:-.01em;padding:1.5rem 3rem 1.5rem 0;position:relative}
+  .qa button::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--accent-mid);transition:.35s}
+  .qa.open button::after{transform:translateY(-50%) rotate(45deg)}
+  .qa .ans{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,.84,.3,1)}
+  .qa .ans p{color:var(--muted);padding:0 0 1.6rem;max-width:62ch;font-size:.99rem}
+  .final{position:relative;text-align:center;overflow:hidden}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% 120%,rgba(var(--rgb),.28),transparent 70%)}
+  .final .wrap{position:relative;z-index:2}
+  .final .kick{font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent-mid);display:block;margin-bottom:1.6rem}
+  .final h2{font-family:var(--grot);font-weight:800;letter-spacing:-.025em;line-height:1.08;font-size:clamp(2.1rem,5vw,4rem);max-width:18ch;margin:0 auto 2.4rem}
+  .final h2 .serif{color:var(--accent-mid);font-weight:500}
+  .micro{font-family:var(--grot);font-size:.85rem;color:var(--muted-2);letter-spacing:.04em;margin-top:1.6rem}
+  footer{border-top:1px solid var(--border);padding:72px 0 40px;background:var(--bg-3)}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:3.5rem}
+  .foot-grid h4{font-family:var(--grot);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1.3rem}
+  .foot-grid p,.foot-grid a{color:var(--muted);font-size:.94rem;display:block;margin-bottom:.6rem;transition:.25s}
+  .foot-grid a:hover{color:#fff}
+  .foot-brands a.cur{color:var(--accent-mid)}
+  .foot-tag{color:var(--muted);font-size:.95rem;max-width:30ch;margin-top:1rem}
+  .foot-bottom{border-top:1px solid var(--border-2);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;color:var(--muted-2);font-size:.85rem;font-family:var(--grot)}
+  @media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+  @media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+  .float-cta{position:fixed;bottom:24px;right:24px;z-index:90;box-shadow:0 16px 40px -12px rgba(var(--rgb),.6)}
+  .overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,5,8,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:.3s}
+  .overlay.open{display:flex;opacity:1}
+  .modal{background:var(--bg-2);border:1px solid var(--border);border-radius:5px;max-width:460px;width:100%;padding:clamp(32px,5vw,48px);position:relative;transform:translateY(16px) scale(.98);transition:.35s cubic-bezier(.16,.84,.3,1);overflow:hidden}
+  .overlay.open .modal{transform:none}
+  .modal::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.35),transparent 70%)}
+  .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1;z-index:2}
+  .modal-close:hover{color:#fff}
+  .modal .eyebrow{margin-bottom:1.1rem}
+  .modal h3{font-family:var(--grot);font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:.9rem;position:relative}
+  .modal p{color:var(--muted);font-size:.97rem;margin-bottom:1.6rem;position:relative}
+  .modal input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.95em 1.1em;color:#fff;font-family:var(--body);font-size:1rem;margin-bottom:1rem;transition:.25s}
+  .modal input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--rgb),.15)}
+  .modal .btn-primary{width:100%;justify-content:center}
+  .modal .fine{font-size:.78rem;color:var(--muted-2);margin-top:1.2rem;line-height:1.5}
+  .modal-success{display:none;text-align:center;position:relative}
+  .modal-success.show{display:block}
+  .modal-success .tick{width:54px;height:54px;border-radius:50%;background:rgba(var(--rgb),.15);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.4rem}
+  .gs-rev{opacity:0}
+  @media(prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
+  @media(max-width:880px){.nav-links{display:none}.burger{display:flex}}
+  @media(max-width:520px){.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- film strip top bar -->
+<div class="filmstrip-top" aria-hidden="true">
+  <div class="fs-ticker"><div class="fs-inner" id="fs-inner">
+    <span>Scene <b>01</b> · Take 1</span>
+    <span>Shoot once. Scale infinitely.</span>
+    <span>LeadLink <b>Studios</b></span>
+    <span>If it doesn't stop the scroll — it doesn't exist.</span>
+    <span>AI Avatar · Short Form · Cinematic · Podcast</span>
+    <span>Scene <b>02</b> · Take 1</span>
+    <span>Content that compounds.</span>
+    <span>24h turnaround · 12 languages · 0 re-shoots</span>
+  </div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">LeadLink<span class="dot"></span><span class="div">Studios</span></a>
+    <div class="nav-links">
+      <a href="studios.html" class="active">Studios</a>
+      <a href="tech.html">Tech</a>
+      <a href="growth.html">Growth</a>
+      <a href="design.html">Design</a>
+      <a href="commerce.html">Commerce</a>
+      <a href="press.html">Press &amp; Media</a>
+    </div>
+    <button class="btn btn-primary" onclick="openModal()">☕ Let's Talk Coffee</button>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-r"></div>
+  <div class="hero-cols"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="scene-count gs-h">Scene <b>01</b> · TAKE 1 · LeadLink Studios · AI · Cinema · Short-Form</div>
+        <h1>
+          <span class="h-mask"><span class="h-line">If it doesn't</span></span>
+          <span class="h-mask"><span class="h-line">stop the <span class="serif">scroll</span>,</span></span>
+          <span class="h-mask"><span class="h-line"><span class="hl-serif">it doesn't exist.</span></span></span>
+        </h1>
+        <p class="sub gs-h">From three-second hooks to cinematic brand films to AI avatars that scale across twelve markets — we make content engineered to earn attention, not just impressions.</p>
+        <div class="hero-ctas gs-h">
+          <button class="btn btn-primary" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+          <button class="btn btn-ghost" onclick="openModal()">Download Our Content Portfolio</button>
+        </div>
+        <p class="hero-spec gs-h">format · <b>AI · cinematic · short-form · podcast</b> · turnaround · <b>24–48h</b> · markets · <b>12 languages</b></p>
+      </div>
+
+      <!-- CSS-built studio set -->
+      <div class="studio" id="studio" aria-hidden="true">
+        <!-- Clapperboard -->
+        <div class="fl clap">
+          <div class="clap-top">
+            <div class="clap-stripes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="clap-hinge"></div>
+          </div>
+          <div class="clap-body">
+            <div class="clap-row"><span class="k">PROD</span><span class="v hl">LeadLink Studios</span></div>
+            <div class="clap-row"><span class="k">CLIENT</span><span class="v">Your Brand</span></div>
+            <div class="clap-row"><span class="k">SCENE</span><span class="v">01</span></div>
+            <div class="clap-row"><span class="k">TAKE</span><span class="v">1</span></div>
+            <div class="clap-row"><span class="k">FORMAT</span><span class="v hl">AI + Cinematic</span></div>
+          </div>
+        </div>
+        <!-- Film roll SVG -->
+        <div class="fl roll">
+          <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="55" cy="55" r="52" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+            <circle cx="55" cy="55" r="40" fill="#111118" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <circle cx="55" cy="55" r="10" fill="rgba(124,58,237,0.4)" stroke="rgba(124,58,237,0.7)" stroke-width="1.5"/>
+            <g fill="rgba(255,255,255,0.18)">
+              <rect x="8" y="8" width="12" height="18" rx="2"/><rect x="90" y="8" width="12" height="18" rx="2"/>
+              <rect x="8" y="84" width="12" height="18" rx="2"/><rect x="90" y="84" width="12" height="18" rx="2"/>
+              <rect x="46" y="2" width="18" height="12" rx="2"/><rect x="46" y="96" width="18" height="12" rx="2"/>
+            </g>
+            <path d="M55 15 A40 40 0 0 1 95 55" stroke="rgba(124,58,237,0.6)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
+          </svg>
+        </div>
+        <!-- phone mockup -->
+        <div class="fl phone">
+          <div class="ph-notch"></div>
+          <div class="ph-reel"><div class="ph-views">2.1M ▲</div></div>
+          <div class="ph-l"></div><div class="ph-l s"></div>
+          <div class="ph-grid"><span></span><span></span></div>
+          <div class="ph-cta"></div>
+        </div>
+        <!-- view counter badge -->
+        <div class="fl views-badge">
+          <div class="vb-num">2.1<span>M</span></div>
+          <div class="vb-t">Organic views · No paid</div>
+        </div>
+        <!-- retention badge -->
+        <div class="fl ret-badge">
+          <div class="rb-t">Avg retention · 78%</div>
+          <div class="rb-bar">
+            <i style="height:100%"></i><i style="height:95%"></i><i style="height:88%"></i>
+            <i style="height:82%"></i><i style="height:79%"></i><i style="height:78%"></i>
+          </div>
+          <div class="rb-v">↑ 3× industry avg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PLATFORMS STRIP ============ -->
+<div class="platforms" aria-hidden="true">
+  <div class="sprockets"></div>
+  <div class="plat-row" id="plat-row">
+    <span class="plat-item"><span class="dot"></span>TikTok</span>
+    <span class="plat-item"><span class="dot"></span>Instagram Reels</span>
+    <span class="plat-item"><span class="dot"></span>YouTube Shorts</span>
+    <span class="plat-item"><span class="dot"></span>LinkedIn Video</span>
+    <span class="plat-item"><span class="dot"></span>Podcast · Spotify</span>
+    <span class="plat-item"><span class="dot"></span>WhatsApp Channels</span>
+    <span class="plat-item"><span class="dot"></span>Apple Podcasts</span>
+    <span class="plat-item"><span class="dot"></span>YouTube Long-form</span>
+  </div>
+  <div class="sprockets2"></div>
+</div>
+
+<!-- ============ THE LEDGER ============ -->
+<section class="section" id="critique">
+  <div class="wrap">
+    <div class="divide-head gs-rev">
+      <span class="eyebrow">Scene 01 · The Divide</span>
+      <h2>Content that fills a feed. <span class="serif hl">Content that stops it.</span></h2>
+      <p>Most brands publish content. Few engineer it. Here's the difference — frame by frame.</p>
+    </div>
+    <div class="ledger gs-rev">
+      <div class="ledger-head">
+        <div class="l-col">Content that fills a feed <span class="tag">Forgettable</span></div>
+        <div class="r-col">Content that stops the scroll <span class="tag">Engineered</span></div>
+      </div>
+      <div class="ledger-row"><div class="l">Starts with "let's shoot something."</div><div class="r">Starts with the hook — the exact frame that earns the next three seconds.</div></div>
+      <div class="ledger-row"><div class="l">Judged by whether the founder likes it.</div><div class="r">Judged by the retention curve at the 3-second, 15-second, and 30-second marks.</div></div>
+      <div class="ledger-row"><div class="l">One shoot. Three clips. Posted and forgotten.</div><div class="r">One shoot. Twelve months of localized, A/B-tested, platform-native content.</div></div>
+      <div class="ledger-row"><div class="l">Turnaround measured in weeks.</div><div class="r">Edited, captioned, graded, and delivered in 24–48 hours.</div></div>
+      <div class="ledger-row"><div class="l">Your competitor published today while you were still in review.</div><div class="r">Your AI avatar published in Arabic at 3 a.m. and you didn't lift a finger.</div></div>
+      <div class="ledger-foot">The brief doesn't change — the machine behind it does. <span class="hl">We are the machine.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="section intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow gs-rev">LeadLink Studios</span>
+        <h2 class="gs-rev">Shoot once. <span class="hl-serif">Run for a year.</span></h2>
+      </div>
+      <div class="gs-rev">
+        <p class="dropcap">Content is the only marketing asset that compounds. LeadLink Studios builds the full content machine — AI avatars that multiply one shoot across twelve markets, short-form edits engineered to the retention curve, cinematic films that turn viewers into believers, and scripts that get the sale after the visual earns the view. One studio, every format, every platform, connected directly to your performance system through the LeadLink group.</p>
+        <p class="byline">Scene · <b>studios/division.shot</b> · Directed by · <b>The LeadLink Studios Desk</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MACHINE COUNTER STRIP ============ -->
+<section class="machine">
+  <div class="wrap">
+    <div class="machine-grid" id="machine-grid">
+      <div class="mc"><div class="mnum" data-target="320" data-suffix="+">0<span class="u">+</span></div><div class="mcap">Videos shipped / month</div><div class="msub">Across all formats · all platforms</div></div>
+      <div class="mc"><div class="mnum" data-target="12" data-suffix="">0</div><div class="mcap">Languages delivered</div><div class="msub">AI avatar · native-quality lip sync</div></div>
+      <div class="mc"><div class="mnum" data-target="24" data-suffix="h">0<span class="u">h</span></div><div class="mcap">Avg. edit turnaround</div><div class="msub">From raw footage to published</div></div>
+      <div class="mc"><div class="mnum" data-target="50" data-suffix="+">0<span class="u">+</span></div><div class="mcap">Cinematic productions</div><div class="msub">Brand films · docs · launches</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="services-head gs-rev">
+      <h2>The four formats</h2>
+      <p>AI, short-form, cinematic, and scripted — every piece of content your brand will ever need, under one roof.</p>
+    </div>
+
+    <!-- 01 AI AVATAR -->
+    <article class="scard">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scene-label">Scene 02 · AI Avatar</div>
+          <h3 class="scard-name">AI Avatar — Shoot Once, Scale Infinitely</h3>
+          <p class="pullquote"><span class="mark">"</span>You filmed for one day. Your content ran for one year. In twelve languages. To twelve different markets. That's not magic — that's LeadLink Studios.</p>
+          <p class="scard-desc">Film your spokesperson once. We clone voice and likeness, then generate hundreds of localized, platform-native variations on demand — every market, every language, every platform.</p>
+          <ul class="incl">
+            <li>{T}Foundation shoot — one filming day</li>
+            <li>{T}Voice &amp; likeness cloning, full IP transfer</li>
+            <li>{T}Unlimited platform-native variations</li>
+            <li>{T}Multilingual — any language</li>
+            <li>{T}Hook-first script engineering</li>
+            <li>{T}Human QC on every piece</li>
+            <li>{T}Content calendar integration</li>
+            <li>{T}A/B tested hook variations</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · AI avatar · multilingual</span>
+          <div class="v-avatar">
+            <div class="av-lang al1 vz"><span class="flag">🇬🇧</span> English · LinkedIn</div>
+            <div class="av-lang al2 vz"><span class="flag">🇦🇪</span> Arabic · TikTok</div>
+            <div class="av-lang al3 vz"><span class="flag">🇪🇸</span> Spanish · Reels</div>
+            <div class="av-lang al4 vz"><span class="flag">🇩🇪</span> German · YouTube</div>
+            <div class="av-screen vz">
+              <div class="av-stats">
+                <div class="av-stat">Views<span class="v">2.1M</span></div>
+                <div class="av-stat">Langs<span class="v">12</span></div>
+              </div>
+            </div>
+            <span class="av-badge vz">1 shoot → 365 days of content</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 SHORT FORM (flipped) -->
+    <article class="scard flip">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scene-label">Scene 03 · Short-Form</div>
+          <h3 class="scard-name">Short-Form Video Editing</h3>
+          <p class="pullquote"><span class="mark">"</span>Three seconds. That's how long you have before they scroll past everything you worked to create.</p>
+          <p class="scard-desc">Performance-grade editing for TikTok, Reels, Shorts, and LinkedIn — built around the retention curve, not just the aesthetic. We adjust every week based on your data.</p>
+          <ul class="incl">
+            <li>{T}Hook-first edit structure</li>
+            <li>{T}Platform-native formatting</li>
+            <li>{T}Animated brand-consistent captions</li>
+            <li>{T}Sound design &amp; trending audio</li>
+            <li>{T}Cinematic colour grading</li>
+            <li>{T}B-roll sourcing &amp; integration</li>
+            <li>{T}All aspect ratios (9:16, 1:1, 16:9)</li>
+            <li>{T}24–48h turnaround</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · edit timeline + retention</span>
+          <div class="v-edit">
+            <div class="ve-win vz">
+              <div class="ve-bar"><span></span><span></span><span></span><span class="tt">timeline · 00:47</span></div>
+              <div class="ve-body">
+                <div class="ve-preview" style="position:relative">
+                  <div class="ve-head-label">playhead · 00:03</div>
+                </div>
+                <div class="ve-track">
+                  <div class="ve-row"><span class="ve-rowl">VIDEO</span><div class="ve-seg tr-v"><i style="left:0;width:100%"></i></div></div>
+                  <div class="ve-row"><span class="ve-rowl">AUDIO</span><div class="ve-seg tr-a"><i style="left:0;width:100%"></i></div></div>
+                  <div class="ve-row"><span class="ve-rowl">CAPT</span><div class="ve-seg tr-c"><i style="left:0;width:48%"></i><i style="left:52%;width:44%"></i></div></div>
+                  <div class="ve-row"><span class="ve-rowl">SFX</span><div class="ve-seg tr-s"><i style="left:0;width:18%"></i><i style="left:30%;width:12%"></i><i style="left:60%;width:10%"></i></div></div>
+                </div>
+                <div class="ve-progress"><span>00:03 / 00:47</span><b>78% retention avg</b></div>
+                <div class="ret-overlay vz">
+                  <div class="ret-label">Retention curve · this video</div>
+                  <svg viewBox="0 0 260 44" preserveAspectRatio="none">
+                    <defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(124,58,237,0.4)"/><stop offset="100%" stop-color="rgba(124,58,237,0.02)"/></linearGradient></defs>
+                    <path id="ret-path" d="M0 4 C 40 4, 60 6, 90 10 C 120 14, 150 18, 190 22 C 220 26, 240 30, 260 34" stroke="rgba(124,58,237,0.9)" stroke-width="1.8" fill="none"/>
+                    <path d="M0 4 C 40 4, 60 6, 90 10 C 120 14, 150 18, 190 22 C 220 26, 240 30, 260 34 L 260 44 L 0 44 Z" fill="url(#rg)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 CINEMATIC -->
+    <article class="scard">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scene-label">Scene 04 · Cinematic</div>
+          <h3 class="scard-name">Cinematic Documentaries &amp; Brand Films</h3>
+          <p class="pullquote"><span class="mark">"</span>The brands people remember didn't just advertise. They told a story worth watching.</p>
+          <p class="scard-desc">Cinematic brand documentaries are the highest-authority content format available. They don't sell — they convert believers. And believers refer, retain, and pay premium.</p>
+          <ul class="incl">
+            <li>{T}Concept, storyboard &amp; interview scripting</li>
+            <li>{T}Multi-camera production &amp; lighting</li>
+            <li>{T}Cinematic colour grade &amp; original score</li>
+            <li>{T}Narrative architecture</li>
+            <li>{T}Full film + 3–5 social cuts + trailer</li>
+            <li>{T}Distribution &amp; sales-process strategy</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · cinematic frames</span>
+          <div class="v-doc">
+            <div class="doc-frame df2 vz"><div class="doc-label">Origin Story · 18:24</div></div>
+            <div class="doc-frame df1 vz"><div class="doc-label">Brand Documentary · 22:47</div></div>
+            <div class="doc-frame df3 vz"><div class="doc-label">Product Launch Film · 06:12</div></div>
+            <div class="doc-award vz">🏆 Best Brand Film</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 SCRIPTWRITING (flipped) -->
+    <article class="scard flip">
+      <div class="scard-grid">
+        <div class="gs-rev">
+          <div class="scene-label">Scene 05 · The Script</div>
+          <h3 class="scard-name">Scriptwriting &amp; Ad Scripts</h3>
+          <p class="pullquote"><span class="mark">"</span>The visual gets the view. The script gets the sale. Most brands invest in the wrong one.</p>
+          <p class="scard-desc">Every piece of content we produce — AI or human, short or cinematic — starts with a script engineered for direct response, narrative psychology, and the platform it lives on.</p>
+          <ul class="incl">
+            <li>{T}Hook-based ad scripts (5–10 variations)</li>
+            <li>{T}VSL scripts</li>
+            <li>{T}Podcast scripts &amp; show notes</li>
+            <li>{T}Documentary &amp; brand-film scripts</li>
+            <li>{T}Platform-native social captions</li>
+            <li>{T}Email &amp; outreach sequences</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div class="sc-visual" data-viz>
+          <span class="vtag">Mockup · screenplay format</span>
+          <div class="v-script">
+            <div class="vs-page vz">
+              <div class="vs-slug">INT. VIEWER'S FEED — DAY</div>
+              <div class="vs-action">The hook lands in the first frame. No build-up. No intro. Just the thing that makes them stop and watch what comes next.</div>
+              <div class="vs-char">FOUNDER (V.O.)</div>
+              <div class="vs-dialogue">"<span class="vs-highlight">Most people film content. We engineer it.</span> And the difference shows up in your analytics by the end of the week."</div>
+              <div class="vs-tag">Hook · Direct response · 00:03</div>
+              <div class="vs-notes"><span>Draft 01 · Approved</span><span>Human-written · Not AI</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROCESS: SCREENPLAY ============ -->
+<section class="section" id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="process-head gs-rev" style="margin-bottom:2.8rem">
+      <span class="eyebrow">Scene 06 · The Method</span>
+      <h2 style="font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.2rem);letter-spacing:-.02em;margin-top:1.4rem;max-width:18ch;line-height:1.08">From brief to published — the production script</h2>
+    </div>
+    <div class="proc-wrap gs-rev">
+      <div class="proc-title">LEADLINK STUDIOS · PRODUCTION SCRIPT · Rev. 01</div>
+      <div class="proc-int">ACT ONE · STRATEGY</div>
+      <div class="proc-action">The production assistant places the call sheet on the table. Before a camera is touched, the market, the platform, and the viewer's 3-second attention window are mapped. Every shot that follows earns its place.</div>
+      <div class="proc-char">THE BRIEF</div>
+      <div class="proc-dialogue">"We need content that actually moves the needle — not just fills the calendar."</div>
+      <div class="proc-stage">01 · STRATEGY SESSION — goals · markets · platforms · messages</div>
+
+      <div class="proc-int">ACT TWO · THE SCRIPT</div>
+      <div class="proc-action">Writers work backwards from the outcome. The hook is engineered before the body. Five variations are drafted so the best one earns the view.</div>
+      <div class="proc-char">THE WRITER</div>
+      <div class="proc-dialogue">"If the first frame doesn't earn the second, nothing else matters."</div>
+      <div class="proc-stage">02 · SCRIPT DEVELOPMENT — hooks · VSLs · captions · CTAs</div>
+
+      <div class="proc-int">ACT THREE · THE SHOOT</div>
+      <div class="proc-action">One professional filming day. Multi-camera. Broadcast audio. This is the only day a camera crew will ever need to be on site. Everything after it compounds.</div>
+      <div class="proc-stage">03 · FOUNDATION SHOOT — studio or location · one day · full capture</div>
+
+      <div class="proc-int">ACT FOUR · THE MACHINE</div>
+      <div class="proc-action">The AI generates. The editors refine. The QC team reviews every frame. Human eyes on every piece before it leaves the studio.</div>
+      <div class="proc-stage">04 → 05 → 06 · AI GENERATION → EDIT → QC &amp; REVIEW</div>
+
+      <div class="proc-int">ACT FIVE · PUBLISH &amp; COMPOUND</div>
+      <div class="proc-action">Content ships. Analytics are watched. Retention curves inform the next round of hooks. The machine gets better every week.</div>
+      <div class="proc-char">THE DATA</div>
+      <div class="proc-dialogue">"78% retention at 15 seconds. We tighten the hook. Ship the next batch."</div>
+      <div class="proc-stage">07 · DEPLOY · MONITOR · OPTIMISE · REPEAT</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section why">
+  <div class="wrap">
+    <div class="why-head gs-rev">
+      <span class="eyebrow">Why Us</span>
+      <h2>Why most content disappears — and ours compounds.</h2>
+    </div>
+    <div class="why-grid" id="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <h3>Hook-first, every time</h3>
+        <p>We engineer the first three seconds before anything else, because retention is decided there. Every cut after that exists to keep someone watching.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+        <h3>Shoot once, run all year</h3>
+        <p>One foundation shoot becomes months of localized, A/B-tested variations. Your cost per piece drops the more you publish, not the other way around.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-5 3 3 5-7"/></svg></div>
+        <h3>Edited for performance, not applause</h3>
+        <p>We watch your retention curves and re-cut based on what the data says. Pretty isn't the goal — watched-to-the-end is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="faq">
+      <div class="faq-head gs-rev">
+        <span class="eyebrow">Scene 07 · The Record</span>
+        <h2>Questions the director gets asked</h2>
+      </div>
+      <div class="qa gs-rev"><button>Is AI avatar content legal and ethical?</button><div class="ans"><p>Yes — with proper consent documentation. We transfer full IP ownership to the client and require written consent from every person whose likeness is used. We also provide disclosure templates for platforms that require AI content labeling. Every piece we generate is covered.</p></div></div>
+      <div class="qa gs-rev"><button>Will viewers know it's AI?</button><div class="ans"><p>On social platforms, most viewers cannot distinguish high-quality AI avatar content from real video — especially on mobile. Our quality standard: if you can tell, we remake it. For contexts where disclosure is required, we build in appropriate labeling transparently.</p></div></div>
+      <div class="qa gs-rev"><button>How many variations can you produce per month?</button><div class="ans"><p>There's no practical upper limit once the foundation shoot is complete. We typically deliver 30–200 pieces per month depending on your content strategy and package. Platform-native cuts, language variants, A/B hook tests, seasonal versions — all from one filming day.</p></div></div>
+      <div class="qa gs-rev"><button>How do you measure whether content "worked"?</button><div class="ans"><p>Retention rate at 3s, 15s, and 30s. Click-through to the CTA. Saves and shares (signal over vanity). And for performance content, cost per lead or cost per conversion. We report these weekly and adjust the editing approach when the curves tell us to.</p></div></div>
+      <div class="qa gs-rev"><button>Do you handle publishing, or just deliver files?</button><div class="ans"><p>Both. We can deliver finished files to your team, or manage full publishing across your social accounts as part of a retainer — with scheduling, captions, hashtag strategy, and community management if needed. The Tech division can also wire the content calendar into your automation stack.</p></div></div>
+      <div class="qa gs-rev"><button>Can you make content for our clients, not just us?</button><div class="ans"><p>Yes — a number of agencies and brands white-label our Studios production. We operate as your in-house team, under your brand, with your deliverables. If you're an agency looking for a production partner, let's talk.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="section final">
+  <div class="wrap">
+    <span class="kick gs-rev">Scene 08 · Final Cut · Your move</span>
+    <h2 class="gs-rev">Ready to make content people actually <span class="serif">stop</span> for?</h2>
+    <button class="btn btn-primary gs-rev" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+    <p class="micro gs-rev">Takes 2 minutes · 3 quick questions · Then you pick a time</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">LeadLink<span class="dot"></span><span class="div">Solutions</span></div>
+        <p class="foot-tag">The full-stack digital growth group. UAE · USA · UK · Global.</p>
+      </div>
+      <div class="foot-brands">
+        <h4>Our Brands</h4>
+        <a href="studios.html" class="cur">LeadLink Studios</a>
+        <a href="tech.html">LeadLink Tech</a>
+        <a href="growth.html">LeadLink Growth</a>
+        <a href="design.html">LeadLink Design</a>
+        <a href="commerce.html">LeadLink Commerce</a>
+        <a href="press.html">LeadLink Press</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#services">Formats</a><a href="#process">Production Script</a><a href="#critique">The Divide</a><a href="#">Insights</a><a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Let's Talk</h4>
+        <a href="#" onclick="openModal();return false;">☕ Virtual Coffee</a>
+        <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+        <a href="#">+971 58 519 9409</a><a href="#">WhatsApp →</a>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LeadLink Solutions. All Rights Reserved.</span><span>Shot in one take. Obviously.</span></div>
+  </div>
+</footer>
+
+<button class="btn btn-primary float-cta" onclick="openModal()">☕ Grab a Coffee</button>
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+    <div id="modal-form">
+      <span class="eyebrow">LeadLink Studios · Portfolio</span>
+      <h3 id="m-title">Want to see what we actually shoot?</h3>
+      <p>Enter your email and we'll send our Studios portfolio straight to your inbox in 60 seconds. Real productions. Real retention curves.</p>
+      <input type="email" id="email" placeholder="Your work email" autocomplete="email">
+      <button class="btn btn-primary" onclick="submitEmail()">Send Me the Portfolio →</button>
+      <p class="fine">We'll also send you one email per month with insights worth reading. Unsubscribe any time.</p>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Check your inbox 📨</h3>
+      <p style="margin-bottom:0">Your Studios portfolio is on its way. Give it 60 seconds — and check spam just in case.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  /* ---------- utils ---------- */
+  const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
+  document.querySelectorAll('.qa button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const qa=b.parentElement,ans=qa.querySelector('.ans'),open=qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(o=>{o.classList.remove('open');o.querySelector('.ans').style.maxHeight=null;});
+      if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+    });
+  });
+  const overlay=document.getElementById('overlay');
+  function openModal(){overlay.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('email').focus(),300);}
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';
+    setTimeout(()=>{document.getElementById('modal-form').style.display='block';
+      document.getElementById('modal-success').classList.remove('show');
+      document.getElementById('email').value='';},300);}
+  function submitEmail(){const em=document.getElementById('email');
+    if(!em.value||!em.value.includes('@')){em.style.borderColor='var(--accent)';em.focus();return;}
+    document.getElementById('modal-form').style.display='none';
+    document.getElementById('modal-success').classList.add('show');}
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();});
+
+  /* ---------- film strip header ticker ---------- */
+  const fsi=document.getElementById('fs-inner');
+  fsi.innerHTML+=fsi.innerHTML;
+
+  /* ---------- duplicate platform strip ---------- */
+  const pr=document.getElementById('plat-row');
+  pr.innerHTML+=pr.innerHTML;
+
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGSAP=typeof gsap!=='undefined';
+
+  if(hasGSAP&&!reduced){
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* film strip header */
+    gsap.to('#fs-inner',{x:()=>-fsi.scrollWidth/2,duration:24,ease:'none',repeat:-1});
+
+    /* platform strip */
+    gsap.to('#plat-row',{x:()=>-pr.scrollWidth/2,duration:28,ease:'none',repeat:-1});
+
+    /* HERO entrance */
+    const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+    tl.from('.h-line',{yPercent:110,duration:1,stagger:.13},.1)
+      .from('.gs-h',{y:24,opacity:0,duration:.8,stagger:.12},'-=.55')
+      .from('#studio .fl',{y:72,opacity:0,scale:.88,rotate:i=>(i%2?8:-8),duration:1.1,stagger:.1,ease:'back.out(1.4)'},'-=.72');
+
+    /* film reel spin + studio idle floats */
+    gsap.to('#studio .roll',{rotate:360,duration:12,repeat:-1,ease:'none'});
+    gsap.utils.toArray('#studio .fl').forEach((el,i)=>{
+      if(el.classList.contains('roll'))return;
+      gsap.to(el,{y:'+='+(i%2?12:-11),rotate:'+='+((i%3)-1)*1.4,duration:3+i*.4,yoyo:true,repeat:-1,ease:'sine.inOut',delay:i*.22});
+    });
+
+    /* hero parallax */
+    gsap.to('.hero-glow,.hero-glow-r',{yPercent:22,scale:1.08,ease:'none',
+      scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('#studio',{yPercent:-9,ease:'none',
+      scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+
+    /* generic reveals */
+    gsap.set('.gs-rev',{y:30});
+    ScrollTrigger.batch('.gs-rev',{start:'top 86%',
+      onEnter:b=>gsap.to(b,{opacity:1,y:0,duration:.85,stagger:.12,ease:'power3.out',overwrite:true})});
+    gsap.from('.ledger-row',{opacity:0,y:14,duration:.5,stagger:.08,ease:'power2.out',
+      scrollTrigger:{trigger:'.ledger',start:'top 80%'}});
+
+    /* machine counter strip: bars + counters */
+    document.querySelectorAll('.mc').forEach(mc=>{
+      ScrollTrigger.create({trigger:mc,start:'top 86%',once:true,
+        onEnter:()=>{
+          mc.classList.add('lit');
+          const el=mc.querySelector('.mnum');
+          const t=+el.dataset.target,s=el.dataset.suffix||'';const o={v:0};
+          gsap.to(o,{v:t,duration:1.5,ease:'power2.out',
+            onUpdate:()=>el.innerHTML=Math.round(o.v)+'<span class="u">'+s+'</span>'});
+        }});
+    });
+
+    /* service mockups pop + idle */
+    gsap.utils.toArray('[data-viz]').forEach(stage=>{
+      gsap.from(stage.querySelectorAll('.vz'),{
+        y:44,opacity:0,scale:.9,rotate:i=>(i%2?5:-5),duration:.9,stagger:.13,ease:'back.out(1.5)',
+        scrollTrigger:{trigger:stage,start:'top 80%'}});
+      stage.querySelectorAll('.vz').forEach((el,i)=>{
+        gsap.to(el,{y:'+='+(i%2?7:-7),duration:3+i*.5,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1+i*.3});
+      });
+    });
+
+    /* retention curve draws itself */
+    const rp=document.getElementById('ret-path');
+    if(rp){
+      const len=rp.getTotalLength();
+      gsap.set(rp,{strokeDasharray:len,strokeDashoffset:len});
+      gsap.to(rp,{strokeDashoffset:0,duration:1.4,ease:'power2.out',
+        scrollTrigger:{trigger:'.ret-curve',start:'top 85%'}});
+    }
+
+    /* editor playhead scrubs across timeline on scroll */
+    ScrollTrigger.create({trigger:'.ve-win',start:'top 80%',end:'bottom 60%',scrub:true,
+      onUpdate:self=>{
+        const pct=(self.progress*80+10)+'%';
+        const ph=document.querySelector('.ve-preview');
+        if(ph)ph.style.setProperty('--ph',pct);
+        const hl=document.querySelector('.ve-head-label');
+        const secs=Math.round(self.progress*47);
+        if(hl)hl.textContent='playhead · 00:'+(secs<10?'0':'')+secs;
+      }});
+
+    /* screenplay process lines fade in staggered */
+    gsap.utils.toArray('.proc-int,.proc-action,.proc-char,.proc-dialogue,.proc-stage').forEach(el=>{
+      gsap.from(el,{opacity:0,x:-18,duration:.6,ease:'power2.out',
+        scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+
+    /* why cards */
+    gsap.from('#why-grid .why-card',{opacity:0,y:34,duration:.7,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#why-grid',start:'top 84%'}});
+
+  }else{
+    document.querySelectorAll('.gs-rev').forEach(el=>el.style.opacity=1);
+    document.querySelectorAll('.mc .mnum').forEach(el=>{
+      el.innerHTML=el.dataset.target+'<span class="u">'+(el.dataset.suffix||'')+'</span>';
+    });
+    /* basic ticker fallback */
+    let x1=0,x2=0;
+    const innerW=fsi.scrollWidth/2,platW=pr.scrollWidth/2;
+    (function loop(){
+      x1-=.4;if(Math.abs(x1)>=innerW)x1=0;fsi.style.transform='translateX('+x1+'px)';
+      x2-=.45;if(Math.abs(x2)>=platW)x2=0;pr.style.transform='translateX('+x2+'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadLink Press — The Authority Issue | PR & Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#E5274A;--accent-bright:#FF4D6A;--accent-deep:#9F1239;
+    --rgb:229,39,74;
+    --bg:#0A0A0F;--bg-2:#111118;--bg-3:#0d0d13;
+    --text:#fff;--muted:rgba(255,255,255,.58);--muted-2:rgba(255,255,255,.38);
+    --border:rgba(255,255,255,.10);--border-2:rgba(255,255,255,.06);
+    --grot:"Schibsted Grotesk",system-ui,sans-serif;
+    --serif:"Playfair Display",Georgia,serif;
+    --body:"Plus Jakarta Sans",system-ui,sans-serif;
+    --maxw:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  .eyebrow{font-family:var(--grot);font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2);display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:500}
+  .hl{color:var(--accent)}
+  a{color:inherit;text-decoration:none}
+  .btn{font-family:var(--grot);font-weight:600;font-size:.95rem;padding:.95em 1.6em;border-radius:2px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:.6em;transition:.35s cubic-bezier(.2,.7,.3,1);background:none;color:var(--text)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-bright);box-shadow:0 14px 40px -10px rgba(var(--rgb),.6);transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);background:rgba(var(--rgb),.06)}
+
+  /* ====== FOLIO DIVIDERS (publication page-markers between sections) ====== */
+  .folio{display:flex;align-items:center;gap:1.2rem;max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  .folio::before,.folio::after{content:"";flex:1;height:1px;background:var(--border-2)}
+  .folio span{font-family:var(--grot);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap}
+  .folio b{color:var(--accent);font-weight:700}
+
+  /* ====== NAV ====== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
+  nav.scrolled{background:rgba(10,10,15,.92);border-bottom-color:var(--border)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--grot);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5em}
+  .logo .dot{width:7px;height:7px;background:var(--accent);border-radius:1px;box-shadow:0 0 12px var(--accent)}
+  .logo .div{font-weight:500;color:var(--muted);font-size:.95rem}
+  .nav-links{display:flex;align-items:center;gap:2.2rem;font-family:var(--grot);font-size:.92rem;font-weight:500}
+  .nav-links a{color:var(--muted);transition:.25s;position:relative}
+  .nav-links a:hover{color:#fff}
+  .nav-links a.active{color:#fff}
+  .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+
+  /* ====== HERO — MASTHEAD ====== */
+  .hero{position:relative;padding:150px 0 0;overflow:hidden}
+  .hero-glow{position:absolute;top:-12%;right:-10%;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.4),rgba(159,18,57,.1) 40%,transparent 68%);filter:blur(22px)}
+  .hero-cols{position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent)}
+  .hero .wrap{position:relative;z-index:2}
+  /* dateline bar — newspaper masthead row */
+  .dateline{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.7rem 0;font-family:var(--grot);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2);gap:1rem;flex-wrap:wrap}
+  .dateline .mid{color:var(--accent);font-weight:700}
+  .hero h1{font-family:var(--grot);font-weight:800;line-height:1;letter-spacing:-.028em;font-size:clamp(2.9rem,8vw,6.6rem);margin:3.2rem 0 0;max-width:13ch}
+  .hero h1 .serif{font-weight:500}
+  .hero h1 .hl-serif{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+  .h-mask{overflow:hidden;display:block}
+  .h-line{display:block;transform:translateY(105%);opacity:0}
+  .hero-low{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,72px);align-items:end;margin:2.6rem 0 4rem}
+  .sub{font-size:clamp(1.02rem,1.6vw,1.25rem);color:var(--muted);max-width:600px}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+  /* standfirst card — like a front-page index box */
+  .standfirst{border:1px solid var(--border);border-left:2px solid var(--accent);background:rgba(255,255,255,.02);padding:1.6rem 1.7rem}
+  .standfirst .kick{font-family:var(--grot);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;font-weight:700}
+  .standfirst ol{list-style:none;counter-reset:ix}
+  .standfirst li{counter-increment:ix;display:flex;gap:.9em;padding:.5rem 0;border-bottom:1px solid var(--border-2);font-family:var(--grot);font-size:.92rem;color:var(--muted)}
+  .standfirst li:last-child{border-bottom:none}
+  .standfirst li::before{content:counter(ix,decimal-leading-zero);color:var(--accent);font-weight:700;font-size:.78rem;margin-top:.18em}
+  .standfirst li a:hover{color:#fff}
+
+  @media (prefers-reduced-motion:no-preference){
+    .load .h-line{animation:rise .9s cubic-bezier(.16,.84,.3,1) forwards}
+    .load .h-line.l2{animation-delay:.12s}.load .h-line.l3{animation-delay:.24s}
+    .load .dateline,.load .hero-low{animation:fade .9s ease forwards;opacity:0}
+    .load .dateline{animation-delay:.05s}.load .hero-low{animation-delay:.45s}
+  }
+  @keyframes rise{to{transform:translateY(0);opacity:1}}
+  @keyframes fade{to{opacity:1}}
+
+  /* ====== TICKER — scrolling headline strip ====== */
+  .ticker{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-3);overflow:hidden;position:relative}
+  .ticker-track{display:flex;width:max-content;animation:scroll 42s linear infinite;padding:.95rem 0}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-item{display:inline-flex;align-items:center;gap:1.1rem;padding:0 2.2rem;white-space:nowrap;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.65)}
+  .ticker-item b{font-family:var(--grot);font-style:normal;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+  .ticker-item::after{content:"";width:5px;height:5px;background:var(--accent);border-radius:50%;margin-left:2.2rem;opacity:.6}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+
+  /* ====== SECTIONS ====== */
+  .section{padding:clamp(80px,11vw,150px) 0}
+
+  /* ====== THE DIVIDE — Advertising vs PR ledger ====== */
+  .divide-head{margin-bottom:3.4rem;max-width:760px}
+  .divide-head h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.6vw,3.4rem);margin-top:1.4rem}
+  .divide-head p{color:var(--muted);margin-top:1.4rem;max-width:560px}
+  .ledger{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+  .ledger-head{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-2)}
+  .ledger-head>div{padding:1.5rem 2rem;font-family:var(--grot);font-weight:800;font-size:clamp(1.05rem,2vw,1.4rem);letter-spacing:-.01em;display:flex;align-items:center;gap:.7em}
+  .ledger-head .ads{color:var(--muted);border-right:1px solid var(--border)}
+  .ledger-head .pr{color:var(--accent)}
+  .ledger-head .tag{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;border:1px solid currentColor;border-radius:2px;padding:.25em .7em;opacity:.7}
+  .ledger-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border-2)}
+  .ledger-row>div{padding:1.25rem 2rem;font-size:.98rem}
+  .ledger-row .l{color:var(--muted);border-right:1px solid var(--border-2)}
+  .ledger-row .r{color:rgba(255,255,255,.86);position:relative}
+  .ledger-row .r::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transition:.4s;transform-origin:top}
+  .ledger-row:hover .r::before{transform:scaleY(1)}
+  .ledger-row:hover{background:rgba(var(--rgb),.025)}
+  .ledger-foot{border-top:1px solid var(--border);padding:1.4rem 2rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.8vw,1.3rem);color:rgba(255,255,255,.85);background:var(--bg-2)}
+  .ledger-foot .hl{font-weight:600}
+
+  /* ====== INTRO — editorial column with drop cap ====== */
+  .intro{background:var(--bg-2);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2)}
+  .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px);align-items:start}
+  .intro h2{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(1.9rem,4.4vw,3.4rem);margin-top:1.4rem}
+  .intro h2 .hl-serif{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+  .dropcap{color:var(--muted);font-size:1.05rem;border-top:1px solid var(--border);padding-top:1.8rem}
+  .dropcap::first-letter{font-family:var(--serif);font-style:italic;font-weight:600;font-size:4.2em;float:left;line-height:.78;padding:.06em .14em 0 0;color:var(--accent)}
+  .byline{margin-top:1.8rem;font-family:var(--grot);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+  .byline b{color:rgba(255,255,255,.7)}
+
+  /* ====== SERVICES — feature spreads ====== */
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+  .services-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em}
+  .services-head p{color:var(--muted);max-width:340px}
+  .scard{border-top:1px solid var(--border);padding:clamp(40px,6vw,76px) 0;position:relative}
+  .scard:last-of-type{border-bottom:1px solid var(--border)}
+  .scard-grid{display:grid;grid-template-columns:64px 1fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+  /* vertical "filed under" spine */
+  .spine{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--grot);font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted-2);border-left:1px solid var(--border-2);padding-left:1rem;height:100%;min-height:220px;display:flex;align-items:center;gap:1em}
+  .spine b{color:var(--accent);font-weight:700}
+  .scard-num{font-family:var(--serif);font-style:italic;font-weight:600;font-size:1rem;color:var(--accent)}
+  .scard-name{font-family:var(--grot);font-weight:800;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.7rem,3.2vw,2.7rem);margin:.5rem 0 1.8rem}
+  .pullquote{position:relative;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.3rem,2.4vw,2.05rem);line-height:1.32;color:rgba(255,255,255,.92)}
+  .pullquote .mark{position:absolute;left:-.45em;top:-.5em;font-size:3.4em;line-height:1;color:var(--accent);opacity:.3;font-family:var(--serif)}
+  .scard-desc{color:var(--muted);margin-top:1.6rem;font-size:1.02rem;max-width:46ch}
+  .deliver{margin-top:1.4rem;font-family:var(--grot);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+  .deliver b{color:rgba(255,255,255,.75)}
+  .incl-label{font-family:var(--grot);font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1.3rem}
+  .incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.85rem 1.6rem}
+  .incl li{display:flex;gap:.7em;font-size:.95rem;color:rgba(255,255,255,.8);line-height:1.4}
+  .incl li svg{flex-shrink:0;margin-top:.28em;color:var(--accent)}
+  .scard .btn{margin-top:2.2rem}
+
+  /* ====== ANATOMY — one placement, twelve assets ====== */
+  .anatomy{background:var(--bg-2)}
+  .anatomy-head{text-align:center;max-width:740px;margin:0 auto 3.6rem}
+  .anatomy-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.4rem);letter-spacing:-.02em;line-height:1.08;margin-top:1.4rem}
+  .anatomy-head h2 .hl-serif{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+  .anatomy-head p{color:var(--muted);margin-top:1.3rem}
+  .seed{max-width:520px;margin:0 auto;border:1px solid rgba(var(--rgb),.45);background:linear-gradient(180deg,rgba(var(--rgb),.1),rgba(var(--rgb),.02));border-radius:4px;padding:1.8rem 2rem;text-align:center;position:relative}
+  .seed .kick{font-family:var(--grot);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .seed h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(1.3rem,2.4vw,1.8rem);margin-top:.5rem}
+  .seed::after{content:"";position:absolute;left:50%;bottom:-44px;width:1px;height:44px;background:linear-gradient(180deg,var(--accent),transparent)}
+  .asset-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-2);border:1px solid var(--border-2);border-radius:4px;overflow:hidden;margin-top:44px}
+  .asset{background:var(--bg-3);padding:1.6rem 1.4rem;transition:.35s;position:relative}
+  .asset:hover{background:var(--bg)}
+  .asset:hover .anum{color:var(--accent)}
+  .anum{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--muted-2);font-size:.95rem;transition:.3s}
+  .asset h4{font-family:var(--grot);font-weight:700;font-size:1.02rem;margin:.6rem 0 .35rem;letter-spacing:-.01em}
+  .asset p{color:var(--muted);font-size:.85rem;line-height:1.55}
+  .anatomy-foot{text-align:center;margin-top:2.8rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2vw,1.45rem);color:rgba(255,255,255,.85)}
+  .anatomy-foot .hl{font-weight:600}
+
+  /* ====== PROCESS — pitch to front page ====== */
+  .process-head{margin-bottom:3.6rem}
+  .process-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.2rem);letter-spacing:-.02em;margin-top:1.4rem;max-width:18ch;line-height:1.08}
+  .steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2.6rem 2rem;counter-reset:step}
+  .step{position:relative;padding-top:1.6rem;border-top:1px solid var(--border-2)}
+  .step::before{content:"";position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--accent);transition:width .9s cubic-bezier(.16,.84,.3,1)}
+  .step.in::before{width:100%}
+  .step-num{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--accent);font-size:1.05rem}
+  .step h3{font-family:var(--grot);font-weight:700;font-size:1.25rem;letter-spacing:-.01em;margin:.5rem 0 .6rem}
+  .step p{color:var(--muted);font-size:.95rem}
+
+  /* ====== WHY US ====== */
+  .why{background:var(--bg-2)}
+  .why-head{margin-bottom:3.4rem}
+  .why-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem;max-width:18ch;line-height:1.1}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .why-card{border:1px solid var(--border);border-radius:3px;padding:2.4rem 2rem;background:var(--bg-3);transition:.4s;position:relative;overflow:hidden}
+  .why-card:hover{border-color:rgba(var(--rgb),.4);transform:translateY(-4px)}
+  .why-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:.4s}
+  .why-card:hover::before{transform:scaleX(1)}
+  .why-icon{width:46px;height:46px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1.6rem}
+  .why-card h3{font-family:var(--grot);font-weight:700;font-size:1.28rem;margin-bottom:.9rem;line-height:1.2;letter-spacing:-.01em}
+  .why-card p{color:var(--muted);font-size:.98rem}
+
+  /* ====== STATS ====== */
+  .stats{border-top:1px solid var(--border-2)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-2)}
+  .stat{background:var(--bg);padding:clamp(36px,5vw,56px) clamp(20px,3vw,36px)}
+  .stat-num{font-family:var(--grot);font-weight:800;font-size:clamp(2.6rem,5vw,4.2rem);letter-spacing:-.03em;line-height:1}
+  .stat-num .u{color:var(--accent)}
+  .stat-cap{font-family:var(--grot);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:1rem}
+
+  /* ====== CLIPPING — testimonial styled as a press cutting ====== */
+  .clipping{max-width:880px;margin:0 auto;position:relative;border:1px solid var(--border);background:var(--bg-2);padding:clamp(36px,6vw,64px) clamp(28px,6vw,72px);border-radius:3px}
+  .clipping::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 14px,transparent 14px 22px);opacity:.85}
+  .clip-kick{font-family:var(--grot);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1.6rem;display:block}
+  .clipping blockquote{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.35rem,2.6vw,2.05rem);line-height:1.4;color:rgba(255,255,255,.92)}
+  .clip-by{margin-top:2rem;display:flex;align-items:center;gap:1rem}
+  .clip-by .avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent-deep),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--grot);font-weight:800;font-size:.95rem}
+  .clip-by .who{font-family:var(--grot);font-size:.92rem;font-weight:700}
+  .clip-by .role{font-family:var(--grot);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+
+  /* ====== FAQ ====== */
+  .faq{max-width:880px;margin:0 auto}
+  .faq-head{margin-bottom:2.6rem}
+  .faq-head h2{font-family:var(--grot);font-weight:800;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;margin-top:1.2rem}
+  .qa{border-top:1px solid var(--border-2)}
+  .qa:last-child{border-bottom:1px solid var(--border-2)}
+  .qa button{width:100%;background:none;border:none;color:#fff;text-align:left;cursor:pointer;font-family:var(--grot);font-weight:700;font-size:clamp(1.02rem,1.8vw,1.2rem);letter-spacing:-.01em;padding:1.5rem 3rem 1.5rem 0;position:relative}
+  .qa button::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--accent);transition:.35s}
+  .qa.open button::after{transform:translateY(-50%) rotate(45deg)}
+  .qa .ans{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,.84,.3,1)}
+  .qa .ans p{color:var(--muted);padding:0 0 1.6rem;max-width:62ch;font-size:.99rem}
+
+  /* ====== FINAL CTA ====== */
+  .final{position:relative;text-align:center;overflow:hidden}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% 120%,rgba(var(--rgb),.28),transparent 70%)}
+  .final .wrap{position:relative;z-index:2}
+  .final .kick{font-family:var(--grot);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;display:block;margin-bottom:1.6rem}
+  .final h2{font-family:var(--grot);font-weight:800;letter-spacing:-.025em;line-height:1.08;font-size:clamp(2.1rem,5vw,4rem);max-width:16ch;margin:0 auto 2.4rem}
+  .final h2 .serif{color:var(--accent);font-weight:500}
+  .micro{font-family:var(--grot);font-size:.85rem;color:var(--muted-2);letter-spacing:.04em;margin-top:1.6rem}
+
+  /* ====== FOOTER ====== */
+  footer{border-top:1px solid var(--border);padding:72px 0 40px;background:var(--bg-3)}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:3.5rem}
+  .foot-grid h4{font-family:var(--grot);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1.3rem}
+  .foot-grid p,.foot-grid a{color:var(--muted);font-size:.94rem;display:block;margin-bottom:.6rem;transition:.25s}
+  .foot-grid a:hover{color:#fff}
+  .foot-brands a.cur{color:var(--accent)}
+  .foot-tag{color:var(--muted);font-size:.95rem;max-width:30ch;margin-top:1rem}
+  .foot-bottom{border-top:1px solid var(--border-2);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;color:var(--muted-2);font-size:.85rem;font-family:var(--grot)}
+
+  .float-cta{position:fixed;bottom:24px;right:24px;z-index:90;box-shadow:0 16px 40px -12px rgba(var(--rgb),.6)}
+
+  /* ====== MODAL ====== */
+  .overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,5,8,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:.3s}
+  .overlay.open{display:flex;opacity:1}
+  .modal{background:var(--bg-2);border:1px solid var(--border);border-radius:5px;max-width:460px;width:100%;padding:clamp(32px,5vw,48px);position:relative;transform:translateY(16px) scale(.98);transition:.35s cubic-bezier(.16,.84,.3,1);overflow:hidden}
+  .overlay.open .modal{transform:none}
+  .modal::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.35),transparent 70%)}
+  .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1;z-index:2}
+  .modal-close:hover{color:#fff}
+  .modal .eyebrow{margin-bottom:1.1rem}
+  .modal h3{font-family:var(--grot);font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:.9rem;position:relative}
+  .modal p{color:var(--muted);font-size:.97rem;margin-bottom:1.6rem;position:relative}
+  .modal input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.95em 1.1em;color:#fff;font-family:var(--body);font-size:1rem;margin-bottom:1rem;transition:.25s}
+  .modal input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--rgb),.15)}
+  .modal .btn-primary{width:100%;justify-content:center}
+  .modal .fine{font-size:.78rem;color:var(--muted-2);margin-top:1.2rem;line-height:1.5}
+  .modal-success{display:none;text-align:center;position:relative}
+  .modal-success.show{display:block}
+  .modal-success .tick{width:54px;height:54px;border-radius:50%;background:rgba(var(--rgb),.15);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.4rem}
+
+  /* ====== REVEAL ====== */
+  .reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.16,.84,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.h-line{transform:none!important;opacity:1!important;animation:none!important}}
+
+  /* ====== RESPONSIVE ====== */
+  @media(max-width:1000px){
+    .scard-grid{grid-template-columns:1fr 1fr}
+    .spine{display:none}
+    .asset-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:880px){
+    .nav-links{display:none}.burger{display:flex}
+    .hero-low{grid-template-columns:1fr}
+    .intro-grid{grid-template-columns:1fr;gap:2.2rem}
+    .scard-grid{grid-template-columns:1fr;gap:2rem}
+    .why-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:2rem}
+    .asset-grid{grid-template-columns:1fr 1fr}
+    .ledger-head,.ledger-row{grid-template-columns:1fr}
+    .ledger-head .ads,.ledger-row .l{border-right:none;border-bottom:1px solid var(--border-2)}
+  }
+  @media(max-width:520px){
+    .incl{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .asset-grid{grid-template-columns:1fr}
+    .float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}
+    .hero-ctas .btn{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body class="load">
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">LeadLink<span class="dot"></span><span class="div">Press</span></a>
+    <div class="nav-links">
+      <a href="tech-extended.html">Tech</a>
+      <a href="growth-extended.html">Growth</a>
+      <a href="design-extended.html">Design</a>
+      <a href="commerce-extended.html">Commerce</a>
+      <a href="press-extended.html" class="active">Press &amp; Media</a>
+    </div>
+    <button class="btn btn-primary" onclick="openModal()">☕ Let's Talk Coffee</button>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO / MASTHEAD ============ -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-cols"></div>
+  <div class="wrap">
+    <div class="dateline">
+      <span>Dubai · London · New York</span>
+      <span class="mid">Vol. 01 — The Authority Issue</span>
+      <span>LeadLink Press · PR &amp; Media</span>
+    </div>
+    <h1>
+      <span class="h-mask"><span class="h-line l1">Ads buy <span class="serif">attention</span>.</span></span>
+      <span class="h-mask"><span class="h-line l2">PR builds <span class="serif">authority</span>.</span></span>
+      <span class="h-mask"><span class="h-line l3"><span class="hl-serif">You need both.</span></span></span>
+    </h1>
+    <div class="hero-low">
+      <div>
+        <p class="sub">A feature in the right publication doesn't just drive traffic — it changes how your entire market perceives you. Media coverage is the credibility signal that advertising simply cannot replicate.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+          <button class="btn btn-ghost" onclick="openModal()">Download Our Media Portfolio</button>
+        </div>
+      </div>
+      <aside class="standfirst">
+        <span class="kick">In this issue</span>
+        <ol>
+          <li><a href="#divide">Why ads alone can't buy trust</a></li>
+          <li><a href="#services">The four instruments of authority</a></li>
+          <li><a href="#anatomy">Anatomy of one placement</a></li>
+          <li><a href="#process">From pitch to front page</a></li>
+        </ol>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HEADLINE TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item"><b>Feature</b> "The agency model is broken. This group is rebuilding it."</span>
+    <span class="ticker-item"><b>Profile</b> "From Dubai to global: the operators behind the brands you keep seeing"</span>
+    <span class="ticker-item"><b>Op-Ed</b> "Why earned media is the last unfair advantage in marketing"</span>
+    <span class="ticker-item"><b>Podcast</b> "47 minutes with the founder your competitors quote in meetings"</span>
+    <span class="ticker-item"><b>Interview</b> "Authority isn't claimed. It's conferred — by the right rooms."</span>
+    <span class="ticker-item"><b>Analysis</b> "The credibility gap: what advertising can't fix"</span>
+  </div>
+</div>
+
+<!-- ============ THE DIVIDE ============ -->
+<section class="section" id="divide">
+  <div class="wrap">
+    <div class="divide-head reveal">
+      <span class="eyebrow">№ 01 · The Divide</span>
+      <h2>Two ways to be seen. Only one way to be <span class="serif hl">believed</span>.</h2>
+      <p>Advertising and PR are not competitors — they're different instruments. One rents attention. The other earns trust. Here's the honest ledger.</p>
+    </div>
+    <div class="ledger reveal">
+      <div class="ledger-head">
+        <div class="ads">Advertising <span class="tag">Rented</span></div>
+        <div class="pr">Earned Media <span class="tag">Owned forever</span></div>
+      </div>
+      <div class="ledger-row"><div class="l">You say you're excellent.</div><div class="r">A publication your buyer respects says it for you.</div></div>
+      <div class="ledger-row"><div class="l">Stops the moment the budget stops.</div><div class="r">A feature ranks, gets cited, and compounds for years.</div></div>
+      <div class="ledger-row"><div class="l">Interrupts people who didn't ask.</div><div class="r">Reaches people already paying attention to that masthead.</div></div>
+      <div class="ledger-row"><div class="l">Audiences discount it instinctively.</div><div class="r">Third-party validation bypasses the skepticism filter.</div></div>
+      <div class="ledger-row"><div class="l">Costs rise as competition bids up the auction.</div><div class="r">Authority makes every other channel cheaper to run.</div></div>
+      <div class="ledger-foot">The play isn't choosing one. It's running ads on top of authority — <span class="hl">that's when both get cheaper.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="folio"><span>LeadLink Press · <b>Page 02</b> · The Brief</span></div>
+
+<!-- ============ DIVISION INTRO ============ -->
+<section class="section intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow reveal">LeadLink Press</span>
+        <h2 class="reveal">You can buy ads. You can't buy authority. <span class="hl-serif">We help you earn it.</span></h2>
+      </div>
+      <div class="reveal">
+        <p class="dropcap">Trust is the only currency that appreciates. LeadLink Press earns you the coverage that performance marketing can't manufacture — features, placements, and podcast appearances in the rooms your buyers already trust. We find the story inside your business, position the narrative, and put it in front of the people whose attention actually moves your market. Then we make sure one placement never stays one placement.</p>
+        <p class="byline">Filed under <b>Earned Media</b> · By <b>The LeadLink Press Desk</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <h2>The four instruments of authority</h2>
+      <p>Every engagement is delivered, tracked, and amplified — never published and forgotten.</p>
+    </div>
+
+    <article class="scard reveal">
+      <div class="scard-grid">
+        <div class="spine"><b>No. 01</b> Filed under · Placement</div>
+        <div>
+          <div class="scard-num">No. 01 — Feature</div>
+          <h3 class="scard-name">Magazine &amp; Publication Placement</h3>
+          <p class="pullquote"><span class="mark">“</span>There is a version of your brand that appears in Forbes, Arabian Business, or Entrepreneur before your competitor does. We make that version real.</p>
+          <p class="scard-desc">We secure earned editorial placement in the publications your market reads and respects. Not a banner ad beside the article — the article.</p>
+          <p class="deliver">Cadence · <b>Monthly placements + PR report</b></p>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div>
+          <p class="incl-label">What's included</p>
+          <ul class="incl">
+            <li>{T}Media landscape analysis</li>
+            <li>{T}Story angle development</li>
+            <li>{T}Media kit prep</li>
+            <li>{T}Journalist &amp; editor outreach</li>
+            <li>{T}Interview preparation</li>
+            <li>{T}Content contribution strategy</li>
+            <li>{T}Coverage monitoring &amp; amplification</li>
+            <li>{T}Monthly PR report</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="scard reveal">
+      <div class="scard-grid">
+        <div class="spine"><b>No. 02</b> Filed under · Narrative</div>
+        <div>
+          <div class="scard-num">No. 02 — Strategy</div>
+          <h3 class="scard-name">Brand PR Strategy</h3>
+          <p class="pullquote"><span class="mark">“</span>PR without strategy is just noise. We find the story, position the narrative, and make sure the right people hear it.</p>
+          <p class="scard-desc">Before a single pitch goes out, we define what your brand stands for and the narrative that makes editors care. Strategy first, placements second.</p>
+          <p class="deliver">Cadence · <b>Ongoing calendar + monthly review</b></p>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div>
+          <p class="incl-label">What's included</p>
+          <ul class="incl">
+            <li>{T}Brand story audit</li>
+            <li>{T}Narrative &amp; angle development</li>
+            <li>{T}Spokesperson positioning</li>
+            <li>{T}Media relationship management</li>
+            <li>{T}Crisis preparedness</li>
+            <li>{T}Ongoing PR calendar</li>
+            <li>{T}Monthly strategy review</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="scard reveal">
+      <div class="scard-grid">
+        <div class="spine"><b>No. 03</b> Filed under · Newswire</div>
+        <div>
+          <div class="scard-num">No. 03 — Release</div>
+          <h3 class="scard-name">Press Release Writing &amp; Distribution</h3>
+          <p class="pullquote"><span class="mark">“</span>One well-placed press release, written for humans not editors, can do more than six months of social posting.</p>
+          <p class="scard-desc">Releases written to get read, not skimmed — then placed on targeted media lists, not blasted into the void. Written by people, never AI.</p>
+          <p class="deliver">Cadence · <b>Per release + performance tracking</b></p>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div>
+          <p class="incl-label">What's included</p>
+          <ul class="incl">
+            <li>{T}Professional copywriting (human, not AI)</li>
+            <li>{T}Headline and angle strategy</li>
+            <li>{T}Distribution to targeted media lists</li>
+            <li>{T}Online syndication</li>
+            <li>{T}Journalist follow-up</li>
+            <li>{T}Performance tracking</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="scard reveal">
+      <div class="scard-grid">
+        <div class="spine"><b>No. 04</b> Filed under · Airwaves</div>
+        <div>
+          <div class="scard-num">No. 04 — Broadcast</div>
+          <h3 class="scard-name">Podcast PR &amp; Guest Booking</h3>
+          <p class="pullquote"><span class="mark">“</span>Podcast listeners are the most attentive audience on the internet. They listen for hours. They trust the host. And when the host vouches for you — they trust you too.</p>
+          <p class="scard-desc">We book your founders and executives onto the shows your ideal clients already listen to — then turn each appearance into clips, audiograms, and reach across your own channels.</p>
+          <p class="deliver">Cadence · <b>Monthly booking tracker</b></p>
+          <button class="btn btn-ghost" onclick="openModal()">⬇ Download Portfolio</button>
+        </div>
+        <div>
+          <p class="incl-label">What's included</p>
+          <ul class="incl">
+            <li>{T}Target podcast identification</li>
+            <li>{T}Pitch deck creation</li>
+            <li>{T}Outreach &amp; booking management</li>
+            <li>{T}Pre-interview preparation</li>
+            <li>{T}Post-appearance clip &amp; audiogram creation</li>
+            <li>{T}Distribution amplification</li>
+            <li>{T}Monthly booking tracker</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="folio"><span>LeadLink Press · <b>Page 03</b> · The Multiplier</span></div>
+
+<!-- ============ ANATOMY OF A PLACEMENT ============ -->
+<section class="section anatomy" id="anatomy">
+  <div class="wrap">
+    <div class="anatomy-head reveal">
+      <span class="eyebrow" style="justify-content:center">№ 02 · The Multiplier</span>
+      <h2>Anatomy of <span class="hl-serif">one placement</span></h2>
+      <p>Most agencies stop when the article goes live. That's where we start. One feature, fully amplified, becomes a campaign.</p>
+    </div>
+    <div class="seed reveal">
+      <span class="kick">The seed</span>
+      <h3>One feature in a publication your buyers trust</h3>
+    </div>
+    <div class="asset-grid reveal">
+      <div class="asset"><span class="anum">i.</span><h4>"As Featured In" bar</h4><p>The credibility strip on your website and landing pages.</p></div>
+      <div class="asset"><span class="anum">ii.</span><h4>LinkedIn series</h4><p>3–5 posts from your founder unpacking the story behind the story.</p></div>
+      <div class="asset"><span class="anum">iii.</span><h4>Sales deck slide</h4><p>Third-party proof inside every pitch your team delivers.</p></div>
+      <div class="asset"><span class="anum">iv.</span><h4>Email signature &amp; nurture</h4><p>Coverage linked in every send your prospects receive.</p></div>
+      <div class="asset"><span class="anum">v.</span><h4>Retargeting creative</h4><p>"As seen in" ads that warm audiences who already met you.</p></div>
+      <div class="asset"><span class="anum">vi.</span><h4>Short-form clips</h4><p>Quote cards and video cuts for Reels, TikTok, and Shorts.</p></div>
+      <div class="asset"><span class="anum">vii.</span><h4>Podcast pitch leverage</h4><p>Hosts book guests other media has already validated.</p></div>
+      <div class="asset"><span class="anum">viii.</span><h4>SEO &amp; AI citations</h4><p>High-authority backlinks — and a source AI engines learn to quote.</p></div>
+      <div class="asset"><span class="anum">ix.</span><h4>Proposal &amp; bid annexes</h4><p>Press pages that strengthen RFPs and enterprise due diligence.</p></div>
+      <div class="asset"><span class="anum">x.</span><h4>Investor &amp; partner kit</h4><p>Coverage that de-risks you in rooms where money is decided.</p></div>
+      <div class="asset"><span class="anum">xi.</span><h4>Recruiting magnet</h4><p>Talent reads the press before they read the job description.</p></div>
+      <div class="asset"><span class="anum">xii.</span><h4>The next pitch</h4><p>Editors cover companies other editors have covered. Coverage begets coverage.</p></div>
+    </div>
+    <p class="anatomy-foot reveal">One placement. Twelve assets. <span class="hl">That's the compounding most brands never collect.</span></p>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="process-head reveal">
+      <span class="eyebrow">№ 03 · The Method</span>
+      <h2>From pitch to front page — the system behind the story</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="step-num">No. 01</span><h3>The Story Audit</h3><p>We interview your team and dig through your business for the angles editors actually want — the contrarian take, the data, the founder arc.</p></div>
+      <div class="step reveal"><span class="step-num">No. 02</span><h3>The Narrative</h3><p>We position one clear story: what you stand for, why now, and why it matters to that publication's readers — not to you.</p></div>
+      <div class="step reveal"><span class="step-num">No. 03</span><h3>The Pitch</h3><p>Tailored pitches to editors and producers we already know, matched to their beat. No mass blasts. No "Dear Sir/Madam."</p></div>
+      <div class="step reveal"><span class="step-num">No. 04</span><h3>The Placement</h3><p>Interview prep, quote approval, fact-checking support — we manage the process until the piece is live and accurate.</p></div>
+      <div class="step reveal"><span class="step-num">No. 05</span><h3>The Amplification</h3><p>The feature becomes twelve assets across your site, socials, sales process, and ads — the multiplier above, executed.</p></div>
+      <div class="step reveal"><span class="step-num">No. 06</span><h3>The Compound</h3><p>Coverage is logged, reported monthly, and leveraged into the next pitch. Authority stacks; we keep stacking it.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="folio"><span>LeadLink Press · <b>Page 04</b> · The Desk</span></div>
+
+<!-- ============ WHY US ============ -->
+<section class="section why">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <span class="eyebrow">Why Us</span>
+      <h2>The difference between getting noticed and getting trusted.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11l-4 4 3 3 4-4"/><path d="M16 13l4-4-3-3-4 4"/><path d="M9 9l6 6"/></svg></div>
+        <h3>Relationships, not cold pitches</h3>
+        <p>We don't spray-and-pray press releases into a database. We work the editor and journalist relationships we already have, so your story lands on a desk that's expecting it.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-4 10.5c.5.5 1 1.2 1 2h6c0-.8.5-1.5 1-2A6 6 0 0012 3z"/></svg></div>
+        <h3>Story-first thinking</h3>
+        <p>Editors don't run ads dressed as articles — they run stories. We find the angle they actually want before we ever reach out, which is why our pitches get answered.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v8"/><circle cx="12" cy="12" r="2"/><path d="M6.3 6.3a8 8 0 000 11.4"/><path d="M17.7 6.3a8 8 0 010 11.4"/><path d="M3.5 3.5a12 12 0 000 17"/><path d="M20.5 3.5a12 12 0 010 17"/></svg></div>
+        <h3>Full amplification</h3>
+        <p>A placement that sits on one website is a missed opportunity. Every feature, release, and podcast gets leveraged across your entire content ecosystem for maximum reach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat reveal"><div class="stat-num" data-target="140" data-suffix="+">0</div><div class="stat-cap">Placements secured</div></div>
+    <div class="stat reveal"><div class="stat-num" data-target="60" data-suffix="+">0</div><div class="stat-cap">Publications reached</div></div>
+    <div class="stat reveal"><div class="stat-num" data-target="95" data-suffix="+">0</div><div class="stat-cap">Podcasts booked</div></div>
+    <div class="stat reveal"><div class="stat-num" data-target="21" data-suffix="">0</div><div class="stat-cap">Day avg. time-to-feature</div></div>
+  </div>
+</section>
+
+<!-- ============ CLIPPING / TESTIMONIAL ============ -->
+<section class="section">
+  <div class="wrap">
+    <figure class="clipping reveal">
+      <span class="clip-kick">From the cutting file</span>
+      <blockquote>"Within one quarter we went from invisible to quoted. Prospects started our sales calls by mentioning the feature — we never had to establish credibility again."</blockquote>
+      <figcaption class="clip-by">
+        <span class="avatar">SA</span>
+        <span><span class="who">Client, Enterprise Services</span><br><span class="role">Placement secured · Q1 engagement</span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="faq">
+      <div class="faq-head reveal">
+        <span class="eyebrow">№ 04 · The Record</span>
+        <h2>Questions editors of this page get asked</h2>
+      </div>
+      <div class="qa reveal">
+        <button>Can you guarantee placement in a specific publication?</button>
+        <div class="ans"><p>No honest PR firm can — editorial decisions belong to editors, and anyone promising a guaranteed Forbes feature is selling you a paid advertorial dressed up as earned media. What we do control is the quality of the story, the strength of the angle, and the relationships the pitch travels through. That's why our placement rate is what it is.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button>How long until we see our first placement?</button>
+        <div class="ans"><p>Typically within the first 30–60 days for press releases and podcast bookings, and 30–90 days for major publication features, depending on editorial calendars and the strength of your story. The first two weeks are spent on the story audit — skipping that step is why most PR fails.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button>What if our company doesn't have a "story"?</button>
+        <div class="ans"><p>Every business that has survived has a story — most founders are just too close to see it. Contrarian market takes, unusual data you're sitting on, the origin nobody asked about, a customer transformation worth documenting. Finding that angle is precisely the job. If after the audit we genuinely don't see one, we'll tell you that too.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button>Is this paid media or earned media?</button>
+        <div class="ans"><p>Earned. We pitch journalists and editors on stories worth covering — we don't buy advertorials and pass them off as press. Where a sponsored opportunity genuinely makes sense for your goals, we'll present it transparently labeled as exactly what it is, and you decide.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button>How do you measure PR success?</button>
+        <div class="ans"><p>Placements secured, the authority of the publications, share of voice against competitors, referral traffic and backlinks, podcast downloads and clip reach — all in a monthly report. And increasingly: whether AI engines cite you when buyers ask for recommendations, since coverage is what they learn from.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button>Do you handle crisis communications?</button>
+        <div class="ans"><p>Crisis preparedness is built into our Brand PR Strategy retainer — holding statements, spokesperson protocols, and escalation plans drafted before you need them. Active crisis management is scoped separately and fast, because the first six hours decide most of the outcome.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section final">
+  <div class="wrap">
+    <span class="kick reveal">Final edition · Your move</span>
+    <h2 class="reveal">Ready to build authority that money <span class="serif">can't simply buy?</span></h2>
+    <button class="btn btn-primary reveal" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
+    <p class="micro reveal">Takes 2 minutes · 3 quick questions · Then you pick a time</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">LeadLink<span class="dot"></span><span class="div">Solutions</span></div>
+        <p class="foot-tag">The full-stack digital growth group. UAE · USA · UK · Global.</p>
+      </div>
+      <div class="foot-brands">
+        <h4>Our Brands</h4>
+        <a href="content.html">LeadLink Content</a>
+        <a href="tech.html">LeadLink Tech</a>
+        <a href="growth.html">LeadLink Growth</a>
+        <a href="design.html">LeadLink Design</a>
+        <a href="commerce.html">LeadLink Commerce</a>
+        <a href="press.html" class="cur">LeadLink Press</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#services">Services</a><a href="#anatomy">The Multiplier</a><a href="#process">Our Method</a><a href="#">Insights</a><a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Let's Talk</h4>
+        <a href="#" onclick="openModal();return false;">☕ Virtual Coffee</a>
+        <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+        <a href="#">+971 58 519 9409</a><a href="#">WhatsApp →</a>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LeadLink Solutions. All Rights Reserved.</span><span>Printed nowhere. Published everywhere.</span></div>
+  </div>
+</footer>
+
+<button class="btn btn-primary float-cta" onclick="openModal()">☕ Grab a Coffee</button>
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+    <div id="modal-form">
+      <span class="eyebrow">LeadLink Press · Portfolio</span>
+      <h3 id="m-title">Want to see what we actually build?</h3>
+      <p>Enter your email and we'll send our Press &amp; Media portfolio straight to your inbox in 60 seconds. Real placements. Real results.</p>
+      <input type="email" id="email" placeholder="Your work email" autocomplete="email">
+      <button class="btn btn-primary" onclick="submitEmail()">Send Me the Portfolio →</button>
+      <p class="fine">We'll also send you one email per month with insights worth reading. Unsubscribe any time.</p>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Check your inbox 📨</h3>
+      <p style="margin-bottom:0">Your Press &amp; Media portfolio is on its way. Give it 60 seconds — and check spam just in case.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // duplicate ticker content for seamless loop
+  const tt=document.getElementById('ticker-track');
+  tt.innerHTML+=tt.innerHTML;
+
+  // inject crimson ticks
+  const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});
+
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20));
+  addEventListener('load',()=>setTimeout(()=>document.body.classList.remove('load'),1400));
+
+  // reveal + counters + step lines
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      const n=e.target.querySelector('.stat-num');
+      if(n&&!n.dataset.done){n.dataset.done=1;countUp(n);}
+      io.unobserve(e.target);
+    }});},{threshold:.15});
+  document.querySelectorAll('.reveal,.step').forEach(el=>io.observe(el));
+
+  function countUp(el){const t=+el.dataset.target,s=el.dataset.suffix||'',d=1400,t0=performance.now();
+    function step(t1){const p=Math.min((t1-t0)/d,1),e=1-Math.pow(1-p,3);
+      el.innerHTML=Math.round(e*t)+'<span class="u">'+s+'</span>';
+      if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+
+  // FAQ accordion
+  document.querySelectorAll('.qa button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const qa=b.parentElement,ans=qa.querySelector('.ans'),open=qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(o=>{o.classList.remove('open');o.querySelector('.ans').style.maxHeight=null;});
+      if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+    });
+  });
+
+  // modal
+  const overlay=document.getElementById('overlay');
+  function openModal(){overlay.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('email').focus(),300);}
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';
+    setTimeout(()=>{document.getElementById('modal-form').style.display='block';
+      document.getElementById('modal-success').classList.remove('show');
+      document.getElementById('email').value='';},300);}
+  function submitEmail(){const em=document.getElementById('email');
+    if(!em.value||!em.value.includes('@')){em.style.borderColor='var(--accent)';em.focus();return;}
+    document.getElementById('modal-form').style.display='none';
+    document.getElementById('modal-success').classList.add('show');
+    // → hook: push em.value to CRM tagged source:press-page, trigger portfolio email
+  }
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();});
+</script>
+</body>
+</html>
