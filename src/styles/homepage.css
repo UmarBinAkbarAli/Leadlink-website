@@ -494,6 +494,15 @@ section {
   z-index: 1;
   margin-top: 170px;
 }
+.division-logo {
+  position: relative;
+  z-index: 1;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 16px;
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--accent) 50%, transparent));
+}
 .division-copy {
   padding: 58px;
   display: flex;
