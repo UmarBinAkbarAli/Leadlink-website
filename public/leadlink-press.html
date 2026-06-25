@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -267,15 +267,27 @@
 <body class="load">
 
 <!-- ===================== NAV ===================== -->
+<style>
+.brand{display:flex;align-items:center;gap:10px;min-width:168px}
+.mark{width:48.193px;height:43.628px;overflow:hidden;position:relative;flex:0 0 auto}
+.mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-9.3px}
+.brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
+.brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
+</style>
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">LeadLink<span class="dot"></span><span class="div">Press</span></a>
+    <a href="index.html" class="brand" aria-label="LeadLink Solutions home">
+      <span class="mark"><img src="assets/logo.png" alt=""></span>
+      <span class="brand-text-image"><img src="assets/logo.png" alt=""></span>
+    </a>
     <div class="nav-links">
-      <a href="content.html">Content</a>
+      <a href="studios.html">Studios</a>
       <a href="tech.html">Tech</a>
       <a href="growth.html">Growth</a>
       <a href="design.html">Design</a>
+      <a href="commerce.html">Commerce</a>
       <a href="press.html" class="active">Press &amp; Media</a>
+      <a href="contact.html">Contact</a>
     </div>
     <button class="btn btn-primary nav-cta" onclick="openModal()">☕ Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -487,43 +499,59 @@
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="logo">LeadLink<span class="dot"></span><span class="div">Solutions</span></div>
-        <p class="foot-tag">The full-stack digital growth group. UAE · USA · UK · Global.</p>
-      </div>
-      <div class="foot-brands">
-        <h4>Our Brands</h4>
-        <a href="content.html">LeadLink Content</a>
-        <a href="tech.html">LeadLink Tech</a>
-        <a href="growth.html">LeadLink Growth</a>
-        <a href="design.html">LeadLink Design</a>
-        <a href="commerce.html">LeadLink Commerce</a>
-        <a href="press.html" class="press">LeadLink Press</a>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <a href="#">Services</a>
-        <a href="#">Case Studies</a>
-        <a href="#">About</a>
-        <a href="#">Insights</a>
-        <a href="#">Contact</a>
-      </div>
-      <div>
-        <h4>Let's Talk</h4>
-        <a href="#" onclick="openModal();return false;">☕ Virtual Coffee</a>
-        <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
-        <a href="#">+971 58 519 9409</a>
-        <a href="#">WhatsApp →</a>
-      </div>
+<!-- FOOTER -->
+<style>
+footer.footer{border-top:none;background:#0a0a0f}
+.footer{width:min(1180px,100%);margin:0 auto;padding:88px 40px 24px;color:rgba(255,255,255,.58)}
+.footer .brand{display:flex;align-items:center;gap:10px}
+.footer .mark{width:48.193px;height:43.628px;overflow:hidden;position:relative;flex:0 0 auto}
+.footer .mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-9.3px}
+.footer .brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
+.footer .brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
+.footer-brand-copy{margin-top:13px;max-width:251px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;min-height:240px}
+.footer h3{color:rgba(255,255,255,.38);font-family:'Hanken Grotesk',sans-serif;font-size:11px;line-height:18.15px;font-weight:700;letter-spacing:1.98px;text-transform:uppercase;margin-bottom:17px}
+.footer p,.footer a{color:rgba(255,255,255,.58);font-family:'Hanken Grotesk',sans-serif;font-size:15px;line-height:23.1px;font-weight:300;display:block}
+.footer a:hover{color:#fff}
+.footer-bottom{margin-left:calc((1180px - 100vw)/2);margin-right:calc((1180px - 100vw)/2);border-top:1px solid rgba(239,233,221,.38);padding:29px clamp(24px,11.8vw,170px) 0;display:flex;justify-content:space-between;color:rgba(255,255,255,.38);font-family:'Hanken Grotesk',sans-serif;font-size:13.5px;line-height:20.63px}
+.footer-bottom span:last-child{color:rgba(255,255,255,.38)}
+@media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{margin-inline:-40px}}
+@media(max-width:620px){.footer-grid>div:first-child{grid-column:1/-1}}
+@media(max-width:480px){.footer{padding-inline:24px}.footer-bottom{margin-inline:-24px;flex-direction:column;gap:8px}}
+</style>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="index.html" aria-label="LeadLink Solutions home">
+        <span class="mark"><img src="assets/logo.png" alt=""></span>
+        <span class="brand-text-image"><img src="assets/logo.png" alt=""></span>
+      </a>
+      <p class="footer-brand-copy">The full-stack digital growth group. One house. Every capability. No coordination gap.</p>
     </div>
-    <div class="foot-bottom">
-      <span>© 2025 LeadLink Solutions. All Rights Reserved.</span>
-      <span>Built by us. Obviously.</span>
+    <div>
+      <h3>Our Brands</h3>
+      <a href="studios.html">LeadLink Studios</a>
+      <a href="tech.html">LeadLink Tech</a>
+      <a href="growth.html">LeadLink Growth</a>
+      <a href="design.html">LeadLink Design</a>
+      <a href="commerce.html">LeadLink Commerce</a>
+      <a href="press.html">LeadLink Press</a>
     </div>
+    <div>
+      <h3>Company</h3>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+      <a href="tel:+971585199409">+971 58 519 9409</a>
+      <a href="https://wa.me/971585199409">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 LeadLink Solutions</span>
+    <span>UAE &middot; USA &middot; UK</span>
   </div>
 </footer>
 

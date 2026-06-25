@@ -1,11 +1,10 @@
 import { gsap } from 'gsap';
 
 const TEAM = [
-  { img: 'assets/team-left.png',   name: 'Alex Chen',   role: 'Head of Growth',   quote: 'Building growth systems that compound over time is the only sustainable way to win.' },
-  { img: 'assets/team-center.png', name: 'Saqib Awan',  role: 'Founder & CEO',    quote: 'The SEO strategy was well structured and easy to follow. Within months, our search rankings improved and our website traffic doubled.' },
-  { img: 'assets/team-right.png',  name: 'Sara Hassan', role: 'Creative Director', quote: 'Every brand has a story worth telling. Our job is to make sure the right people hear it at the right time.' },
-  { img: 'assets/team-left.png',   name: 'Omar Malik',  role: 'Tech Lead',         quote: 'Solid infrastructure is invisible — until you need it most. We build it right the first time.' },
-  { img: 'assets/team-center.png', name: 'Zara Ahmed',  role: 'Strategy Lead',     quote: 'Strategy without execution is just a document. We do both, every single time.' },
+  { img: 'assets/Muhammad-Saqib.png', name: 'Muhammad Saqib', role: 'CEO',                          quote: 'Great work is the result of great collaboration — and that is what we bring every day.' },
+  { img: 'assets/Usama-Abbas.jpg',    name: 'Usama Abbas',    role: 'Co-Founder',                   quote: 'Consistency and clarity are the foundations of everything we build for our clients.' },
+  { img: 'assets/Iqra-Abbas.jpg',     name: 'Iqra Abbas',     role: 'Operation Manager',            quote: 'Seamless operations are the backbone of every successful client outcome we deliver.' },
+  { img: 'assets/Muhammad-Aqib.jpg',  name: 'Muhammad Aqib',  role: 'Head of Business Development', quote: 'Every challenge is an opportunity to deliver something our clients never expected.' },
 ];
 
 const TESTS = [

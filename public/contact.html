@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact LeadLink Solutions — Let's Talk Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Hanken+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Archivo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── tokens ─────────────────────────────────────── */
+:root{
+  --bg:#000;--panel:#15130f;--card:#282a2b;
+  --line:rgba(239,233,221,.1);--line-strong:rgba(239,233,221,.22);
+  --text:#fff;--muted:#c8c7c2;--soft:rgba(239,233,221,.55);
+  --brand:#1c80ff;--green:#c9e265;--max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:210px auto auto -360px;width:441px;height:642px;border-radius:50%;background:rgba(28,128,255,.18);filter:blur(120px);pointer-events:none;z-index:-1}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p{margin:0}
+em{color:var(--brand);font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-1.72px}
+
+/* ── nav ─────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:50%;z-index:30;width:min(100%,1440px);transform:translateX(-50%);border-bottom:1px solid rgba(239,233,221,.08);background:rgba(11,10,9,.9);backdrop-filter:blur(6px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:20px clamp(22px,7.8vw,112px)}
+.brand{display:flex;align-items:center;gap:10px;min-width:168px}
+.mark{width:48.193px;height:43.628px;overflow:hidden;position:relative;flex:0 0 auto}
+.mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-9.3px}
+.brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
+.brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
+.nav-links{display:flex;align-items:center;gap:38px;color:var(--soft);font-family:"Hanken Grotesk",sans-serif;font-size:13px;font-weight:300;letter-spacing:.52px}
+.nav-item{position:relative;display:flex;align-items:center}
+.nav-links>a:hover,.nav-trigger:hover,.nav-trigger[aria-expanded="true"]{color:#efe9dd}
+.nav-trigger{appearance:none;border:0;padding:0;background:transparent;color:inherit;display:inline-flex;align-items:center;gap:8px;font:inherit;letter-spacing:inherit;cursor:pointer}
+.nav-trigger::after{content:"";width:6px;height:6px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-1px);opacity:.8}
+.subnav{position:absolute;top:calc(100% + 16px);left:0;min-width:220px;padding:14px 0;border:1px solid rgba(239,233,221,.1);background:rgba(11,10,9,.98);box-shadow:0 20px 36px rgba(0,0,0,.32);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .22s ease,transform .22s ease,visibility .22s ease;pointer-events:none;z-index:40}
+.subnav a{display:block;padding:10px 16px;color:rgba(239,233,221,.82);font-size:12.5px;letter-spacing:.28px;white-space:nowrap}
+.subnav a:hover{background:rgba(255,255,255,.04);color:#fff}
+.subnav a.active-link{color:#fff;background:rgba(28,128,255,.1)}
+.nav-item:hover .subnav,.nav-item:focus-within .subnav,.nav-item.open .subnav{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:45px;padding:12px 24px;border:1px solid #0057c6;background:var(--brand);color:white;font-size:16px;line-height:1.2;letter-spacing:-.08px;white-space:nowrap}
+.btn.light{background:white;color:var(--brand)}
+.btn.ghost{border-color:#2a2a2d;background:transparent;color:white;font-size:14px;letter-spacing:-.072px}
+.dot{width:6px;height:6px;background:var(--green);box-shadow:0 0 8px rgba(201,226,101,.7);display:inline-block}
+
+/* ── hero ────────────────────────────────────────── */
+.hero{min-height:680px;margin-top:83px;position:relative;display:flex;align-items:center;padding:88px clamp(24px,6.8vw,98px) 82px;overflow:hidden}
+.hero-glow{position:absolute;right:-120px;top:-80px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(28,128,255,.14),transparent 65%);filter:blur(80px);pointer-events:none;z-index:0}
+.hero-grid-lines{position:absolute;inset:0;z-index:0;opacity:.18;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),rgba(239,233,221,.08) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 20%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 20%,#000 80%,transparent)}
+.hero-copy{position:relative;z-index:1;width:min(820px,100%)}
+.eyebrow{display:flex;align-items:center;gap:14px;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.44;letter-spacing:.6912px;text-transform:uppercase}
+.eyebrow::before,.eyebrow.center::after{content:"";width:36px;height:1px;background:currentColor;flex:0 0 auto}
+.eyebrow.center{justify-content:center}
+.hero h1{margin-top:16px;display:grid;gap:10px;font-size:clamp(44px,4.8vw,72px);line-height:.957;letter-spacing:-3.096px;font-weight:400;white-space:nowrap}
+.hero h1 span{display:flex;gap:16px;align-items:center}
+.hero-text{width:min(580px,100%);margin-top:22px;color:var(--muted);font-size:17px;line-height:25.2px}
+.actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:27px}
+
+/* ── section base ──────────────────────────────── */
+section{padding-left:clamp(24px,7vw,130px);padding-right:clamp(24px,7vw,130px)}
+.section-block{width:min(var(--max),100%);margin:0 auto}
+.section-title{color:white;font-size:clamp(36px,3.35vw,48px);line-height:1.1;letter-spacing:-3.096px;font-weight:400}
+.split-head{display:grid;grid-template-columns:563px 1fr;align-items:end;gap:71px;margin-bottom:56px}
+.split-head .section-title{margin-top:16px}
+.split-head p{color:var(--muted);font-size:17px;line-height:25.2px}
+
+/* ── contact layout ──────────────────────────────── */
+.contact-section{padding-top:106px;padding-bottom:106px}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+
+/* ── info column ─────────────────────────────────── */
+.contact-info-col{display:flex;flex-direction:column;gap:40px}
+.info-intro p{color:var(--muted);font-size:17px;line-height:26px;margin-top:18px}
+.info-cards{display:flex;flex-direction:column;gap:16px}
+.info-card{border:1px solid rgba(239,233,221,.12);padding:24px 26px;background:rgba(21,19,15,.6);display:flex;align-items:flex-start;gap:18px;transition:.25s}
+.info-card:hover{border-color:rgba(28,128,255,.3)}
+.info-card-icon{width:40px;height:40px;border:1px solid rgba(28,128,255,.35);display:grid;place-items:center;flex:0 0 auto}
+.info-card-icon svg{width:18px;height:18px;stroke:var(--brand);stroke-width:1.8;fill:none}
+.info-card-body h4{color:#efe9dd;font-family:"Hanken Grotesk",sans-serif;font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:6px}
+.info-card-body a,.info-card-body p{color:var(--muted);font-size:15px;line-height:22px;display:block}
+.info-card-body a:hover{color:#fff}
+.availability{border-top:1px solid var(--line-strong);padding-top:24px}
+.availability p{color:var(--muted);font-size:14px;line-height:22px}
+.availability strong{color:var(--green)}
+
+/* ── form column ─────────────────────────────────── */
+.contact-form-col{}
+.contact-form{display:flex;flex-direction:column;gap:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{color:#efe9dd;font-family:"Hanken Grotesk",sans-serif;font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase}
+.field input,.field textarea,.field select{background:rgba(21,19,15,.8);border:1px solid rgba(239,233,221,.14);color:#fff;font-family:Inter,sans-serif;font-size:15px;padding:14px 16px;outline:none;transition:border-color .2s;width:100%}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8c7c2' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.field select option{background:#15130f;color:#fff}
+.field input::placeholder,.field textarea::placeholder{color:rgba(200,199,194,.4)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand)}
+.field textarea{resize:vertical;min-height:140px}
+.form-note{color:var(--muted);font-size:13px;line-height:20px}
+.form-submit{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-submit{min-height:52px;padding:14px 32px;font-size:16px;cursor:pointer;font-family:Inter,sans-serif}
+.form-success{display:none;color:var(--green);font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.5px}
+.form-success.show{display:block}
+
+/* ── channels strip ──────────────────────────────── */
+.channels{padding-top:80px;padding-bottom:106px}
+.channels-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(239,233,221,.1);border:1px solid rgba(239,233,221,.1)}
+.channel{background:var(--bg);padding:40px 36px;display:flex;flex-direction:column;gap:16px;transition:.25s;text-decoration:none}
+.channel:hover{background:rgba(21,19,15,.8)}
+.channel-num{color:var(--brand);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.7px}
+.channel h3{color:#efe9dd;font-size:20px;font-weight:500;letter-spacing:-.3px}
+.channel p{color:var(--muted);font-size:14px;line-height:22px}
+.channel-link{color:var(--brand);font-family:"Hanken Grotesk",sans-serif;font-size:13px;font-weight:500;letter-spacing:.3px;margin-top:auto}
+
+/* ── cta ─────────────────────────────────────────── */
+.cta{padding-top:106px;padding-bottom:106px;border-block:1px solid rgba(201,168,106,.22);text-align:center;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;left:50%;top:50%;width:560px;height:560px;border-radius:50%;transform:translate(-50%,-45%);background:radial-gradient(circle,rgba(55,148,251,.2),rgba(55,148,251,0) 70%);filter:blur(60px)}
+.cta-content{position:relative;z-index:1;max-width:854px;margin:0 auto}
+.cta h2{font-family:"Instrument Serif",serif;font-size:clamp(48px,5.85vw,84px);line-height:1;letter-spacing:-.84px;font-weight:400}
+.cta p{max-width:620px;margin:23px auto 0;color:var(--soft);font-size:18px;line-height:26.4px;font-weight:300}
+.cta .actions{justify-content:center}
+.cta .btn:first-child{background:#18181a;border-color:var(--brand)}
+
+/* ── footer ──────────────────────────────────────── */
+.footer{width:min(1180px,100%);margin:0 auto;padding:88px 40px 24px;color:#d2d2d2}
+.footer-brand{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.footer-brand-copy{margin-top:13px;max-width:251px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;min-height:240px}
+.footer h3{color:white;font-family:"Hanken Grotesk",sans-serif;font-size:11px;line-height:18.15px;font-weight:700;letter-spacing:1.98px;text-transform:uppercase;margin-bottom:17px}
+.footer p,.footer a{color:#d2d2d2;font-family:"Hanken Grotesk",sans-serif;font-size:15px;line-height:23.1px;font-weight:300;display:block}
+.footer-bottom{margin-left:calc((1180px - 100vw) / 2);margin-right:calc((1180px - 100vw) / 2);border-top:1px solid rgba(239,233,221,.38);padding:29px clamp(24px,11.8vw,170px) 0;display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;line-height:20.63px}
+.footer-bottom span:last-child{color:rgba(239,233,221,.3)}
+
+/* ── ham / mobile menu ───────────────────────────── */
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:4px}
+.ham span{display:block;width:22px;height:1.5px;background:#efe9dd;transition:.25s}
+.mobile-menu{display:none;position:fixed;inset:83px 0 0;background:rgba(11,10,9,.97);z-index:20;padding:32px clamp(22px,7.8vw,112px);flex-direction:column;gap:24px}
+.mobile-menu.open{display:flex}
+.mobile-nav-links{display:flex;flex-direction:column;gap:0}
+.mobile-nav-item{border-bottom:1px solid rgba(239,233,221,.08)}
+.mobile-nav-link,.mobile-nav-trigger{display:block;padding:16px 0;color:#efe9dd;font-family:"Hanken Grotesk",sans-serif;font-size:16px;font-weight:300;background:none;border:0;cursor:pointer;text-align:left;width:100%}
+.mobile-subnav{padding-left:16px}
+.mobile-subnav a{display:block;padding:10px 0;color:rgba(239,233,221,.6);font-size:14px}
+
+/* ── responsive ──────────────────────────────────── */
+@media(max-width:980px){
+  .nav-inner{padding-inline:24px}
+  .nav-links{display:none}
+  .ham{display:flex}
+  .hero h1{white-space:normal}
+  .hero h1 span{flex-wrap:wrap}
+  .contact-grid{grid-template-columns:1fr;gap:60px}
+  .split-head{grid-template-columns:1fr;gap:24px}
+  .channels-inner{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .nav .btn{display:none}
+  .brand{min-width:0}
+  .hero{padding-top:58px}
+  .hero h1{font-size:clamp(36px,9vw,54px)}
+  .actions{align-items:stretch}
+  .btn{width:100%;white-space:normal;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .section-title{letter-spacing:-1.5px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer{padding-inline:24px}
+  .footer-bottom{margin-inline:-24px;flex-direction:column;gap:10px}
+  .cta{padding-top:80px;padding-bottom:80px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="LeadLink Solutions home">
+      <span class="mark"><img src="assets/logo.png" alt=""></span>
+      <span class="brand-text-image"><img src="assets/logo.png" alt=""></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <div class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Our Services</button>
+        <div class="subnav">
+          <a href="studios.html">LeadLink Studios</a>
+          <a href="tech.html">LeadLink Tech</a>
+          <a href="growth.html">LeadLink Growth</a>
+          <a href="design.html">LeadLink Design</a>
+          <a href="commerce.html">LeadLink Commerce</a>
+          <a href="press.html">LeadLink Press &amp; Media</a>
+        </div>
+      </div>
+      <a href="contact.html" style="color:#efe9dd">Contact</a>
+    </nav>
+    <a class="btn light" href="mailto:info@leadlinksolution.com">Let's Grab a Virtual Coffee &rarr;</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-nav-links" aria-label="Mobile primary">
+    <div class="mobile-nav-item">
+      <button class="mobile-nav-trigger" type="button" aria-expanded="false">Our Services</button>
+      <div class="mobile-subnav" hidden>
+        <a href="studios.html">LeadLink Studios</a>
+        <a href="tech.html">LeadLink Tech</a>
+        <a href="growth.html">LeadLink Growth</a>
+        <a href="design.html">LeadLink Design</a>
+        <a href="commerce.html">LeadLink Commerce</a>
+        <a href="press.html">LeadLink Press &amp; Media</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <a class="mobile-nav-link" href="contact.html">Contact</a>
+    </div>
+  </nav>
+  <a class="btn" href="mailto:info@leadlinksolution.com">Let's Grab a Virtual Coffee &rarr;</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-copy">
+    <div class="eyebrow">Start the conversation</div>
+    <h1>
+      <span>No pitch decks.</span>
+      <span>No pressure. Just a</span>
+      <span><em>real conversation.</em></span>
+    </h1>
+    <p class="hero-text">Tell us about your business and where you want it to go. We'll tell you exactly how we'd get it there. 30 minutes. Free. No obligation.</p>
+    <div class="actions">
+      <a class="btn" href="#contact-form">Send a Message &darr;</a>
+      <a class="btn ghost" href="mailto:info@leadlinksolution.com"><span class="dot"></span>Email Us Directly</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT MAIN -->
+<section class="contact-section" id="contact-form">
+  <div class="section-block">
+    <div class="contact-grid">
+
+      <!-- LEFT: info -->
+      <div class="contact-info-col">
+        <div class="info-intro">
+          <div class="eyebrow">Get in touch</div>
+          <h2 class="section-title" style="margin-top:16px">Let's talk about your <em>growth.</em></h2>
+          <p>Whether you need one division or all six, the conversation starts here. We respond within one business day — usually the same afternoon.</p>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            </div>
+            <div class="info-card-body">
+              <h4>Email</h4>
+              <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+              <p style="margin-top:4px;font-size:13px;">Response within one business day</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.8 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.71 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.69a16 16 0 006.38 6.38l1.05-1.05a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="info-card-body">
+              <h4>Phone</h4>
+              <a href="tel:+971585199409">+971 58 519 9409</a>
+              <p style="margin-top:4px;font-size:13px;">UAE (Sunday – Thursday, 9am–6pm GST)</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <div class="info-card-body">
+              <h4>WhatsApp</h4>
+              <a href="https://wa.me/971585199409">Chat on WhatsApp</a>
+              <p style="margin-top:4px;font-size:13px;">Fastest response — usually within the hour</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="availability">
+          <div class="eyebrow" style="margin-bottom:16px">Availability</div>
+          <p>We work with clients across <strong style="color:#efe9dd">UAE, USA, and UK</strong> — so there's always someone awake. Current availability for new projects: <strong>Open</strong>.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="contact-form-col">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" placeholder="Sarah" required>
+            </div>
+            <div class="field">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Johnson" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="sarah@company.com" required>
+          </div>
+
+          <div class="field">
+            <label for="company">Company / Brand</label>
+            <input type="text" id="company" name="company" placeholder="Your company name">
+          </div>
+
+          <div class="field">
+            <label for="service">What can we help with?</label>
+            <select id="service" name="service">
+              <option value="" disabled selected>Select a division or tell us below</option>
+              <option value="studios">LeadLink Studios — Video &amp; Content</option>
+              <option value="tech">LeadLink Tech — Web, Apps &amp; AI</option>
+              <option value="growth">LeadLink Growth — Marketing &amp; Lead Gen</option>
+              <option value="design">LeadLink Design — Brand &amp; UI/UX</option>
+              <option value="commerce">LeadLink Commerce — TikTok &amp; Marketplace</option>
+              <option value="press">LeadLink Press — PR &amp; Media</option>
+              <option value="full">Full-Stack Growth Package</option>
+              <option value="other">Not sure yet — let's talk</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Tell us about your project</label>
+            <textarea id="message" name="message" placeholder="Give us a quick overview: what you're building, where you're stuck, or what growth looks like for you. The more detail, the better our response." required></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-submit">Send Message &rarr;</button>
+            <p class="form-note">No spam. No pitch emails. Just a real reply.</p>
+          </div>
+
+          <p class="form-success" id="formSuccess">&#10003;&nbsp; Message sent — we'll be in touch shortly.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS STRIP -->
+<section class="channels">
+  <div class="section-block">
+    <div class="eyebrow center" style="margin-bottom:48px">Other ways to reach us</div>
+    <div class="channels-inner">
+      <a class="channel" href="mailto:info@leadlinksolution.com">
+        <span class="channel-num">01</span>
+        <h3>Email</h3>
+        <p>Send us the details and we'll come back with a structured response — no vague reply, no auto-responders.</p>
+        <span class="channel-link">info@leadlinksolution.com &rarr;</span>
+      </a>
+      <a class="channel" href="https://wa.me/971585199409">
+        <span class="channel-num">02</span>
+        <h3>WhatsApp</h3>
+        <p>Prefer a quick back-and-forth? WhatsApp is where we move fastest. Ask anything.</p>
+        <span class="channel-link">+971 58 519 9409 &rarr;</span>
+      </a>
+      <a class="channel" href="tel:+971585199409">
+        <span class="channel-num">03</span>
+        <h3>Phone</h3>
+        <p>Got something big to discuss? Call us during UAE business hours and let's talk it through.</p>
+        <span class="channel-link">+971 58 519 9409 &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-content">
+    <h2>Ready to stop juggling<br>and start growing?</h2>
+    <p>One conversation is all it takes. Tell us where you are and where you want to be — we'll map the route.</p>
+    <div class="actions">
+      <a class="btn" href="#contact-form">Send a Message</a>
+      <a class="btn ghost" href="about.html"><span class="dot"></span>Learn About LeadLink</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="index.html" aria-label="LeadLink Solutions home">
+        <span class="mark"><img src="assets/logo.png" alt=""></span>
+        <span class="brand-text-image"><img src="assets/logo.png" alt=""></span>
+      </a>
+      <p class="footer-brand-copy">The full-stack digital growth group. One house. Every capability. No coordination gap.</p>
+    </div>
+    <div>
+      <h3>Our Brands</h3>
+      <a href="studios.html">LeadLink Studios</a>
+      <a href="tech.html">LeadLink Tech</a>
+      <a href="growth.html">LeadLink Growth</a>
+      <a href="design.html">LeadLink Design</a>
+      <a href="commerce.html">LeadLink Commerce</a>
+      <a href="press.html">LeadLink Press</a>
+    </div>
+    <div>
+      <h3>Company</h3>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <a href="mailto:info@leadlinksolution.com">info@leadlinksolution.com</a>
+      <a href="tel:+971585199409">+971 58 519 9409</a>
+      <a href="https://wa.me/971585199409">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 LeadLink Solutions</span>
+    <span>UAE &middot; USA &middot; UK</span>
+  </div>
+</footer>
+
+<script>
+/* nav dropdowns */
+document.querySelectorAll('.nav-trigger').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.nav-item');
+    const open=item.classList.toggle('open');
+    btn.setAttribute('aria-expanded',String(open));
+    document.querySelectorAll('.nav-item').forEach(i=>{if(i!==item){i.classList.remove('open');i.querySelector('.nav-trigger')?.setAttribute('aria-expanded','false');}});
+  });
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.nav-item')){
+    document.querySelectorAll('.nav-item').forEach(i=>{i.classList.remove('open');i.querySelector('.nav-trigger')?.setAttribute('aria-expanded','false');});
+  }
+});
+
+/* mobile menu */
+const hamBtn=document.getElementById('hamBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+hamBtn.addEventListener('click',()=>{
+  const open=mobileMenu.classList.toggle('open');
+  hamBtn.setAttribute('aria-expanded',String(open));
+});
+document.querySelectorAll('.mobile-nav-trigger').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const subnav=btn.nextElementSibling;
+    const open=subnav.hidden;
+    subnav.hidden=!open;
+    btn.setAttribute('aria-expanded',String(open));
+  });
+});
+
+/* form — mailto fallback (no backend) */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const data=new FormData(this);
+  const fname=data.get('fname')||'';
+  const lname=data.get('lname')||'';
+  const email=data.get('email')||'';
+  const company=data.get('company')||'';
+  const service=data.get('service')||'';
+  const message=data.get('message')||'';
+  const body=`Name: ${fname} ${lname}%0AEmail: ${email}%0ACompany: ${company}%0AService: ${service}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
+  window.location.href=`mailto:info@leadlinksolution.com?subject=New enquiry from ${encodeURIComponent(fname+' '+lname)}&body=${body}`;
+  document.getElementById('formSuccess').classList.add('show');
+});
+</script>
+</body>
+</html>

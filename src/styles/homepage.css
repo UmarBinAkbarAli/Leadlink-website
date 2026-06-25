@@ -1068,7 +1068,7 @@ section {
   width: min(1180px, 100%);
   margin: 0 auto;
   padding: 88px 40px 24px;
-  color: #d2d2d2;
+  color: rgba(255,255,255,.58);
 }
 .footer .brand { display: flex; }
 .footer-brand-copy {
@@ -1082,7 +1082,7 @@ section {
   min-height: 240px;
 }
 .footer h3 {
-  color: white;
+  color: rgba(255,255,255,.38);
   font-family: Hanken Grotesk, sans-serif;
   font-size: 11px;
   line-height: 18.15px;
@@ -1093,13 +1093,14 @@ section {
 }
 .footer p,
 .footer a {
-  color: #d2d2d2;
+  color: rgba(255,255,255,.58);
   font-family: Hanken Grotesk, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 23.1px;
   font-weight: 300;
   display: block;
 }
+.footer a:hover { color: #fff; }
 .footer-bottom {
   margin-left: calc((1180px - 100vw) / 2);
   margin-right: calc((1180px - 100vw) / 2);
@@ -1107,12 +1108,12 @@ section {
   padding: 29px clamp(24px, 11.8vw, 170px) 0;
   display: flex;
   justify-content: space-between;
-  color: rgba(255,255,255,.85);
+  color: rgba(255,255,255,.38);
   font-family: Hanken Grotesk, sans-serif;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 20.63px;
 }
-.footer-bottom span:last-child { color: rgba(239,233,221,.3); }
+.footer-bottom span:last-child { color: rgba(255,255,255,.38); }
 
 /* ---- Hamburger button ---- */
 .ham {
