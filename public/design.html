@@ -71,6 +71,14 @@
   .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:72px 0 0;background:rgba(10,10,12,.97);z-index:99;padding:32px clamp(20px,5vw,48px);flex-direction:column;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-nav-link{display:block;padding:16px 0;color:rgba(255,255,255,.75);font-family:var(--grot),sans-serif;font-size:16px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:#fff}
+.mobile-menu .btn-primary{margin-top:24px;width:100%;justify-content:center}
 
   /* ====== HERO ====== */
   .hero{position:relative;padding:170px 0 110px;overflow:hidden;min-height:92vh;display:flex;align-items:center}
@@ -405,7 +413,7 @@
     .ledger-head,.ledger-row{grid-template-columns:1fr}
     .ledger-head .l-col,.ledger-row .l{border-right:none;border-bottom:1px solid var(--border-2)}
   }
-  @media(max-width:520px){
+  @media(max-width:520px){nav .btn-primary{display:none}
     .incl{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr}
@@ -448,7 +456,20 @@
     <button class="btn btn-primary" onclick="openModal()">☕ Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+
 </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a class="mobile-nav-link" href="studios.html">Studios</a>
+  <a class="mobile-nav-link" href="tech.html">Tech</a>
+  <a class="mobile-nav-link" href="growth.html">Growth</a>
+  <a class="mobile-nav-link" href="design.html">Design</a>
+  <a class="mobile-nav-link" href="commerce.html">Commerce</a>
+  <a class="mobile-nav-link" href="press.html">Press &amp; Media</a>
+  <a class="mobile-nav-link" href="contact.html">Contact</a>
+  <button class="btn btn-primary" onclick="openModal()">Book Consultation</button>
+</div>
 
 <!-- ============ HERO ============ -->
 <header class="hero artboard" id="hero">
@@ -742,24 +763,6 @@
   </div>
 </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="section" id="process" style="padding-top:0">
-  <div class="wrap">
-    <div class="process-head gs-rev">
-      <span class="eyebrow">Plate 08 · The Method</span>
-      <h2>Six artboards from brief to brand</h2>
-    </div>
-    <div class="steps" id="steps">
-      <div class="step gs-rev"><span class="ab">Artboard 01</span><h3>The Interrogation</h3><p>We question everything before designing anything — your market, your buyers, your competitors, and the perception gap between what you are and how you look.</p></div>
-      <div class="step gs-rev"><span class="ab">Artboard 02</span><h3>The Position</h3><p>One sentence that defines who you're for and why you win. Every visual decision that follows must defend itself against this sentence.</p></div>
-      <div class="step gs-rev"><span class="ab">Artboard 03</span><h3>The Concepts</h3><p>Divergent directions, not three shades of the same idea. Each concept is a different strategic bet, presented with its reasoning attached.</p></div>
-      <div class="step gs-rev"><span class="ab">Artboard 04</span><h3>The System</h3><p>The chosen direction becomes a system — logo suite, palette, type, iconography, photography rules — engineered to survive contact with reality.</p></div>
-      <div class="step gs-rev"><span class="ab">Artboard 05</span><h3>The Stress Test</h3><p>We break it on purpose: smallest favicon, worst print job, busiest feed. If the identity fails anywhere it will live, it goes back to the bench.</p></div>
-      <div class="step gs-rev"><span class="ab">Artboard 06</span><h3>The Handover</h3><p>Guidelines, templates, and source files your team can actually use — then we wire the brand into your ads, content, and site through the LeadLink group.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ WHY ============ -->
 <section class="section why">
   <div class="wrap">
@@ -881,7 +884,7 @@ footer.footer{border-top:none;background:#0a0a0f}
   </div>
 </footer>
 
-<button class="btn btn-primary float-cta" onclick="openModal()">☕ Grab a Coffee</button>
+<button class="btn btn-primary float-cta" onclick="openModal()">Book Consultation</button>
 
 <!-- ============ MODAL ============ -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
@@ -906,6 +909,18 @@ footer.footer{border-top:none;background:#0a0a0f}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+
   /* ---------- non-animation setup ---------- */
   const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
   document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});

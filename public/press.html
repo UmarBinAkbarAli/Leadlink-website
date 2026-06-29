@@ -4,7 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeadLink Press — The Authority Issue | PR & Media</title>
-<script>(function(){var d=document.documentElement;d.className="js"+(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches?" reduce":"");})();</script>
+<script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+(function(){var d=document.documentElement;d.className="js"+(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches?" reduce":"");})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -57,6 +69,14 @@
   .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:72px 0 0;background:rgba(10,10,12,.97);z-index:99;padding:32px clamp(20px,5vw,48px);flex-direction:column;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-nav-link{display:block;padding:16px 0;color:rgba(255,255,255,.75);font-family:var(--grot),sans-serif;font-size:16px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:#fff}
+.mobile-menu .btn-primary{margin-top:24px;width:100%;justify-content:center}
 
   /* ====== HERO — MASTHEAD ====== */
   .hero{position:relative;padding:150px 0 0;overflow:hidden}
@@ -339,7 +359,7 @@
     .ledger-head,.ledger-row{grid-template-columns:1fr}
     .ledger-head .ads,.ledger-row .l{border-right:none;border-bottom:1px solid var(--border-2)}
   }
-  @media(max-width:520px){
+  @media(max-width:520px){nav .btn-primary{display:none}
     .incl{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr}
@@ -552,7 +572,20 @@
     <button class="btn btn-primary" onclick="openModal()">☕ Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+
 </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a class="mobile-nav-link" href="studios.html">Studios</a>
+  <a class="mobile-nav-link" href="tech.html">Tech</a>
+  <a class="mobile-nav-link" href="growth.html">Growth</a>
+  <a class="mobile-nav-link" href="design.html">Design</a>
+  <a class="mobile-nav-link" href="commerce.html">Commerce</a>
+  <a class="mobile-nav-link" href="press.html">Press &amp; Media</a>
+  <a class="mobile-nav-link" href="contact.html">Contact</a>
+  <button class="btn btn-primary" onclick="openModal()">Book Consultation</button>
+</div>
 
 <!-- ============ HERO / MASTHEAD ============ -->
 <header class="hero">
@@ -1042,7 +1075,7 @@ footer.footer{border-top:none;background:#0a0a0f}
   </div>
 </footer>
 
-<button class="btn btn-primary float-cta" onclick="openModal()">☕ Grab a Coffee</button>
+<button class="btn btn-primary float-cta" onclick="openModal()">Book Consultation</button>
 
 <!-- ============ MODAL ============ -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
@@ -1065,6 +1098,18 @@ footer.footer{border-top:none;background:#0a0a0f}
 </div>
 
 <script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+
 (function(){
   const docEl=document.documentElement;
   const reduce=docEl.classList.contains('reduce');

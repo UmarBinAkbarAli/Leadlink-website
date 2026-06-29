@@ -47,6 +47,14 @@ nav.scrolled{background:rgba(10,10,15,.92);border-bottom-color:var(--border)}
 .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
 .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:72px 0 0;background:rgba(10,10,12,.97);z-index:99;padding:32px clamp(20px,5vw,48px);flex-direction:column;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-nav-link{display:block;padding:16px 0;color:rgba(255,255,255,.75);font-family:var(--grot),sans-serif;font-size:16px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:#fff}
+.mobile-menu .btn-primary{margin-top:24px;width:100%;justify-content:center}
 .hero{position:relative;padding:190px 0 120px;overflow:hidden}
 .hero-glow{position:absolute;top:-10%;right:-8%;width:780px;height:780px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.42),rgba(var(--deep-rgb),.12) 38%,transparent 68%);filter:blur(20px);z-index:0}
 .hero-cols{position:absolute;inset:0;z-index:0;opacity:.5;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
@@ -142,7 +150,7 @@ footer{border-top:1px solid var(--border);padding:72px 0 40px;background:var(--b
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.h-line{transform:none!important;opacity:1!important;animation:none!important}}
 @media(max-width:880px){.nav-links{display:none}.burger{display:flex}.scard-grid{grid-template-columns:1fr;gap:2rem}.why-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.foot-grid{grid-template-columns:1fr 1fr;gap:2rem}}
-@media(max-width:520px){.incl{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
+@media(max-width:520px){nav .btn-primary{display:none}.incl{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body class="load">
@@ -172,7 +180,20 @@ footer{border-top:1px solid var(--border);padding:72px 0 40px;background:var(--b
     <button class="btn btn-primary" onclick="openModal()">&#9749; Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+
 </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a class="mobile-nav-link" href="studios.html">Studios</a>
+  <a class="mobile-nav-link" href="tech.html">Tech</a>
+  <a class="mobile-nav-link" href="growth.html">Growth</a>
+  <a class="mobile-nav-link" href="design.html">Design</a>
+  <a class="mobile-nav-link" href="commerce.html">Commerce</a>
+  <a class="mobile-nav-link" href="press.html">Press &amp; Media</a>
+  <a class="mobile-nav-link" href="contact.html">Contact</a>
+  <button class="btn btn-primary" onclick="openModal()">Book Consultation</button>
+</div>
 
 <header class="hero">
   <div class="hero-glow"></div>
@@ -406,7 +427,7 @@ footer.footer{border-top:none;background:#0a0a0f}
   </div>
 </footer>
 
-<button class="btn btn-primary float-cta" onclick="openModal()">&#9749; Grab a Coffee</button>
+<button class="btn btn-primary float-cta" onclick="openModal()">Book Consultation</button>
 
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
@@ -428,6 +449,18 @@ footer.footer{border-top:none;background:#0a0a0f}
 </div>
 
 <script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+
 const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
 document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});
 const nav=document.getElementById('nav');

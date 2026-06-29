@@ -55,6 +55,14 @@
   .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:72px 0 0;background:rgba(10,10,12,.97);z-index:99;padding:32px clamp(20px,5vw,48px);flex-direction:column;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-nav-link{display:block;padding:16px 0;color:rgba(255,255,255,.75);font-family:var(--grot),sans-serif;font-size:16px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:#fff}
+.mobile-menu .btn-primary{margin-top:24px;width:100%;justify-content:center}
 
   /* ====== HERO ====== */
   .hero{position:relative;padding:150px 0 80px;overflow:hidden;min-height:100vh;display:flex;align-items:center}
@@ -210,7 +218,7 @@
     .dvx-switch .opt{padding:.55em .7em}
   }
   @media(max-width:560px){.dvx-switch .lbl-full{display:none}.dvx-switch .lbl-short{display:inline}}
-  @media(max-width:520px){.dvx-tiles{grid-template-columns:1fr}.dvx-tile{border-right:none}.dvx-top{justify-content:center}.dvx-state{display:none}}
+  @media(max-width:520px){nav .btn-primary{display:none}.dvx-tiles{grid-template-columns:1fr}.dvx-tile{border-right:none}.dvx-top{justify-content:center}.dvx-state{display:none}}
 
   /* ====== HORIZONTAL MACHINE (pinned scrub) ====== */
   .hmach{position:relative;background:var(--bg-2);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);overflow:hidden}
@@ -404,7 +412,7 @@
   .gs-rev{opacity:0}
   @media(prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
   @media(max-width:880px){.nav-links{display:none}.burger{display:flex}}
-  @media(max-width:520px){.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
+  @media(max-width:520px){nav .btn-primary{display:none}.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -435,7 +443,20 @@
     <button class="btn btn-primary mag" onclick="openModal()">&#9749; Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+
 </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a class="mobile-nav-link" href="studios.html">Studios</a>
+  <a class="mobile-nav-link" href="tech.html">Tech</a>
+  <a class="mobile-nav-link" href="growth.html">Growth</a>
+  <a class="mobile-nav-link" href="design.html">Design</a>
+  <a class="mobile-nav-link" href="commerce.html">Commerce</a>
+  <a class="mobile-nav-link" href="press.html">Press &amp; Media</a>
+  <a class="mobile-nav-link" href="contact.html">Contact</a>
+  <button class="btn btn-primary" onclick="openModal()">Book Consultation</button>
+</div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="hero">
@@ -803,17 +824,17 @@
       <h2>Why most automation projects quietly die — and ours don't.</h2>
     </div>
     <div class="why-grid" id="why-grid">
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
         <h3>We map the business before we write code</h3>
         <p>Every automation solves a real bottleneck with a measurable outcome. We sequence builds by ROI, not by what's technically fun.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
         <h3>We build it, manage it, and improve it</h3>
         <p>No setup-fee-and-a-goodbye. We monitor every system, fix breaks before you notice, and keep training the AI on its edge cases.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
         <h3>One team, no middleware vendors</h3>
         <p>Agents, automations, ERP, and integrations are built by the same people. Everything works together because it was built together.</p>
@@ -913,7 +934,7 @@ footer.footer{border-top:none;background:#0a0a0f}
   </div>
 </footer>
 
-<button class="btn btn-primary float-cta mag" onclick="openModal()">&#9749; Grab a Coffee</button>
+<button class="btn btn-primary float-cta mag" onclick="openModal()">Book Consultation</button>
 
 <!-- ============ MODAL ============ -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
@@ -938,6 +959,18 @@ footer.footer{border-top:none;background:#0a0a0f}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+
   /* ---------- base ---------- */
   const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
   document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});

@@ -49,7 +49,7 @@
   .fs-inner b{color:var(--accent-mid)}
 
   /* ====== NAV ====== */
-  nav{position:fixed;top:28px;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
   nav.scrolled{background:rgba(10,10,15,.92);border-bottom-color:var(--border)}
   .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between}
   .logo{font-family:var(--grot);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5em}
@@ -62,9 +62,17 @@
   .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent)}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:100px 0 0;background:rgba(10,10,12,.97);z-index:99;padding:32px clamp(20px,5vw,48px);flex-direction:column;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-nav-link{display:block;padding:16px 0;color:rgba(255,255,255,.75);font-family:var(--grot),sans-serif;font-size:16px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:#fff}
+.mobile-menu .btn-primary{margin-top:24px;width:100%;justify-content:center}
 
   /* ====== HERO ====== */
-  .hero{position:relative;padding:210px 0 100px;overflow:hidden;min-height:94vh;display:flex;align-items:center}
+  .hero{position:relative;padding:182px 0 100px;overflow:hidden;min-height:94vh;display:flex;align-items:center}
   .hero-glow{position:absolute;top:-10%;left:-8%;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(var(--rgb),.35),rgba(76,29,149,.08) 42%,transparent 68%);filter:blur(24px)}
   .hero-glow-r{position:absolute;bottom:-10%;right:-8%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.28),transparent 68%);filter:blur(24px)}
   .hero-cols{position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent)}
@@ -128,7 +136,7 @@
   .ret-badge .rb-v{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;color:var(--accent-mid);margin-top:.35rem}
   @media(max-width:1000px){.studio{height:440px;transform:scale(.82);transform-origin:top right}}
   @media(max-width:880px){
-    .hero{min-height:0;padding-top:180px}
+    .hero{min-height:0;padding-top:152px}
     .hero-grid{grid-template-columns:1fr}
     .studio{height:420px;transform:scale(.85);transform-origin:top center;margin-top:1.5rem}
     .clap{left:0}.roll{right:0;top:0}.phone{right:18%;top:60px}
@@ -191,7 +199,7 @@
   .mc .mcap{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.8rem}
   .mc .msub{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted-2);margin-top:.2rem}
   @media(max-width:880px){.machine-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.machine-grid{grid-template-columns:1fr}}
+  @media(max-width:520px){nav .btn-primary{display:none}.machine-grid{grid-template-columns:1fr}}
 
   /* ====== SERVICES — FILM SPREAD CARDS ====== */
   .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
@@ -327,7 +335,7 @@
   .foot-tag{color:var(--muted);font-size:.95rem;max-width:30ch;margin-top:1rem}
   .foot-bottom{border-top:1px solid var(--border-2);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;color:var(--muted-2);font-size:.85rem;font-family:var(--grot)}
   @media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr;gap:2rem}}
-  @media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+  @media(max-width:520px){nav .btn-primary{display:none}.foot-grid{grid-template-columns:1fr}}
   .float-cta{position:fixed;bottom:24px;right:24px;z-index:90;box-shadow:0 16px 40px -12px rgba(var(--rgb),.6)}
   .overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,5,8,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:.3s}
   .overlay.open{display:flex;opacity:1}
@@ -349,22 +357,16 @@
   .gs-rev{opacity:0}
   @media(prefers-reduced-motion:reduce){.gs-rev{opacity:1!important;transform:none!important}}
   @media(max-width:880px){.nav-links{display:none}.burger{display:flex}}
-  @media(max-width:520px){.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
+  @media(max-width:520px){nav .btn-primary{display:none}.incl{grid-template-columns:1fr}.float-cta{right:16px;bottom:16px;padding:.85em 1.2em;font-size:.85rem}.hero-ctas .btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
 
-<!-- film strip top bar -->
+
+<!-- FILMSTRIP TOP -->
 <div class="filmstrip-top" aria-hidden="true">
   <div class="fs-ticker"><div class="fs-inner" id="fs-inner">
-    <span>Scene <b>01</b> · Take 1</span>
-    <span>Shoot once. Scale infinitely.</span>
-    <span>LeadLink <b>Studios</b></span>
-    <span>If it doesn't stop the scroll — it doesn't exist.</span>
-    <span>AI Avatar · Short Form · Cinematic · Podcast</span>
-    <span>Scene <b>02</b> · Take 1</span>
-    <span>Content that compounds.</span>
-    <span>24h turnaround · 12 languages · 0 re-shoots</span>
+    <span>LeadLink Studios</span><span><b>AI Avatar</b></span><span>Short-Form</span><span><b>Cinematic</b></span><span>Scriptwriting</span><span><b>12 Languages</b></span><span>24h Turnaround</span><span><b>Hook-First</b></span><span>Retention Engineered</span><span><b>320+ Videos / Month</b></span>
   </div></div>
 </div>
 
@@ -376,7 +378,7 @@
 .brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
 .brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
 </style>
-<nav id="nav">
+<nav id="nav" style="top:28px">
   <div class="nav-inner">
     <a href="index.html" class="brand" aria-label="LeadLink Solutions home">
       <span class="mark"><img src="assets/logo.png" alt=""></span>
@@ -394,7 +396,20 @@
     <button class="btn btn-primary" onclick="openModal()">☕ Let's Talk Coffee</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+
 </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a class="mobile-nav-link" href="studios.html">Studios</a>
+  <a class="mobile-nav-link" href="tech.html">Tech</a>
+  <a class="mobile-nav-link" href="growth.html">Growth</a>
+  <a class="mobile-nav-link" href="design.html">Design</a>
+  <a class="mobile-nav-link" href="commerce.html">Commerce</a>
+  <a class="mobile-nav-link" href="press.html">Press &amp; Media</a>
+  <a class="mobile-nav-link" href="contact.html">Contact</a>
+  <button class="btn btn-primary" onclick="openModal()">Book Consultation</button>
+</div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="hero">
@@ -752,17 +767,17 @@
       <h2>Why most content disappears — and ours compounds.</h2>
     </div>
     <div class="why-grid" id="why-grid">
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
         <h3>Hook-first, every time</h3>
         <p>We engineer the first three seconds before anything else, because retention is decided there. Every cut after that exists to keep someone watching.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
         <h3>Shoot once, run all year</h3>
         <p>One foundation shoot becomes months of localized, A/B-tested variations. Your cost per piece drops the more you publish, not the other way around.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card gs-rev">
         <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-5 3 3 5-7"/></svg></div>
         <h3>Edited for performance, not applause</h3>
         <p>We watch your retention curves and re-cut based on what the data says. Pretty isn't the goal — watched-to-the-end is.</p>
@@ -855,7 +870,7 @@ footer.footer{border-top:none;background:#0a0a0f}
   </div>
 </footer>
 
-<button class="btn btn-primary float-cta" onclick="openModal()">☕ Grab a Coffee</button>
+<button class="btn btn-primary float-cta" onclick="openModal()">Book Consultation</button>
 
 <!-- ============ MODAL ============ -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
@@ -880,6 +895,18 @@ footer.footer{border-top:none;background:#0a0a0f}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+/* mobile menu */
+(function(){
+  var burger=document.querySelector('.burger');
+  var menu=document.getElementById('mobileMenu');
+  if(!burger||!menu)return;
+  var openMenu=function(){burger.classList.add('open');burger.setAttribute('aria-expanded','true');menu.classList.add('open');menu.removeAttribute('aria-hidden');document.body.style.overflow='hidden';};
+  var closeMenu=function(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  burger.addEventListener('click',function(){burger.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+
   /* ---------- utils ---------- */
   const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
   document.querySelectorAll('.incl li').forEach(li=>{li.innerHTML=li.innerHTML.replace('{T}',tick);});
