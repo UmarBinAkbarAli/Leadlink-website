@@ -155,20 +155,20 @@
   .divide-head p{color:var(--muted);margin-top:1.4rem;max-width:560px}
   .divide-head p .key{color:rgba(255,255,255,.82);font-weight:600}
 
-  .dvx{position:relative;max-width:1000px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#0c0d14,#0a0b11);box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(251,113,133,.05);transition:box-shadow .6s,border-color .6s}
+  .dvx{position:relative;max-width:1000px;margin:0 auto;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#0c0d14,#0a0b11);box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(251,113,133,.05);transition:box-shadow .6s,border-color .6s}
   .dvx.is-os{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 90px -42px rgba(var(--rgb),.55),0 0 0 1px rgba(var(--rgb),.1)}
   /* scan sweep that fires on flip */
   .dvx-sweep{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(var(--rgb),.16) 45%,rgba(34,211,238,.28) 50%,rgba(var(--rgb),.16) 55%,transparent)}
 
   /* top: switch + status */
   .dvx-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.05rem 1.25rem;border-bottom:1px solid var(--border-2);flex-wrap:wrap;background:rgba(255,255,255,.015)}
-  .dvx-switch{position:relative;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:50px;padding:4px;cursor:pointer;user-select:none;font-family:var(--grot);font-weight:700;font-size:.8rem;outline:none}
+  .dvx-switch{position:relative;display:grid;grid-template-columns:1fr 1fr;min-width:min(100%,560px);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:50px;padding:4px;cursor:pointer;user-select:none;font-family:var(--grot);font-weight:700;font-size:.8rem;outline:none}
   .dvx-switch:focus-visible{box-shadow:0 0 0 3px rgba(var(--rgb),.3)}
   .dvx-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:50px;background:var(--warn);box-shadow:0 6px 18px -6px rgba(251,113,133,.7);transition:transform .45s cubic-bezier(.3,.85,.3,1),background .45s,box-shadow .45s;z-index:1}
   .dvx.is-os .dvx-thumb{transform:translateX(100%);background:var(--accent);box-shadow:0 6px 18px -6px rgba(var(--rgb),.7)}
-  .dvx-switch .opt{position:relative;z-index:2;padding:.55em 1.1em;border-radius:50px;text-align:center;color:var(--muted);transition:color .35s;white-space:nowrap}
-  .dvx:not(.is-os) .dvx-switch .opt.man{color:var(--btn-dark)}
-  .dvx.is-os .dvx-switch .opt.os{color:var(--btn-dark)}
+  .dvx-switch .opt{position:relative;z-index:2;padding:.55em 1.1em;border-radius:50px;text-align:center;color:rgba(255,255,255,.64);transition:color .35s;text-shadow:0 1px 1px rgba(0,0,0,.35);white-space:nowrap}
+  .dvx:not(.is-os) .dvx-switch .opt.man,
+  .dvx.is-os .dvx-switch .opt.os{color:#fff;text-shadow:0 0 12px rgba(0,0,0,.55)}
   .dvx-state{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55em;color:var(--warn);transition:color .4s}
   .dvx.is-os .dvx-state{color:var(--ok)}
   .dvx-state i{width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 9px var(--warn);transition:.4s}
@@ -200,7 +200,7 @@
   .dvx.is-os .dvx-row .i-os{opacity:1;transform:none}
   .dvx-row .tx{position:relative;flex:1;min-height:1.5em;font-size:.98rem}
   .dvx-row .tx span{display:block;transition:opacity .5s,transform .5s}
-  .dvx-row .t-os{position:absolute;inset:0;color:rgba(255,255,255,.9)}
+  .dvx-row .t-os{position:absolute;left:0;right:0;top:0;color:rgba(255,255,255,.9)}
   .dvx-row .t-man{color:var(--muted)}
   .dvx-row .t-os{opacity:0;transform:translateY(7px)}
   .dvx.is-os .dvx-row .t-man{opacity:0;transform:translateY(-7px)}
@@ -214,7 +214,7 @@
     .dvx-tiles{grid-template-columns:1fr 1fr}
     .dvx-tile:nth-child(2n){border-right:none}
     .dvx-tile{border-bottom:1px solid var(--border-2)}
-    .dvx-switch{font-size:.72rem}
+    .dvx-switch{font-size:.72rem;min-width:100%}
     .dvx-switch .opt{padding:.55em .7em}
   }
   @media(max-width:560px){.dvx-switch .lbl-full{display:none}.dvx-switch .lbl-short{display:inline}}
@@ -440,7 +440,7 @@
       <a href="press.html">Press &amp; Media</a>
       <a href="contact.html">Contact</a>
     </div>
-    <button class="btn btn-primary mag" onclick="openModal()">&#9749; Let's Talk Coffee</button>
+    <button class="btn btn-primary mag" onclick="openModal()">Book Consultation</button>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 
@@ -1110,7 +1110,7 @@ footer.footer{border-top:none;background:#0a0a0f}
     mm.add('(min-width: 881px)',()=>{
       const track=document.getElementById('htrack');
       const packet=document.getElementById('packet');
-      const getScroll=()=>track.scrollWidth-innerWidth;
+      const getScroll=()=>Math.max(0,track.scrollWidth-document.querySelector('.htrack-wrap').clientWidth);
       gsap.to(track,{x:()=>-getScroll(),ease:'none',
         scrollTrigger:{trigger:'#hmach',start:'top top',end:()=>'+='+getScroll(),
           pin:true,scrub:1,invalidateOnRefresh:true,
