@@ -225,15 +225,16 @@
   @media(max-width:880px){.scard-grid{grid-template-columns:1fr;gap:2.2rem}.scard.flip .scard-grid>.sc-visual{order:0}.sc-visual{min-height:320px}}
 
   /* V1: AI Avatar spread */
-  .v-avatar{position:relative;width:100%;max-width:380px;height:300px}
+  .v-avatar{position:relative;width:100%;max-width:380px;height:420px}
   .av-langs{position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:7px;z-index:2}
   .av-lang{border-radius:5px;padding:.4rem .7rem;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;display:flex;align-items:center;gap:.5rem;box-shadow:0 12px 28px -8px rgba(0,0,0,.7)}
   .av-lang .flag{font-size:.8rem}
   .al1{background:#1a1a22;border:1px solid var(--border)}.al2{background:rgba(var(--rgb),.18);border:1px solid rgba(var(--rgb),.4);color:#d8cfff}.al3{background:#1a1a22;border:1px solid var(--border)}.al4{background:#1a1a22;border:1px solid var(--border)}
-  .av-screen{position:absolute;right:0;top:20px;width:220px;height:260px;border-radius:12px;background:linear-gradient(160deg,rgba(var(--rgb),.22),rgba(76,29,149,.12));border:1px solid rgba(var(--rgb),.4);box-shadow:0 30px 64px -18px rgba(0,0,0,.85);overflow:hidden}
-  .av-screen::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.2rem;color:rgba(255,255,255,.9);text-shadow:0 0 40px rgba(var(--rgb),.8)}
-  .av-screen::after{content:"";position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(10,10,15,.9),transparent)}
-  .av-stats{position:absolute;bottom:14px;left:0;right:0;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 .9rem;z-index:2}
+  .av-screen{position:absolute;right:0;top:20px;width:200px;height:356px;border-radius:12px;background:#000;border:1px solid rgba(var(--rgb),.4);box-shadow:0 30px 64px -18px rgba(0,0,0,.85);overflow:hidden}
+  .av-screen iframe{position:absolute;top:-15%;left:-10%;width:120%;height:132%;border:none;z-index:0;pointer-events:none}
+  .av-screen::before{content:"";position:absolute;top:0;left:0;right:0;height:48px;background:linear-gradient(180deg,rgba(10,10,15,1) 55%,transparent);z-index:2;pointer-events:none}
+  .av-screen::after{content:"";position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(0deg,rgba(10,10,15,.95),transparent);z-index:2}
+  .av-stats{position:absolute;bottom:14px;left:0;right:0;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 .9rem;z-index:3}
   .av-stat{background:rgba(10,10,15,.85);border:1px solid var(--border);border-radius:5px;padding:.4rem .6rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em}
   .av-stat .v{color:var(--accent-mid);font-weight:600;font-size:.7rem;display:block;margin-top:.1rem}
   .av-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;border-radius:3px;padding:.4em .9em;box-shadow:0 10px 28px -8px rgba(var(--rgb),.8);z-index:3;white-space:nowrap}
@@ -262,14 +263,15 @@
   .ret-label{font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin-bottom:.5rem}
   .ret-curve svg{display:block;width:100%;height:44px;overflow:visible}
   /* V3: documentary frames */
-  .v-doc{position:relative;width:100%;max-width:380px;height:300px}
+  .v-doc{position:relative;width:100%;max-width:380px;height:380px}
   .doc-frame{position:absolute;border-radius:7px;overflow:hidden;box-shadow:0 26px 60px -16px rgba(0,0,0,.85);border:1px solid var(--border)}
-  .df1{left:0;top:20px;width:210px;height:148px;background:linear-gradient(145deg,rgba(var(--rgb),.4),rgba(76,29,149,.2));z-index:2}
-  .df2{right:0;top:0;width:170px;height:120px;background:linear-gradient(145deg,rgba(var(--rgb),.28),rgba(109,40,217,.15));z-index:1;transform:rotate(4deg)}
-  .df3{left:30px;bottom:14px;width:200px;height:120px;background:linear-gradient(145deg,rgba(76,29,149,.5),rgba(124,58,237,.18));z-index:3;transform:rotate(-3deg)}
-  .doc-frame::before{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:rgba(255,255,255,.8)}
-  .doc-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 40%)}
-  .doc-label{position:absolute;bottom:6px;left:8px;right:8px;z-index:4;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .df1{left:0;top:20px;width:252px;height:178px;background:#000;z-index:2}
+  .df2{right:0;top:0;width:204px;height:145px;background:#000;z-index:1;transform:rotate(4deg)}
+  .df3{left:30px;bottom:14px;width:240px;height:145px;background:#000;z-index:3;transform:rotate(-3deg)}
+  .doc-frame::before{content:"";position:absolute;top:0;left:0;right:0;height:38px;background:linear-gradient(180deg,rgba(10,10,15,1) 55%,transparent);z-index:2;pointer-events:none}
+  .doc-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent 45%);z-index:1}
+  .doc-frame iframe{position:absolute;top:-20%;left:-10%;width:120%;height:142%;border:none;z-index:0;pointer-events:none}
+  .doc-label{position:absolute;bottom:6px;left:8px;right:8px;z-index:2;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
   .doc-award{position:absolute;top:12px;right:-8px;z-index:5;background:linear-gradient(135deg,var(--gold),#D97706);color:#1c1600;font-family:var(--grot);font-weight:800;font-size:.58rem;border-radius:5px;padding:.4em .8em;box-shadow:0 10px 28px -8px rgba(245,158,11,.7)}
   /* V4: script page */
   .v-script{position:relative;width:100%;max-width:340px}
@@ -593,6 +595,7 @@
             <div class="av-lang al3 vz"><span class="flag">🇪🇸</span> Spanish · Reels</div>
             <div class="av-lang al4 vz"><span class="flag">🇩🇪</span> German · YouTube</div>
             <div class="av-screen vz">
+              <iframe src="https://www.youtube.com/embed/BR9uIUVDDAw?autoplay=1&mute=1&loop=1&playlist=BR9uIUVDDAw&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen="false" title="AI Avatar preview"></iframe>
               <div class="av-stats">
                 <div class="av-stat">Views<span class="v">2.1M</span></div>
                 <div class="av-stat">Langs<span class="v">12</span></div>
@@ -676,9 +679,18 @@
         <div class="sc-visual" data-viz>
           <span class="vtag">Mockup · cinematic frames</span>
           <div class="v-doc">
-            <div class="doc-frame df2 vz"><div class="doc-label">Origin Story · 18:24</div></div>
-            <div class="doc-frame df1 vz"><div class="doc-label">Brand Documentary · 22:47</div></div>
-            <div class="doc-frame df3 vz"><div class="doc-label">Product Launch Film · 06:12</div></div>
+            <div class="doc-frame df2 vz">
+              <iframe src="https://www.youtube.com/embed/dzIAEssWoM4?autoplay=1&mute=1&loop=1&playlist=dzIAEssWoM4&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1" allow="autoplay; encrypted-media" title="Origin Story"></iframe>
+              <div class="doc-label">Origin Story · 18:24</div>
+            </div>
+            <div class="doc-frame df1 vz">
+              <iframe src="https://www.youtube.com/embed/ygWgSybCan8?autoplay=1&mute=1&loop=1&playlist=ygWgSybCan8&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1" allow="autoplay; encrypted-media" title="Brand Documentary"></iframe>
+              <div class="doc-label">Brand Documentary · 22:47</div>
+            </div>
+            <div class="doc-frame df3 vz">
+              <iframe src="https://www.youtube.com/embed/5YPiXAvhzTE?autoplay=1&mute=1&loop=1&playlist=5YPiXAvhzTE&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1" allow="autoplay; encrypted-media" title="Product Launch Film"></iframe>
+              <div class="doc-label">Product Launch Film · 06:12</div>
+            </div>
             <div class="doc-award vz">🏆 Best Brand Film</div>
           </div>
         </div>
