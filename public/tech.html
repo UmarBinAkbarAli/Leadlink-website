@@ -276,12 +276,15 @@
   .scard .btn{margin-top:2rem}
   .sc-visual{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:5px;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(var(--rgb),.05),transparent 70%);overflow:hidden;padding:2rem}
   .sc-visual .vtag{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
+  .sc-visual--img{padding:1.5rem;background:#090c10;border-color:rgba(255,255,255,.08)}
+  .sc-img{width:80%;display:block;margin:0 auto;object-fit:contain;border-radius:10px;box-shadow:0 24px 60px -10px rgba(0,0,0,.55),0 8px 24px -6px rgba(var(--rgb),.35)}
+  .sc-img--no-shadow{box-shadow:none}
   @media(max-width:880px){.scard-grid{grid-template-columns:1fr;gap:2.2rem}.scard.flip .scard-grid>.sc-visual{order:0}.sc-visual{min-height:320px}}
 
   /* V1: integration mesh */
   .v-mesh{position:relative;width:100%;max-width:400px;height:300px}
   .v-mesh svg.lines{position:absolute;inset:0;width:100%;height:100%;color:rgba(var(--rgb),.45)}
-  .mesh-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:linear-gradient(140deg,var(--accent),var(--accent-deep));color:var(--btn-dark);font-family:var(--grot);font-weight:900;font-size:.66rem;border-radius:11px;padding:.8rem .9rem;text-align:center;z-index:2;box-shadow:0 18px 44px -10px rgba(var(--rgb),.7);line-height:1.2}
+  .mesh-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:90px;height:90px;object-fit:contain;border-radius:11px;z-index:2;box-shadow:0 18px 44px -10px rgba(var(--rgb),.7)}
   .mesh-node{position:absolute;background:#0f0f16;border:1px solid var(--border);border-radius:8px;padding:.45rem .7rem;font-family:var(--grot);font-weight:600;font-size:.6rem;color:rgba(255,255,255,.82);z-index:2;box-shadow:0 12px 30px -10px rgba(0,0,0,.8);white-space:nowrap}
   .mn1{left:0;top:6%}.mn2{right:0;top:0}.mn3{left:-4%;bottom:18%}.mn4{right:-2%;bottom:6%}.mn5{left:36%;bottom:-2%}.mn6{right:30%;top:-4%}
   .pkt{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 10px rgba(var(--rgb),.9);z-index:3;offset-rotate:0deg}
@@ -680,7 +683,7 @@
             <span class="mesh-node mn4">Stripe</span>
             <span class="mesh-node mn5">WhatsApp</span>
             <span class="mesh-node mn6">n8n</span>
-            <span class="mesh-core">LeadLink<br>OS</span>
+            <img src="assets/leadlink-solution.jpg" alt="LeadLink Solution" class="mesh-core">
           </div>
         </div>
       </div>
@@ -753,24 +756,8 @@
           </ul>
           <button class="btn btn-ghost mag" onclick="openModal()">&#8595; Download Portfolio</button>
         </div>
-        <div class="sc-visual" data-viz>
-          <span class="vtag">// erp · operations</span>
-          <div class="v-erp">
-            <div class="erp-frame">
-              <div class="erp-top"><span class="erp-l">Operations · live</span><span class="erp-badge">role: admin</span></div>
-              <div class="erp-tiles">
-                <div class="erp-tile"><div class="ti">📊</div><div class="tn">CRM</div></div>
-                <div class="erp-tile"><div class="ti">📦</div><div class="tn">Inventory</div></div>
-                <div class="erp-tile"><div class="ti">👥</div><div class="tn">HR</div></div>
-                <div class="erp-tile"><div class="ti">💳</div><div class="tn">Finance</div></div>
-              </div>
-              <div class="erp-chart" id="erp-chart">
-                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-              <div class="erp-row"><span>Throughput this week</span><b>+34%</b></div>
-              <div class="erp-row"><span>Manual exports</span><b>0</b></div>
-            </div>
-          </div>
+        <div class="sc-visual sc-visual--img" data-viz>
+          <img src="assets/ERP-solution.png" alt="Custom ERP Solution" class="sc-img sc-img--no-shadow">
         </div>
       </div>
     </article>
@@ -796,20 +783,8 @@
           </ul>
           <button class="btn btn-ghost mag" onclick="openModal()">&#8595; Download Portfolio</button>
         </div>
-        <div class="sc-visual" data-viz>
-          <span class="vtag">// app · shipping</span>
-          <div class="v-app">
-            <div class="app">
-              <div class="app-notch"></div>
-              <div class="app-hd">Good morning, Sara</div>
-              <div class="app-sub">Your dashboard</div>
-              <div class="app-hero">📱</div>
-              <div class="app-row"><span class="ai">⚡</span><span><span class="at">Active orders</span><br><span class="as">12 in progress</span></span></div>
-              <div class="app-row"><span class="ai">🔔</span><span><span class="at">3 new updates</span><br><span class="as">tap to view</span></span></div>
-              <div class="app-cta">Open dashboard</div>
-            </div>
-            <div class="app-toast" id="app-toast"><span class="ic">🔔</span><span><span class="tt">Push delivered</span><br><span class="ts">98% open rate</span></span></div>
-          </div>
+        <div class="sc-visual sc-visual--img" data-viz>
+          <img src="assets/mobile-template.png" alt="Mobile App Development" class="sc-img">
         </div>
       </div>
     </article>
