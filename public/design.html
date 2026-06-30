@@ -237,7 +237,7 @@
   .va .va-stat{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.3em .7em;color:var(--muted-2);white-space:nowrap}
   .va.b .va-stat{color:var(--accent);border-color:rgba(var(--rgb),.5)}
   /* V4: social feed */
-  .v-social{position:relative;width:100%;max-width:330px}
+  .v-social{position:relative;width:100%;max-width:429px}
   .vs-frame{border:1px solid var(--border);border-radius:12px;background:#0c0c12;box-shadow:0 26px 60px -16px rgba(0,0,0,.8);padding:1rem;overflow:hidden}
   .vs-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
   .vs-ava{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 210deg,var(--accent),var(--accent-deep),var(--accent))}
@@ -594,15 +594,13 @@
           <div class="v-ui">
             <div class="vu-browser vz">
               <div class="vu-bar"><span></span><span></span><span></span></div>
-              <div class="vu-body">
-                <div class="vu-h"></div><div class="vu-p"></div><div class="vu-p s"></div>
-                <div class="vu-grid"><span></span><span></span><span></span></div>
-                <div class="vu-btn"></div>
+              <div style="overflow:hidden;line-height:0">
+                <img src="assets/ui-screen-mobile.png" alt="UI desktop screen" style="width:100%;height:auto;display:block">
               </div>
             </div>
             <svg class="vu-flow vz" width="70" height="60" viewBox="0 0 70 60" fill="none"><path d="M4 8 C 36 8, 40 50, 66 50" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 5"/><path d="M60 44l6 6-8 2z" fill="currentColor"/></svg>
-            <div class="vu-phone vz">
-              <div class="ph-h"></div><div class="ph-l"></div><div class="ph-l s"></div><div class="ph-cta"></div>
+            <div class="vu-phone vz" style="overflow:hidden;padding:0;display:flex;align-items:stretch">
+              <img src="assets/ui-screen-desktop.png" alt="UI mobile screen" style="width:100%;height:100%;object-fit:cover;border-radius:20px">
             </div>
           </div>
         </div>
