@@ -241,14 +241,6 @@ img { display: block; max-width: 100%; }
   letter-spacing: .6912px;
   text-transform: uppercase;
 }
-.eyebrow::before,
-.eyebrow.center::after {
-  content: "";
-  width: 36px;
-  height: 1px;
-  background: currentColor;
-  flex: 0 0 auto;
-}
 .eyebrow.center { justify-content: center; }
 h1, h2, h3, p { margin: 0; }
 .hero h1 {
