@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -40,13 +40,6 @@
   .btn-ghost{border-color:var(--border)}
   .btn-ghost:hover{border-color:var(--accent);background:rgba(var(--rgb),.07)}
 
-  /* ====== FILM-STRIP TOP BORDER ====== */
-  .filmstrip-top{height:28px;background:#111;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:200}
-  .filmstrip-top::before,.filmstrip-top::after{content:"";flex:none;height:16px;background:repeating-linear-gradient(90deg,var(--bg) 0 10px,#111 10px 18px);width:60px}
-  .fs-ticker{flex:1;overflow:hidden}
-  .fs-inner{display:flex;white-space:nowrap;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35)}
-  .fs-inner span{padding:0 2rem}
-  .fs-inner b{color:var(--accent-mid)}
 
   /* ====== NAV ====== */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border-2);transition:.4s}
@@ -365,22 +358,15 @@
 <body>
 
 
-<!-- FILMSTRIP TOP -->
-<div class="filmstrip-top" aria-hidden="true">
-  <div class="fs-ticker"><div class="fs-inner" id="fs-inner">
-    <span>LeadLink Studios</span><span><b>AI Avatar</b></span><span>Short-Form</span><span><b>Cinematic</b></span><span>Scriptwriting</span><span><b>12 Languages</b></span><span>24h Turnaround</span><span><b>Hook-First</b></span><span>Retention Engineered</span><span><b>320+ Videos / Month</b></span>
-  </div></div>
-</div>
-
 <!-- NAV -->
 <style>
 .brand{display:flex;align-items:center;gap:10px;min-width:168px}
 .mark{width:48.193px;height:43.628px;overflow:hidden;position:relative;flex:0 0 auto}
-.mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-9.3px}
+.mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-17px}
 .brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
-.brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
+.brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-93.2px}
 </style>
-<nav id="nav" style="top:28px">
+<nav id="nav" style="top:0">
   <div class="nav-inner">
     <a href="index.html" class="brand" aria-label="LeadLink Solutions home">
       <span class="mark"><img src="assets/logo.png" alt=""></span>
@@ -832,9 +818,9 @@ footer.footer{border-top:none;background:#0a0a0f}
 .footer{width:min(1180px,100%);margin:0 auto;padding:88px 40px 24px;color:rgba(255,255,255,.58)}
 .footer .brand{display:flex;align-items:center;gap:10px}
 .footer .mark{width:48.193px;height:43.628px;overflow:hidden;position:relative;flex:0 0 auto}
-.footer .mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-9.3px}
+.footer .mark img{width:160.7px;max-width:none;position:absolute;left:-56.8px;top:-17px}
 .footer .brand-text-image{width:87.255px;height:18.263px;overflow:hidden;position:relative;flex:0 0 auto}
-.footer .brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-56.5px}
+.footer .brand-text-image img{width:160.7px;max-width:none;position:absolute;left:-37.6px;top:-93.2px}
 .footer-brand-copy{margin-top:13px;max-width:251px}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;min-height:240px}
 .footer h3{color:rgba(255,255,255,.38);font-family:'Hanken Grotesk',sans-serif;font-size:11px;line-height:18.15px;font-weight:700;letter-spacing:1.98px;text-transform:uppercase;margin-bottom:17px}
@@ -943,10 +929,6 @@ footer.footer{border-top:none;background:#0a0a0f}
     document.getElementById('modal-success').classList.add('show');}
   addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();});
 
-  /* ---------- film strip header ticker ---------- */
-  const fsi=document.getElementById('fs-inner');
-  fsi.innerHTML+=fsi.innerHTML;
-
   /* ---------- duplicate platform strip ---------- */
   const pr=document.getElementById('plat-row');
   pr.innerHTML+=pr.innerHTML;
@@ -956,9 +938,6 @@ footer.footer{border-top:none;background:#0a0a0f}
 
   if(hasGSAP&&!reduced){
     gsap.registerPlugin(ScrollTrigger);
-
-    /* film strip header */
-    gsap.to('#fs-inner',{x:()=>-fsi.scrollWidth/2,duration:24,ease:'none',repeat:-1});
 
     /* platform strip */
     gsap.to('#plat-row',{x:()=>-pr.scrollWidth/2,duration:28,ease:'none',repeat:-1});
