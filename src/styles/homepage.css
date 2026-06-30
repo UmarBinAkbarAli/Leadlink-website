@@ -60,6 +60,11 @@ img { display: block; max-width: 100%; }
   gap: 10px;
   min-width: 168px;
 }
+.brand-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+}
 .mark {
   width: 48.193px;
   height: 43.628px;
