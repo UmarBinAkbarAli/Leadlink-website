@@ -71,6 +71,12 @@
   .hero-cols{position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--border-2) calc(100%/12 - 1px) calc(100%/12));-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent)}
   .hero .wrap{position:relative;z-index:2;width:100%}
   .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:center}
+  /* ---- HERO VISUAL: blended photo crossfade ---- */
+  .hero-visual{position:relative;height:672px;overflow:visible}
+  .hero-visual-img{position:absolute;inset:0;width:120%;height:120%;left:-10%;top:-10%;object-fit:cover;opacity:0;transition:opacity 1.8s ease;
+    -webkit-mask-image:radial-gradient(ellipse 62% 62% at 55% 45%,#000 20%,rgba(0,0,0,.85) 38%,rgba(0,0,0,.55) 54%,rgba(0,0,0,.22) 70%,transparent 92%);
+    mask-image:radial-gradient(ellipse 62% 62% at 55% 45%,#000 20%,rgba(0,0,0,.85) 38%,rgba(0,0,0,.55) 54%,rgba(0,0,0,.22) 70%,transparent 92%)}
+  .hero-visual-img.is-active{opacity:1}
   /* scene counter, like a clapperboard header */
   .scene-count{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2);display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
   .scene-count::before{content:"";width:18px;height:18px;border:1.5px solid var(--accent);transform:rotate(45deg);display:inline-block;flex-shrink:0}
@@ -407,7 +413,6 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="scene-count gs-h">Scene <b>01</b> · TAKE 1 · LeadLink Studios · AI · Cinema · Short-Form</div>
         <h1>
           <span class="h-mask"><span class="h-line">If it doesn't</span></span>
           <span class="h-mask"><span class="h-line">stop the <span class="serif">scroll</span>,</span></span>
@@ -418,61 +423,10 @@
           <button class="btn btn-primary" onclick="openModal()">☕ Let's Grab a Virtual Coffee</button>
           <button class="btn btn-ghost" onclick="openModal()">Download Our Content Portfolio</button>
         </div>
-        <p class="hero-spec gs-h">format · <b>AI · cinematic · short-form · podcast</b> · turnaround · <b>24–48h</b> · markets · <b>12 languages</b></p>
       </div>
-
-      <!-- CSS-built studio set -->
-      <div class="studio" id="studio" aria-hidden="true">
-        <!-- Clapperboard -->
-        <div class="fl clap">
-          <div class="clap-top">
-            <div class="clap-stripes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="clap-hinge"></div>
-          </div>
-          <div class="clap-body">
-            <div class="clap-row"><span class="k">PROD</span><span class="v hl">LeadLink Studios</span></div>
-            <div class="clap-row"><span class="k">CLIENT</span><span class="v">Your Brand</span></div>
-            <div class="clap-row"><span class="k">SCENE</span><span class="v">01</span></div>
-            <div class="clap-row"><span class="k">TAKE</span><span class="v">1</span></div>
-            <div class="clap-row"><span class="k">FORMAT</span><span class="v hl">AI + Cinematic</span></div>
-          </div>
-        </div>
-        <!-- Film roll SVG -->
-        <div class="fl roll">
-          <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="55" cy="55" r="52" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-            <circle cx="55" cy="55" r="40" fill="#111118" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
-            <circle cx="55" cy="55" r="10" fill="rgba(124,58,237,0.4)" stroke="rgba(124,58,237,0.7)" stroke-width="1.5"/>
-            <g fill="rgba(255,255,255,0.18)">
-              <rect x="8" y="8" width="12" height="18" rx="2"/><rect x="90" y="8" width="12" height="18" rx="2"/>
-              <rect x="8" y="84" width="12" height="18" rx="2"/><rect x="90" y="84" width="12" height="18" rx="2"/>
-              <rect x="46" y="2" width="18" height="12" rx="2"/><rect x="46" y="96" width="18" height="12" rx="2"/>
-            </g>
-            <path d="M55 15 A40 40 0 0 1 95 55" stroke="rgba(124,58,237,0.6)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
-          </svg>
-        </div>
-        <!-- phone mockup -->
-        <div class="fl phone">
-          <div class="ph-notch"></div>
-          <div class="ph-reel"><div class="ph-views">2.1M ▲</div></div>
-          <div class="ph-l"></div><div class="ph-l s"></div>
-          <div class="ph-grid"><span></span><span></span></div>
-          <div class="ph-cta"></div>
-        </div>
-        <!-- view counter badge -->
-        <div class="fl views-badge">
-          <div class="vb-num">2.1<span>M</span></div>
-          <div class="vb-t">Organic views · No paid</div>
-        </div>
-        <!-- retention badge -->
-        <div class="fl ret-badge">
-          <div class="rb-t">Avg retention · 78%</div>
-          <div class="rb-bar">
-            <i style="height:100%"></i><i style="height:95%"></i><i style="height:88%"></i>
-            <i style="height:82%"></i><i style="height:79%"></i><i style="height:78%"></i>
-          </div>
-          <div class="rb-v">↑ 3× industry avg</div>
-        </div>
+      <div class="hero-visual" id="heroVisual" aria-hidden="true">
+        <img class="hero-visual-img is-active" src="assets/studios-hero-man.webp" alt="">
+        <img class="hero-visual-img" src="assets/studios-hero-photo4.avif" alt="">
       </div>
     </div>
   </div>
@@ -903,6 +857,20 @@ footer.footer{border-top:none;background:#0a0a0f}
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 })();
+
+  /* ---------- hero bg slider ---------- */
+  (function(){
+    var visual=document.getElementById('heroVisual');
+    if(!visual)return;
+    var slides=visual.querySelectorAll('.hero-visual-img');
+    if(slides.length<2)return;
+    var i=0;
+    setInterval(function(){
+      slides[i].classList.remove('is-active');
+      i=(i+1)%slides.length;
+      slides[i].classList.add('is-active');
+    },4000);
+  })();
 
   /* ---------- utils ---------- */
   const tick='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
