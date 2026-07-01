@@ -222,8 +222,9 @@
   @media(max-width:880px){.scard-grid{grid-template-columns:1fr;gap:2.2rem}.scard.flip .scard-grid>.sc-visual{order:0}.sc-visual{min-height:320px}}
 
   /* V1: GMV dashboard */
-  .v-gmv{width:100%;max-width:400px}
-  .vg-frame{border:1px solid var(--border);border-radius:11px;background:#0c0c12;box-shadow:0 30px 64px -18px rgba(0,0,0,.85);padding:1.2rem}
+  .v-gmv{width:100%;max-width:480px}
+  .vg-frame{border-radius:11px;background:#0c0c12;box-shadow:0 30px 64px -18px rgba(0,0,0,.85)}
+  .vg-img{width:100%;display:block;border-radius:11px;object-fit:cover}
   .vg-top{display:flex;justify-content:space-between;align-items:baseline}
   .vg-l{font-family:var(--mono);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
   .vg-v{font-family:var(--grot);font-weight:900;font-size:2rem;letter-spacing:-.02em;color:var(--accent-bright);font-variant-numeric:tabular-nums}
@@ -535,15 +536,10 @@
           <button class="btn btn-ghost mag" onclick="openModal()">⬇ Download Portfolio</button>
         </div>
         <div class="sc-visual" data-viz>
-          <span class="vtag">Mockup · GMV dashboard</span>
+          <span class="vtag">TikTok Shop · manager dashboard</span>
           <div class="v-gmv">
             <div class="vg-frame vz">
-              <div class="vg-top">
-                <div><div class="vg-l">Monthly GMV</div><div class="vg-v" data-kpi data-prefix="$" data-target="180" data-suffix="K">$0K</div></div>
-                <div class="vg-delta">▲ +212% vs month 1</div>
-              </div>
-              <div class="vg-chart" id="vg-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="vg-row"><span>Orders <b data-kpi data-target="4280">0</b></span><span>AOV <b data-kpi data-prefix="AED " data-target="96">0</b></span><span>Affiliate share <b data-kpi data-target="62" data-suffix="%">0%</b></span></div>
+              <img src="assets/tiktok-shop-dashboard.jpg" alt="TikTok Shop Manager Dashboard" class="vg-img">
             </div>
           </div>
         </div>
@@ -969,12 +965,6 @@ footer.footer{border-top:none;background:#0a0a0f}
       });
     });
 
-    /* GMV chart bars + KPIs */
-    const barH=[14,22,18,30,34,46,42,58,66,78,88,100];
-    gsap.utils.toArray('#vg-chart i').forEach((b,i)=>{
-      gsap.to(b,{height:barH[i]+'%',duration:.9,ease:'power3.out',delay:i*.06,
-        scrollTrigger:{trigger:'.v-gmv',start:'top 80%'}});
-    });
     gsap.utils.toArray('[data-kpi]').forEach(el=>{
       const t=+el.dataset.target,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';const o={v:0};
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,

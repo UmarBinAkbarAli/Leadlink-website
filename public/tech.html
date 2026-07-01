@@ -757,7 +757,10 @@
           <button class="btn btn-ghost mag" onclick="openModal()">&#8595; Download Portfolio</button>
         </div>
         <div class="sc-visual sc-visual--img" data-viz>
-          <img src="assets/ERP-solution.png" alt="Custom ERP Solution" class="sc-img sc-img--no-shadow">
+          <span class="vtag">// erp · operations</span>
+          <div class="v-erp">
+            <img src="assets/ERP-solution.png" alt="Custom ERP Solution" class="sc-img sc-img--no-shadow">
+          </div>
         </div>
       </div>
     </article>
@@ -784,7 +787,10 @@
           <button class="btn btn-ghost mag" onclick="openModal()">&#8595; Download Portfolio</button>
         </div>
         <div class="sc-visual sc-visual--img" data-viz>
-          <img src="assets/mobile-template.png" alt="Mobile App Development" class="sc-img">
+          <span class="vtag">// app · shipping</span>
+          <div class="v-app">
+            <img src="assets/mobile-template.png" alt="Mobile App Development" class="sc-img">
+          </div>
         </div>
       </div>
     </article>
@@ -1153,17 +1159,6 @@ footer.footer{border-top:none;background:#0a0a0f}
           onUpdate:()=>{num.textContent=Math.round(o.v);ring.setAttribute('stroke-dashoffset',C-(o.v/100*C));}});
       }});
     })();
-
-    /* ---- ERP chart bars ---- */
-    (function erpViz(){
-      const bars=gsap.utils.toArray('#erp-chart i');if(!bars.length)return;
-      const h=[18,26,22,34,30,46,40,56,62,72,84,96];
-      bars.forEach((b,i)=>gsap.to(b,{height:h[i]+'%',duration:.9,ease:'power3.out',delay:i*.05,
-        scrollTrigger:{trigger:'#erp-chart',start:'top 86%'}}));
-    })();
-
-    /* ---- app toast float ---- */
-    gsap.to('#app-toast',{y:-10,duration:2.6,yoyo:true,repeat:-1,ease:'sine.inOut'});
 
     /* ---- why cards ---- */
     gsap.from('#why-grid .why-card',{opacity:0,y:34,duration:.7,stagger:.12,ease:'power3.out',
